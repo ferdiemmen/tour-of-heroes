@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Hero } from '../hero/hero';
 import { HeroService } from '../hero/hero.service';
 import { CacheService } from '../cache/cache.service';
@@ -14,6 +15,7 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[];
 
   constructor(
+    private router: Router,
     private heroService: HeroService,
     private cacheService: CacheService) { }
 
@@ -26,9 +28,9 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
-  // gotoDetail(hero: Hero): void {
-
-  // }
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.selectedHero.id]);
+  }
 
   ngOnInit(): void {
     // Lifecycle hook
