@@ -26,6 +26,10 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
+  // gotoDetail(hero: Hero): void {
+
+  // }
+
   ngOnInit(): void {
     // Lifecycle hook
     // Get the hero data when the AppComponent activates.
