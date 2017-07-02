@@ -12,11 +12,21 @@ export class HeroService {
 
   constructor(private http: Http, private cacheService: CacheService) { }
 
-  getHero(id: Number): Promise<Hero> {
-    return this.getHeroes()
-             .then(heroes => heroes.find(hero => hero.id === id));
+  // Get hero by id.
+  getHero(id: number): Promise<Hero> {
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => {
+        // Save 'hero' on cache service.
+        this.cacheService.setCache(`hero_${id}`, response.json().data as Hero);
+        
+        return response.json().data as Hero
+      })
+      .catch(this.handleError);
   }
 
+  // Get all heroes.
   getHeroes(): Promise<Hero[]> {
     if (this.cacheService.getCache('heroes')) {
       return Promise.resolve(this.cacheService.getCache('heroes'));
@@ -24,8 +34,10 @@ export class HeroService {
       return this.http.get(this.heroesUrl)
         .toPromise()
         .then(response => {
-          response.json().data as Hero[];
+          // Save 'heroes' on cache service.
           this.cacheService.setCache('heroes', response.json().data as Hero[]);
+          
+          return response.json().data as Hero[];
         })
         .catch(this.handleError);
     }
@@ -36,6 +48,19 @@ export class HeroService {
       // Simulate server latency with 2 second delay
       setTimeout(() => resolve(this.getHeroes()), 2000);
     });
+  }
+
+  updateHero(hero: Hero): Promise<Hero> {
+    const url = `${this.heroesUrl}/${hero.id}`;
+    return this.http.post(url, hero)
+      .toPromise()
+      .then(response => {
+        if (this.cacheService.getCache(`hero_${hero.id}`)) { 
+          // Update the cached hero.
+          this.cacheService.setCache(`hero_${hero.id}`, response.json().data as Hero);
+        }
+        return response.json().data as Hero;
+      })
   }
 
   private handleError(error: any): Promise<any> {
