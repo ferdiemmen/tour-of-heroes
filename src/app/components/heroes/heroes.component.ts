@@ -47,6 +47,15 @@ export class HeroesComponent implements OnInit {
       });
   }
 
+  delete(hero: Hero): void {
+    this.heroService
+      .removeHero(hero)
+      .then(() => {
+        this.heroes = this.heroes.filter(h => h !== hero);
+        if (this.selectedHero === hero) { this.selectedHero = null };
+      });
+  }
+
   ngOnInit(): void {
     // Lifecycle hook
     // Get the hero data when the AppComponent activates.
