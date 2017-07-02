@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Hero, HEROES } from './hero';
+import { Http } from '@angular/http';
+import { Hero } from './hero';
 import { CacheService } from '../cache/cache.service';
+
+// Convert a Observable to a Promise
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HeroService {
+  private heroesUrl = 'api/heroes' // URL to web api 
 
-  constructor(private cacheService: CacheService) { }
+  constructor(private http: Http, private cacheService: CacheService) { }
 
   getHero(id: Number): Promise<Hero> {
     return this.getHeroes()
@@ -16,8 +21,13 @@ export class HeroService {
     if (this.cacheService.getCache('heroes')) {
       return Promise.resolve(this.cacheService.getCache('heroes'));
     } else {
-      this.cacheService.setCache('heroes', HEROES);
-      return Promise.resolve(HEROES);
+      return this.http.get(this.heroesUrl)
+        .toPromise()
+        .then(response => {
+          response.json().data as Hero[];
+          this.cacheService.setCache('heroes', response.json().data as Hero[]);
+        })
+        .catch(this.handleError);
     }
   }
 
@@ -26,5 +36,10 @@ export class HeroService {
       // Simulate server latency with 2 second delay
       setTimeout(() => resolve(this.getHeroes()), 2000);
     });
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

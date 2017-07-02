@@ -8,7 +8,7 @@ import { CacheService } from '../cache/cache.service';
 @Component({
   selector: 'app-my-heroes',
   templateUrl: './heroes.component.html',
-    styleUrls: ['./heroes.component.scss']
+  styleUrls: ['./heroes.component.scss']
 })
 export class HeroesComponent implements OnInit {
   selectedHero: Hero;
@@ -32,13 +32,13 @@ export class HeroesComponent implements OnInit {
     this.router.navigate(['/detail', this.selectedHero.id]);
   }
 
+  getHeroes(): void {
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+
   ngOnInit(): void {
     // Lifecycle hook
     // Get the hero data when the AppComponent activates.
-    this.heroService
-      .getHeroes()
-      .then(heroes => {
-        this.heroes = heroes;
-      });
-    }
+    this.getHeroes();
+  }
 }
