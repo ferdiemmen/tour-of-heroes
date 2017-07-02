@@ -97,6 +97,7 @@ export class HeroService {
       .delete(url)
       .toPromise()
       .then(() => {
+        
         // Clear the deleted hero from the cached array.
         this.cacheService.clearFromCacheArray('heroes', hero);
         return Promise.resolve();
