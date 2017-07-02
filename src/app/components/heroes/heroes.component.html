@@ -6,6 +6,9 @@
   </li>
 </ul>
 
+<input type="text" [(ngModel)]="name" />
+<button (click)="add(name)">Create hero</button>
+
 <div *ngIf="selectedHero">
   <h2>
     {{selectedHero.name | uppercase}} is my hero
