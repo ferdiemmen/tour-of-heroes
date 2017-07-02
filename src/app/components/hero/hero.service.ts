@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Hero } from './hero';
 import { CacheService } from '../cache/cache.service';
 
@@ -9,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class HeroService {
   private heroesUrl = 'api/heroes' // URL to web api 
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http, private cacheService: CacheService) { }
 
@@ -52,15 +53,17 @@ export class HeroService {
 
   updateHero(hero: Hero): Promise<Hero> {
     const url = `${this.heroesUrl}/${hero.id}`;
-    return this.http.post(url, hero)
+    return this.http
+      .put(url, JSON.stringify(hero), {headers: this.headers})
       .toPromise()
-      .then(response => {
+      .then(() => {
         if (this.cacheService.getCache(`hero_${hero.id}`)) { 
           // Update the cached hero.
-          this.cacheService.setCache(`hero_${hero.id}`, response.json().data as Hero);
+          this.cacheService.setCache(`hero_${hero.id}`, hero as Hero);
         }
-        return response.json().data as Hero;
+        return hero;
       })
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
