@@ -7,6 +7,8 @@ import { ObservableInput } from 'rxjs/Observable';
 import { Article } from './article';
 import { ArticleService } from './article.service';
 
+import { MediumEditorComponent } from 'ng2-meditor';
+
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
