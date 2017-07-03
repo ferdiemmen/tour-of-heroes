@@ -13,7 +13,6 @@ import { ArticleService } from './article.service';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-  private article: Article;
 
   constructor(
     private articleService: ArticleService,
@@ -27,6 +26,6 @@ export class ArticleComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.articleService.getArticle(+params.get('id')))
-      .subscribe(article => this.article = article);
+      .subscribe();
   }
 }

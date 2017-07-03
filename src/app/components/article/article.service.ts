@@ -4,9 +4,11 @@ import { Injectable } from '@angular/core';
 import { Article } from './article';
 import { ApiService } from '../../api.service';
 
+
 @Injectable()
 export class ArticleService {
-  private articlesUrl = 'api/articles' // URL to web api
+  article: Article;
+  private articlesUrl = 'api/articles'; // URL to web api
 
   constructor(private apiService: ApiService) { }
 
@@ -14,7 +16,7 @@ export class ArticleService {
     const url = `${this.articlesUrl}/${id}/`;
     return this.apiService.get(url)
       .then(response => {
-        return response.json().data as Article;
+        return this.article = response.json().data as Article;
       })
   }
 }
