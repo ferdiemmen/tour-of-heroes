@@ -7,15 +7,14 @@ import { HeroService } from '../hero/hero.service';
 @Component({
   selector: 'app-dashboard',
   template: `
-    <h2>Top Heroes</h2>
-    <div class="grid grid-pad">
-      <a *ngFor="let hero of heroes" [routerLink]="['/detail', hero.id]" class="col-1-4">
-        <div class="module hero">
-          <h4>{{hero.name}}</h4>
-        </div>
+    <div>
+      <a routerLink="/article/create">
+        Maak artikel aan
+      </a>
+      <a routerLink="/page/create">
+        Maak pagina aan
       </a>
     </div>
-    <app-hero-search></app-hero-search>
   `
 })
 export class DashboardComponent implements OnInit {
