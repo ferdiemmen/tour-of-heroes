@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ApiService } from './api.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ArticleComponent } from './components/article/article.component';
+import { ArticleListComponent } from './components/article-list/article-list.component';
 import { ArticleService } from './components/article/article.service';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
@@ -35,6 +36,7 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     AppComponent,
     ToolbarComponent,
     ArticleComponent,
+    ArticleListComponent,
     DashboardComponent,
     HeroesComponent,
     HeroDetailComponent,

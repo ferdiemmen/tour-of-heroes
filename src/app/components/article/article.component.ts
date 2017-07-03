@@ -13,6 +13,7 @@ import { ArticleService } from './article.service';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
+  article: Article;
 
   constructor(
     public articleService: ArticleService,
@@ -30,6 +31,6 @@ export class ArticleComponent implements OnInit {
         return this.articleService.getArticle(+params.get('id'));
       }
     )
-    .subscribe();
+    .subscribe(article => this.article = article);
   }
 }
