@@ -1,0 +1,13 @@
+
+
+@import './settings';
+
+$cms-preview--article-width:           640px !default;
+
+.cms-preview {
+  margin: 0 auto;
+
+  &--article {
+    width: $cms-preview--article-width;
+  }
+}

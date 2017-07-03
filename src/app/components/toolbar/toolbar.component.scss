@@ -4,19 +4,7 @@
 $cms-toolbar-background:          $cms-background !default;
 
 .cms-toolbar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
+  height: 100%;
   width: 60px;
   background: $cms-toolbar-background;
-
-  &--left {
-    left: 0;
-    right: auto;
-  }
-
-  &--right {
-    left: auto;
-    right: 0;
-  }
 }

@@ -1,5 +1,6 @@
 
 
-<div *ngIf="articleService.article">
-  {{articleService.article.title}}
+<div class="cms-preview cms-preview--article">
+  <div *ngIf="articleService.article">{{articleService.article.title}}</div>
 </div>
+<button (click)="goBack()">Back</button>

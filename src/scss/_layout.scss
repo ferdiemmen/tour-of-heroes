@@ -1,6 +1,17 @@
 
-main {
+html,
+body,
+main,
+app-root {
   width: 100%;
-  max-width: 970px;
-  margin: 0 auto;
+  height: 100%;
+}
+
+app-root {
+  display: flex;
+  flex-direction: row;
+}
+
+app-article {
+  flex: 1;
 }
