@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hero } from '../hero/hero';
 import { HeroService } from '../hero/hero.service';
-import { CacheService } from '../cache/cache.service';
 
 @Component({
   selector: 'app-my-heroes',
@@ -17,8 +16,7 @@ export class HeroesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private heroService: HeroService,
-    private cacheService: CacheService) { }
+    private heroService: HeroService) { }
 
   onSelect(hero: Hero): void {
     // Deselect if the hero is the same as the selected.

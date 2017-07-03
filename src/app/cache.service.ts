@@ -17,7 +17,7 @@ export class CacheService {
     this.cache[id].push(object);
   }
 
-  clearFromCacheArray(id:any, object: any): void {
+  clearFromCacheArray(id: any, object: any): void {
     this.cache[id] = this.cache[id].filter(o => o !== object);
   }
 

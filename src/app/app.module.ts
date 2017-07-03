@@ -15,7 +15,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 import { HeroSearchComponent } from './components/hero-search/hero-search.compontent';
-import { CacheService } from './components/cache/cache.service';
+import { CacheService } from './cache.service';
 import { HeroService } from './components/hero/hero.service';
 import { HeroSearchService } from './components/hero-search/hero-search.service';
 

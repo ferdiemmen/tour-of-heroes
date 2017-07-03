@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Hero } from './hero';
-import { CacheService } from '../cache/cache.service';
+import { CacheService } from '../../cache.service';
 
 // Convert a Observable to a Promise
 import 'rxjs/add/operator/toPromise';
