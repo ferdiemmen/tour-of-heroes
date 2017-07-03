@@ -15,7 +15,7 @@ import { ArticleService } from './article.service';
 export class ArticleComponent implements OnInit {
 
   constructor(
-    private articleService: ArticleService,
+    public articleService: ArticleService,
     private route: ActivatedRoute,
     private location: Location) { }
 

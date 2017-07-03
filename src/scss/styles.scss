@@ -3,6 +3,9 @@
 @import '../../node_modules/normalize-scss/sass/normalize';
 @include normalize();
 
+@import 'settings';
+@import '../../node_modules/font-awesome-sass/assets/stylesheets/font-awesome';
+
 @import 'typography';
 @import 'layout';
 @import 'preview';
