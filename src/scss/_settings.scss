@@ -1,3 +1,4 @@
 
 
-$cms-toolbar-background:              lime !default;
+$cms-background:                      #24292e !default;
+$cms-toolbar-background:              $cms-background !default;

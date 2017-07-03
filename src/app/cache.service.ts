@@ -1,8 +1,9 @@
+
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CacheService {
-  cache: Object = {};
+  private cache: Object = {};
 
   setCache(id: any, objects: any): void {
     this.cache[id] = objects;

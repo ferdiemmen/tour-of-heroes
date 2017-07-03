@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
   selector: 'app-toolbar',
   styleUrls: ['./toolbar.component.scss'],
   template: `
-    <div class="cms-toolbar">
+    <div class="cms-toolbar cms-toolbar--left">
       <ul>
         <li>
           <a routerLink="/articlebrowser">icon</a>
