@@ -13,6 +13,7 @@ import { CacheService } from '../cache/cache.service';
 export class HeroesComponent implements OnInit {
   selectedHero: Hero;
   heroes: Hero[];
+  name: string;
 
   constructor(
     private router: Router,
@@ -20,7 +21,6 @@ export class HeroesComponent implements OnInit {
     private cacheService: CacheService) { }
 
   onSelect(hero: Hero): void {
-    
     // Deselect if the hero is the same as the selected.
     if (hero === this.selectedHero) {
       this.selectedHero = null;

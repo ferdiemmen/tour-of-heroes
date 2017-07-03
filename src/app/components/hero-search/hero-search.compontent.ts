@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
+import { Router } from '@angular/router';
 
-import { Observable }        from 'rxjs/Observable';
-import { Subject }           from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 // Observable class extensions
 import 'rxjs/add/observable/of';
 
 // Observable operators
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -16,13 +17,16 @@ import { HeroSearchService } from './hero-search.service';
 import { Hero } from '../hero/hero';
 
 @Component({
-  selector: 'hero-search',
+  selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
-  styleUrls: [ './hero-search.component.css' ],
+  styleUrls: [ './hero-search.component.scss' ],
   providers: [HeroSearchService]
 })
 export class HeroSearchComponent implements OnInit {
   heroes: Observable<Hero[]>;
+  // A Subject is a producer of an observable event stream;
+  // searchTerms produces an Observable of strings,
+  // the filter criteria for the name search.
   private searchTerms = new Subject<string>();
 
   constructor(
@@ -51,7 +55,7 @@ export class HeroSearchComponent implements OnInit {
   }
 
   gotoDetail(hero: Hero): void {
-    let link = ['/detail', hero.id];
+    const link = ['/detail', hero.id];
     this.router.navigate(link);
   }
 }

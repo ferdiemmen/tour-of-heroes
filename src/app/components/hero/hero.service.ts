@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HeroService {
-  private heroesUrl = 'api/heroes' // URL to web api 
+  private heroesUrl = 'api/heroes' // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http, private cacheService: CacheService) { }
@@ -25,7 +25,7 @@ export class HeroService {
         .then(response => {
           // Save 'hero' on cache service.
           this.cacheService.setCache(`hero_${id}`, response.json().data as Hero);
-          
+
           return response.json().data as Hero
         })
         .catch(this.handleError);
@@ -43,7 +43,7 @@ export class HeroService {
         .then(response => {
           // Save 'heroes' on cache service.
           this.cacheService.setCache('heroes', response.json().data);
-          
+
           return response.json().data as Hero[];
         })
         .catch(this.handleError);
@@ -64,7 +64,7 @@ export class HeroService {
       .then(result => {
         // Create cache for new hero.
         this.cacheService.setCache(`hero_${result.json().data.id}`, result.json().data);
-        
+
         // Add the new hero to the cached array of heroes.
         this.cacheService.addToCacheArray('heroes', result.json().data);
 
@@ -79,12 +79,12 @@ export class HeroService {
       .put(url, JSON.stringify(hero), {headers: this.headers})
       .toPromise()
       .then(() => {
-        if (this.cacheService.getCache(`hero_${hero.id}`)) { 
+        if (this.cacheService.getCache(`hero_${hero.id}`)) {
           // Update the cached hero.
           this.cacheService.setCache(`hero_${hero.id}`, hero as Hero);
-          
+
           // Clear heroes list so we get the updated hero.
-          this.cacheService.clearCache('heroes');          
+          this.cacheService.clearCache('heroes');
         }
         return hero;
       })
@@ -97,7 +97,7 @@ export class HeroService {
       .delete(url)
       .toPromise()
       .then(() => {
-        
+
         // Clear the deleted hero from the cached array.
         this.cacheService.clearFromCacheArray('heroes', hero);
         return Promise.resolve();
