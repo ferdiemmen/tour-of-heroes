@@ -11,6 +11,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ApiService {
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     private http: Http,
@@ -18,16 +19,29 @@ export class ApiService {
 
   get(url: string): Promise<any> {
     // Check if a cached version exist and return it.
-    if (this.cacheService.getCache(url)) {
-      return Promise.resolve(this.cacheService.getCache(url));
-    }
+    // if (this.cacheService.getCache(url)) {
+    //   return Promise.resolve(this.cacheService.getCache(url));
+    // }
 
-    return this.http.get(url)
+    return this.http
+      .get(url)
       .toPromise()
       .then(response => {
         // Add to response to the cache service.
-        this.cacheService.setCache(url, response);
+        // this.cacheService.setCache(url, response);
         return response;
       });
+  }
+
+  post(url: string, object: any): Promise<any> {
+    return this.http
+      .post(url, JSON.stringify(object), {headers: this.headers})
+      .toPromise();
+  }
+
+  put(url: string, object: any): Promise<any> {
+    return this.http
+      .put(url, JSON.stringify(object), {headers: this.headers})
+      .toPromise();
   }
 }

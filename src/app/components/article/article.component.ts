@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { ObservableInput } from 'rxjs/Observable';
 
@@ -20,11 +20,23 @@ export class ArticleComponent implements OnInit {
 
   constructor(
     public articleService: ArticleService,
+    private router: Router,
     private route: ActivatedRoute,
     private location: Location) { }
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    let action = (this.article.id) ? 'update' : 'create';
+
+    this.articleService[action](this.article)
+      .then(article => {
+        let id = (article.id) ? article.id : this.article.id;
+        const link = ['/article/edit', id];
+        this.router.navigate(link);
+      });
   }
 
   ngOnInit(): void {
@@ -36,4 +48,5 @@ export class ArticleComponent implements OnInit {
     )
     .subscribe(article => this.article = article);
   }
+
 }
