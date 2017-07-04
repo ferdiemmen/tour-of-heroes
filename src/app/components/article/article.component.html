@@ -1,8 +1,9 @@
 
-
 <div class="cms-preview cms-preview--article">
-  <div *ngIf="article">
-    {{article.title}}
-  </div>
+  <medium-editor [(editorModel)]="article.title"
+    [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+    <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
+  </medium-editor>
+  {{article|json}}
 </div>
 <button (click)="goBack()">Back</button>

@@ -4,10 +4,11 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { ObservableInput } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/switchMap';
+
 import { Article } from './article';
 import { ArticleService } from './article.service';
 
-import { MediumEditorComponent } from 'ng2-meditor';
 
 @Component({
   selector: 'app-article',
@@ -15,7 +16,7 @@ import { MediumEditorComponent } from 'ng2-meditor';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-  article: Article;
+  article: Article = new Article();
 
   constructor(
     public articleService: ArticleService,

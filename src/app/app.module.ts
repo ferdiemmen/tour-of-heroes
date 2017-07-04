@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { MediumEditorDirective } from 'angular2-medium-editor/medium-editor.directive';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +34,7 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     AppRoutingModule
   ],
   declarations: [
+    MediumEditorDirective,
     AppComponent,
     ToolbarComponent,
     ArticleComponent,

@@ -259,6 +259,10 @@ angular-in-memory-web-api@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/angular-in-memory-web-api/-/angular-in-memory-web-api-0.3.2.tgz#8836d9e2534d37b728f3cb5a1caf6fe1e7fbbecd"
 
+"angular2-medium-editor@git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git":
+  version "1.0.6"
+  resolved "git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git#874e45d8f3d23de351b13a2fc49f7150aa0290a0"
+
 ansi-escapes@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-2.0.0.tgz#5bae52be424878dd9783e8910e3fc2922e83c81b"
@@ -2884,7 +2888,7 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
 
-medium-editor@^5.21.0:
+medium-editor@^5.23.1:
   version "5.23.1"
   resolved "https://registry.yarnpkg.com/medium-editor/-/medium-editor-5.23.1.tgz#02e7b6959b8decd9c713d007083e9ef1e2484065"
 
@@ -3029,12 +3033,6 @@ ncname@1.0.x:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
-
-ng2-meditor@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ng2-meditor/-/ng2-meditor-1.0.1.tgz#c7982e1c6d4c1243d6293a415c12254e896324d7"
-  dependencies:
-    medium-editor "^5.21.0"
 
 no-case@^2.2.0:
   version "2.3.1"
