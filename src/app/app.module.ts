@@ -11,6 +11,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 
 // Imports from third party components
 import { MediumEditorDirective } from 'angular2-medium-editor/medium-editor.directive';
+import { DateTimePickerModule } from 'ng-pick-datetime';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +36,8 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    AppRoutingModule
+    AppRoutingModule,
+    DateTimePickerModule
   ],
   declarations: [
     MediumEditorDirective,

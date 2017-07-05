@@ -4,6 +4,12 @@
     [editorOptions]="{'disableReturn': true, 'toolbar': false}">
     <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
   </medium-editor>
+  <input [ngModel]="article.publishDate|date:'dd MM y H:mm'"
+         [locale]="'nl'"
+         [mode]="'dropdown'"
+         [theme]="'#222628'"
+         [autoClose]="true"
+         [(dateTimePicker)]="article.publishDate" readonly />
   {{article|json}}
 </div>
 <button (click)="goBack()">Back</button>
