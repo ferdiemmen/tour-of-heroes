@@ -1,0 +1,8 @@
+
+.medium-editor-element {
+  outline: 1px solid transparent;
+
+  &:hover {
+    outline: 1px solid $cms-highlight;
+  }
+}

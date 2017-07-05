@@ -1,6 +1,6 @@
 
 <div class="cms-preview cms-preview--article article">
-  <medium-editor class="article__title" [(editorModel)]="article.title"
+  <medium-editor class="article__title cms-outline" [(editorModel)]="article.title"
     [editorOptions]="{'disableReturn': true, 'toolbar': false}">
     <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
   </medium-editor>
@@ -12,13 +12,17 @@
 </div>
 
 <div class="cms-editor cms-editor--article editor">
-  <input [ngModel]="article.publishDate|date:'dd MM y H:mm'"
-        [locale]="'nl'"
-        [mode]="'dropdown'"
-        [theme]="'#222628'"
-        [autoClose]="true"
-        [(dateTimePicker)]="article.publishDate" readonly />
+  
+  <label class="cms__label">Publiceer datum</label>
+  <input class="cms__input" 
+         [ngModel]="article.publishDate|date:'dd MM y H:mm'"
+         [locale]="'nl'"
+         [mode]="'dropdown'"
+         [theme]="'#222628'"
+         [autoClose]="true"
+         [(dateTimePicker)]="article.publishDate" readonly />
 
+  <label class="cms__label">Categorie</label>
   <select name="category" [compareWith]="categoryById" *ngIf="article.category" [(ngModel)]="article.category">
     <option *ngFor="let category of categoryService.categories" [ngValue]="category">
       {{ category.name }}

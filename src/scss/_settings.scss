@@ -1,7 +1,9 @@
 
-$fa-font-path:                        '../../node_modules/font-awesome-sass/assets/fonts/font-awesome/';
+$fa-font-path:                          '../../node_modules/font-awesome-sass/assets/fonts/font-awesome/';
 
-$cms-background:                      #24292e !default;
-$cms-toolbar-background:              $cms-background !default;
+$cms-background:                        #24292e !default;
+$cms-highlight:                         #2196F3 !default;
+$cms-toolbar-background:                $cms-background !default;
+$cms-inactive:                          lighten($cms-background, 10) !default;
 
-$cms-preview--article-width:          640px !default;
+$cms-preview--article-width:            640px !default;

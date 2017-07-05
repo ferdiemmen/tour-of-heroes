@@ -1,0 +1,21 @@
+
+
+input, textarea {
+  color: #333;
+}
+
+.cms__input,
+.cms__textarea {
+  box-sizing: border-box;
+  width: 100%;
+  background: $cms-background;
+  border: 1px solid $cms-inactive;
+  padding: 5px;
+  color: #fff;
+  transition: all 0.3s ease 0s;
+  font-size: .7em;
+
+  &:hover {
+    border: 1px solid $cms-highlight;
+  }
+}
