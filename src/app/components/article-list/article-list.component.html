@@ -1,6 +1,29 @@
 
-<div *ngFor="let article of articles">
-  <a [routerLink]="['/article/edit', article.id]">
-    {{article.title}}
-  </a>
-</div>
+<table cellspacing="0">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Titel</th>
+      <th>Publiceer datum</th>
+      <th>Depubliceer datum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let article of articles">
+      <td>
+        {{article.id}}
+      </td>
+      <td>
+        <a [routerLink]="['/article/edit', article.id]">
+          {{article.title}}
+        </a>
+      </td>
+      <td>
+        {{article.publishDate|date:'dd MMMM y H:mm'}}
+      </td>
+      <td>
+        {{article.expiryDate|date:'dd MMMM y H:mm'}}
+      </td>
+    </tr>
+  </tbody>
+</table>

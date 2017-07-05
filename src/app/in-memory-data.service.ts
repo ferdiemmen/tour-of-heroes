@@ -1,19 +1,22 @@
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+
+import * as moment from 'moment';
+
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const articles = [
-      { id: 0, title: 'Zero' },
-      { id: 11, title: 'Mr. Nice' },
-      { id: 12, title: 'Narco' },
-      { id: 13, title: 'Bombasto' },
-      { id: 14, title: 'Celeritas' },
-      { id: 15, title: 'Magneta' },
-      { id: 16, title: 'RubberMan' },
-      { id: 17, title: 'Dynama' },
-      { id: 18, title: 'Dr IQ' },
-      { id: 19, title: 'Magma' },
-      { id: 20, title: 'Tornado' }
+      { id: 0, title: 'Zero', publishDate: moment().format()},
+      { id: 11, title: 'Mr. Nice', publishDate: moment().format() },
+      { id: 12, title: 'Narco', publishDate: moment().format() },
+      { id: 13, title: 'Bombasto', publishDate: moment().format() },
+      { id: 14, title: 'Celeritas', publishDate: moment().format() },
+      { id: 15, title: 'Magneta', publishDate: moment().format() },
+      { id: 16, title: 'RubberMan', publishDate: moment().format() },
+      { id: 17, title: 'Dynama', publishDate: moment().format() },
+      { id: 18, title: 'Dr IQ', publishDate: moment().format() },
+      { id: 19, title: 'Magma', publishDate: moment().format() },
+      { id: 20, title: 'Tornado', publishDate: moment().format() }
     ];
     const user = {
       id: 88141,
