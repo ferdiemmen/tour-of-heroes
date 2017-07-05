@@ -10,7 +10,14 @@
          [theme]="'#222628'"
          [autoClose]="true"
          [(dateTimePicker)]="article.publishDate" readonly />
-  {{article|json}}
+
+  <select name="category" [compareWith]="categoryById" *ngIf="article.category" [(ngModel)]="article.category">
+    <option *ngFor="let category of categories" [ngValue]="category">
+      {{ category.name }}
+    </option>
+  </select>
+
+  <pre>{{article|json}}</pre>
 </div>
 <button (click)="goBack()">Back</button>
 <button (click)="save()">Save</button>

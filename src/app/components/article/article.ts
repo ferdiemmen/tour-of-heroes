@@ -1,5 +1,6 @@
 
 import * as moment from 'moment';
+import { Category } from '../category/category';
 
 export class Article {
   id: number;
@@ -7,6 +8,7 @@ export class Article {
   subtitle: string;
   publishDate: string;
   expiryDate: string;
+  category: Category;
 
   constructor() {
     this.title = '';

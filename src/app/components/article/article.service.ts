@@ -26,6 +26,13 @@ export class ArticleService {
       .then(response => response.json().data as Article[]);
   }
 
+  getCategories(): Promise<any> {
+    const url = `api/categories`;
+    return this.apiService
+      .get(url)
+      .then(response => response.json().data as any[]);
+  }
+
   create(article: Article): Promise<Article> {
     const url = `${this.articlesUrl}`;
     return this.apiService

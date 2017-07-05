@@ -6,6 +6,7 @@
       <th>Titel</th>
       <th>Publiceer datum</th>
       <th>Depubliceer datum</th>
+      <th>Categorie</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,9 @@
       </td>
       <td>
         {{article.expiryDate|date:'dd MMMM y H:mm'}}
+      </td>
+      <td *ngIf="article.category">
+        {{article.category.name}}
       </td>
     </tr>
   </tbody>

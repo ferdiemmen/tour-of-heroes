@@ -1,11 +1,13 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ObservableInput } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/switchMap';
 
+import { Category } from '../category/category';
 import { Article } from './article';
 import { ArticleService } from './article.service';
 
@@ -17,6 +19,7 @@ import { ArticleService } from './article.service';
 })
 export class ArticleComponent implements OnInit {
   article: Article = new Article();
+  categories: any[];
 
   constructor(
     public articleService: ArticleService,
@@ -45,7 +48,19 @@ export class ArticleComponent implements OnInit {
       });
   }
 
+  categoryById(item1: any, item2: any) {
+    if (!item1 || !item2) { return };
+    return item1.id === item2.id;
+  }
+
   ngOnInit(): void {
+    this.articleService
+      .getCategories()
+      .then(categories => this.categories = categories)
+      .then(_ => {
+        // this.article.category = this.categories.find(c => c.slug === 'nieuws');
+      });
+
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (!params.get('id')) { return []; }
