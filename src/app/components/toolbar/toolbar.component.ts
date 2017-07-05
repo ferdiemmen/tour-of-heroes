@@ -10,10 +10,18 @@ import { Location } from '@angular/common';
   template: `
     <div class="cms-toolbar cms-toolbar--left">
       <a class="cms-toolbar__link" routerLink="/dashboard">
-        <i class="fa fa-home"></i>
+        <i class="fa fa-home" aria-hidden="true"></i>
       </a>
+
+      <div class="has-dropdown cms-toolbar__link">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <ul class="dropdown">
+          <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/article/create">Artikel</a></li>
+        </ul>
+      </div>
+
       <a class="cms-toolbar__link" routerLink="/article-list">
-        <i class="fa fa-file-text-o"></i>
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
       </a>
     </div>
   `

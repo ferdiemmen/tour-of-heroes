@@ -1,11 +1,13 @@
 
 @import '../../../scss/settings';
+@import '../../../scss/mixins';
 
+$cms-toolbar-width:               60px !default;
 $cms-toolbar-background:          $cms-background !default;
 
 .cms-toolbar {
   height: 100%;
-  width: 60px;
+  width: $cms-toolbar-width;
   background: $cms-toolbar-background;
   text-align: center;
 
@@ -14,12 +16,46 @@ $cms-toolbar-background:          $cms-background !default;
     font-size: 1.5em;
   }
 
+  // .cms-toolbar__link
   &__link {
-    padding: 16px 0;
+    padding: 1em 0;
     display: block;
+    color: #fff;
 
     &:hover {
       background: lighten($cms-toolbar-background, 15);
+    }
+
+    &:visited {
+      color: #fff;
+    }
+  }
+
+  .has-dropdown {
+    position: relative;
+
+    &:hover {
+      .dropdown {
+        display: block;
+      }
+    }
+  }
+
+  .dropdown {
+    @extend %list-reset;
+    position: absolute;
+    top: 0;
+    left: $cms-toolbar-width;
+    display: none;
+
+    // .cms-toolbar .dropdown__item
+    &__item {
+      background: $cms-toolbar-background;
+
+      // .cms-toolbar .dropdown__item .cms-toolbar__link
+      .cms-toolbar__link {
+        padding: 1.2em 1em;
+      }
     }
   }
 }
