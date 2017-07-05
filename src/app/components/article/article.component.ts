@@ -29,12 +29,18 @@ export class ArticleComponent implements OnInit {
   }
 
   save(): void {
+    let link;
     let action = (this.article.id) ? 'update' : 'create';
 
     this.articleService[action](this.article)
       .then(article => {
-        let id = (article.id) ? article.id : this.article.id;
-        const link = ['/article/edit', id];
+        const id = (article.id) ? article.id : this.article.id;
+        if (action === 'create') {
+          link = ['/article/edit', id];
+          action = 'update';
+        } else {
+          link = ['/article-list'];
+        }
         this.router.navigate(link);
       });
   }

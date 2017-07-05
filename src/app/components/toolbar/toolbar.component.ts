@@ -9,6 +9,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./toolbar.component.scss'],
   template: `
     <div class="cms-toolbar cms-toolbar--left">
+      <a class="cms-toolbar__link" routerLink="/dashboard">
+        <i class="fa fa-home"></i>
+      </a>
       <a class="cms-toolbar__link" routerLink="/article-list">
         <i class="fa fa-file-text-o"></i>
       </a>
