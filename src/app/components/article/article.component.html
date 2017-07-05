@@ -1,8 +1,11 @@
 
-<div class="cms-preview cms-preview--article">
-  <medium-editor [(editorModel)]="article.title"
+<div class="cms-preview cms-preview--article article">
+  <medium-editor class="article__title" [(editorModel)]="article.title"
     [editorOptions]="{'disableReturn': true, 'toolbar': false}">
     <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
+  </medium-editor>
+  <medium-editor class="article__subtitle" [(editorModel)]="article.subtitle"
+    [editorOptions]="{'disableReturn': true, 'toolbar': false}">
   </medium-editor>
   <input [ngModel]="article.publishDate|date:'dd MM y H:mm'"
          [locale]="'nl'"
@@ -19,5 +22,8 @@
 
   <pre>{{article|json}}</pre>
 </div>
-<button (click)="goBack()">Back</button>
-<button (click)="save()">Save</button>
+
+<div class="cms-editor cms-editor--article editor">
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>

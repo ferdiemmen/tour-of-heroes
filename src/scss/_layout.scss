@@ -12,6 +12,16 @@ app-root {
   flex-direction: row;
 }
 
-app-article {
+app-article,
+app-article-list {
   flex: 1;
+}
+
+app-article {
+  display: flex;
+  background: #f1f1f1;
+}
+
+app-article-list {
+  padding: 10px;
 }

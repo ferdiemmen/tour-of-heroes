@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let article of articles">
+    <tr *ngFor="let article of articles; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
       <td>
         {{article.id}}
       </td>

@@ -1,0 +1,36 @@
+
+
+table {
+  width: 100%;
+  border: 1px solid rgb(224, 224, 224);
+  border-bottom: 0;
+  border-right: 0;
+  border-radius: 3px;
+}
+
+td, th {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  padding: 10px;
+  color: rgb(68, 68, 68);
+  border-bottom: 1px solid rgb(224, 224, 224);
+  border-right: 1px solid rgb(224, 224, 224);
+  text-align: left;
+  background: #fff;
+}
+
+td {
+  &:last-child {
+    border-radius: 0 0 3px 0;
+  }
+}
+
+a {
+  font-weight: bold;
+}
+
+tr.even {
+  td {
+    background: #f4f4f4;
+  }
+}
