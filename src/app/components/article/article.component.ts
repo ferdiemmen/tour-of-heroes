@@ -8,6 +8,7 @@ import { ObservableInput } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
 import { Category } from '../category/category';
+import { CategoryService } from '../category/category.service';
 import { Article } from './article';
 import { ArticleService } from './article.service';
 
@@ -19,10 +20,10 @@ import { ArticleService } from './article.service';
 })
 export class ArticleComponent implements OnInit {
   article: Article = new Article();
-  categories: any[];
 
   constructor(
     public articleService: ArticleService,
+    public categoryService: CategoryService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location) { }
@@ -54,12 +55,11 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.articleService
+    this.categoryService
       .getCategories()
-      .then(categories => this.categories = categories)
       .then(_ => {
         if (!this.article.id) {
-          this.article.category = this.categories.find(c => c.slug === 'nieuws');
+          this.article.category = this.categoryService.categories.find(c => c.slug === 'nieuws');
         }
       });
 

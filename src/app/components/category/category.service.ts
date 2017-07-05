@@ -7,22 +7,23 @@ import { ApiService } from '../../api.service';
 
 @Injectable()
 export class CategoryService {
+  public categories: Category[];
 
-  private articlesUrl = 'api/articles'; // URL to web api
+  private categoriesUrl = 'api/categories'; // URL to web api
 
   constructor(private apiService: ApiService) { }
 
   getCategory(id: number): Promise<Category> {
-    const url = `${this.articlesUrl}/${id}/`;
+    const url = `${this.categoriesUrl}/${id}/`;
     return this.apiService
       .get(url)
       .then(response => response.json().data as Category);
   }
 
   getCategories(): Promise<Category[]> {
-    const url = `${this.articlesUrl}`;
+    const url = `${this.categoriesUrl}`;
     return this.apiService
       .get(url)
-      .then(response => response.json().data as Category[]);
+      .then(response => this.categories = response.json().data as Category[]);
   }
 }

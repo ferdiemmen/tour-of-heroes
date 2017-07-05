@@ -4,8 +4,6 @@ import { Http, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { CacheService } from './cache.service';
-
 // Convert a Observable to a Promise
 import 'rxjs/add/operator/toPromise';
 
@@ -14,23 +12,12 @@ export class ApiService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
-    private http: Http,
-    private cacheService: CacheService) { }
+    private http: Http) { }
 
   get(url: string): Promise<any> {
-    // Check if a cached version exist and return it.
-    // if (this.cacheService.getCache(url)) {
-    //   return Promise.resolve(this.cacheService.getCache(url));
-    // }
-
     return this.http
       .get(url)
-      .toPromise()
-      .then(response => {
-        // Add to response to the cache service.
-        // this.cacheService.setCache(url, response);
-        return response;
-      });
+      .toPromise();
   }
 
   post(url: string, object: any): Promise<any> {
