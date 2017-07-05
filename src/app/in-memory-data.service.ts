@@ -6,17 +6,17 @@ import * as moment from 'moment';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const articles = [
-      { id: 0, title: 'Zero', publishDate: moment().format()},
-      { id: 11, title: 'Mr. Nice', publishDate: moment().format() },
-      { id: 12, title: 'Narco', publishDate: moment().format() },
-      { id: 13, title: 'Bombasto', publishDate: moment().format(), category: { id: 2, name: 'Review', slug: 'review' } },
-      { id: 14, title: 'Celeritas', publishDate: moment().format() },
-      { id: 15, title: 'Magneta', publishDate: moment().format() },
-      { id: 16, title: 'RubberMan', publishDate: moment().format() },
-      { id: 17, title: 'Dynama', publishDate: moment().format() },
-      { id: 18, title: 'Dr IQ', publishDate: moment().format() },
-      { id: 19, title: 'Magma', publishDate: moment().format() },
-      { id: 20, title: 'Tornado', publishDate: moment().format() }
+      { id: 0, title: 'Zero', publishDate: moment().format(), category: { id: 3, name: 'Algemene', slug: 'algemeen' } },
+      { id: 11, title: 'Mr. Nice', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' } },
+      { id: 12, title: 'Narco', publishDate: moment().format(), category: { id: 2, name: 'Review', slug: 'review' } },
+      { id: 13, title: 'Bombasto', publishDate: moment().format(), category: { id: 3, name: 'Algemeen', slug: 'algemeen' } },
+      { id: 14, title: 'Celeritas', publishDate: moment().format(), category: { id: 2, name: 'Review', slug: 'review' } },
+      { id: 15, title: 'Magneta', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' } },
+      { id: 16, title: 'RubberMan', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' } },
+      { id: 17, title: 'Dynama', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' } },
+      { id: 18, title: 'Dr IQ', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' } },
+      { id: 19, title: 'Magma', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' } },
+      { id: 20, title: 'Tornado', publishDate: moment().format(), category: { id: 3, name: 'Algemeen', slug: 'algemeen' } }
     ];
     const categories = [
       { id: 1, name: 'Nieuws', slug: 'nieuws' },

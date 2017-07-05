@@ -58,7 +58,9 @@ export class ArticleComponent implements OnInit {
       .getCategories()
       .then(categories => this.categories = categories)
       .then(_ => {
-        // this.article.category = this.categories.find(c => c.slug === 'nieuws');
+        if (!this.article.id) {
+          this.article.category = this.categories.find(c => c.slug === 'nieuws');
+        }
       });
 
     this.route.paramMap
