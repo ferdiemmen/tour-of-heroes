@@ -261,7 +261,7 @@ angular-in-memory-web-api@^0.3.2:
 
 "angular2-medium-editor@git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git":
   version "1.0.6"
-  resolved "git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git#d479529dea5eee8d8e43e0b89a455aa70dfb192e"
+  resolved "git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git#faf1c4d1eade1eb61f851bee8c586a21d7af56c2"
 
 ansi-escapes@^2.0.0:
   version "2.0.0"
