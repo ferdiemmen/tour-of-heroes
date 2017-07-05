@@ -16,6 +16,7 @@ import { DateTimePickerModule } from 'ng-pick-datetime';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ApiService } from './api.service';
+import { AuthGuard } from './auth-guard.service';
 import { CacheService } from './cache.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -56,6 +57,7 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     HeroService,
     HeroSearchService,
     CacheService,
+    AuthGuard,
     {
       provide: LOCALE_ID,
       useValue: 'nl-NL'

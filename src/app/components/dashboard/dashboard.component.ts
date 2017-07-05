@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-dashboard',
   template: `
     <div>
-      <a routerLink="/article/create">
+      <a routerLink="/cms/article/create">
         <i class="fa fa-file-text-o"></i>
         Maak een artikel aan
       </a>
-      <a routerLink="/page/create">
+      <a routerLink="/cms/page/create">
         Maak pagina aan
       </a>
     </div>

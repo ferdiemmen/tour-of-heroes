@@ -39,10 +39,10 @@ export class ArticleComponent implements OnInit {
       .then(article => {
         const id = (article.id) ? article.id : this.article.id;
         if (action === 'create') {
-          link = ['/article/edit', id];
+          link = ['/cms/article/edit', id];
           action = 'update';
         } else {
-          link = ['/article-list'];
+          link = ['/cms/article-list'];
         }
         this.router.navigate(link);
       });
