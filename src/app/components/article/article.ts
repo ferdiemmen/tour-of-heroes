@@ -15,5 +15,6 @@ export class Article {
     this.subtitle = '';
     this.publishDate = moment().format();
     this.expiryDate = '';
+    this.category = null;
   }
 }

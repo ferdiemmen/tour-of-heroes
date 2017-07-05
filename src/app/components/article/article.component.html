@@ -7,23 +7,25 @@
   <medium-editor class="article__subtitle" [(editorModel)]="article.subtitle"
     [editorOptions]="{'disableReturn': true, 'toolbar': false}">
   </medium-editor>
-  <input [ngModel]="article.publishDate|date:'dd MM y H:mm'"
-         [locale]="'nl'"
-         [mode]="'dropdown'"
-         [theme]="'#222628'"
-         [autoClose]="true"
-         [(dateTimePicker)]="article.publishDate" readonly />
-
-  <select name="category" [compareWith]="categoryById" *ngIf="article.category" [(ngModel)]="article.category">
-    <option *ngFor="let category of categories" [ngValue]="category">
-      {{ category.name }}
-    </option>
-  </select>
 
   <pre>{{article|json}}</pre>
 </div>
 
 <div class="cms-editor cms-editor--article editor">
+  <input [ngModel]="article.publishDate|date:'dd MM y H:mm'"
+        [locale]="'nl'"
+        [mode]="'dropdown'"
+        [theme]="'#222628'"
+        [autoClose]="true"
+        [(dateTimePicker)]="article.publishDate" readonly />
+
+  <select name="category" [compareWith]="categoryById" *ngIf="article.category" [(ngModel)]="article.category">
+    <option *ngFor="let category of categoryService.categories" [ngValue]="category">
+      {{ category.name }}
+    </option>
+  </select>
+
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
+  <button (click)="save(true)">Save and continue</button>
 </div>

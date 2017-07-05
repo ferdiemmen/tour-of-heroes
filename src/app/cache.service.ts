@@ -14,8 +14,19 @@ export class CacheService {
     return Promise.resolve(this.cache[id]);
   }
 
+  checkCacheKey(id: string): boolean {
+    if (this.cache.hasOwnProperty(id)) { return true };
+    return false;
+  }
+
   addToCacheArray(id: any, object: any): void {
-    this.cache[id].push(object);
+    if (!this.cache.hasOwnProperty(id)) { return; }    
+    this.cache[id].unshift(object);
+  }
+
+  updateObjectInCacheArray(id, object): void {
+    if (!this.cache.hasOwnProperty(id)) { return; }    
+    this.cache[id][this.cache[id].findIndex(el => el.id === object.id)] = object;
   }
 
   clearFromCacheArray(id: any, object: any): void {
