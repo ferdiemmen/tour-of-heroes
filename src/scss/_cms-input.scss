@@ -19,3 +19,23 @@ input, textarea {
     border: 1px solid $cms-highlight;
   }
 }
+
+.cms__select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 100%;
+  background-color: $cms-background;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…J2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+);
+  background-position: 100% center;
+  background-repeat: no-repeat;
+  border: 1px solid $cms-inactive;
+  color: #fff;
+  font-size: .7em;
+  padding: 0.44444rem;
+  border-radius: 0;
+  transition: border-color .1s ease-out;
+
+  &:hover {
+    border-color: $cms-highlight;
+  }
+}

@@ -62,7 +62,7 @@ export class ArticleComponent implements OnInit {
     this.categoryService
       .getCategories()
       .then(_ => {
-        
+
         // A new article doesn't have a category by default. After we got
         // all the categories we set it to the site's default category.
         if (!this.article.id) {

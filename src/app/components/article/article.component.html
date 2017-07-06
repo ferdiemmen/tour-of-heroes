@@ -7,14 +7,17 @@
   <medium-editor class="article__subtitle" [(editorModel)]="article.subtitle"
     [editorOptions]="{'disableReturn': true, 'toolbar': false}">
   </medium-editor>
-
   <pre>{{article|json}}</pre>
 </div>
 
-<div class="cms-editor cms-editor--article editor">
-  
+<div class="cms-advanced">
+  <pre>{{article|json}}</pre>
+</div>
+
+<div class="cms-editor cms-editor--article">
+
   <label class="cms__label">Publiceer datum</label>
-  <input class="cms__input" 
+  <input class="cms__input"
          [ngModel]="article.publishDate|date:'dd MM y H:mm'"
          [locale]="'nl'"
          [mode]="'dropdown'"
@@ -23,13 +26,13 @@
          [(dateTimePicker)]="article.publishDate" readonly />
 
   <label class="cms__label">Categorie</label>
-  <select name="category" [compareWith]="categoryById" *ngIf="article.category" [(ngModel)]="article.category">
+  <select class="cms__select" name="category" [compareWith]="categoryById" *ngIf="article.category" [(ngModel)]="article.category">
     <option *ngFor="let category of categoryService.categories" [ngValue]="category">
       {{ category.name }}
     </option>
   </select>
 
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
-  <button (click)="save(true)">Save and continue</button>
+  <button class="cms__button" (click)="goBack()">Back</button>
+  <button class="cms__button" (click)="save()">Save</button>
+  <button class="cms__button" (click)="save(true)">Save and continue</button>
 </div>
