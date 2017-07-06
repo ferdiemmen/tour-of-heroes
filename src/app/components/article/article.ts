@@ -11,6 +11,7 @@ export class Article {
   publishDate: string;
   expiryDate: string;
   category: Category;
+  seoScore: number;
 
   constructor() {
     this.author = null;
@@ -19,5 +20,6 @@ export class Article {
     this.publishDate = moment().format();
     this.expiryDate = '';
     this.category = null;
+    this.seoScore = 0;
   }
 }

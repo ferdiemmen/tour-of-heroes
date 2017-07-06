@@ -15,41 +15,55 @@
 </div>
 
 <div class="cms-editor cms-editor--article">
+  <div id="cms-tabs">
+    <ul class="cms-tabs">
+      <li class="cms-tabs__element" [ngClass]="{'active': tabIndex === 1}"><a href="javascript:void(0);" class="cms-tabs__toggle" (click)="tabIndex = 1">Basis</a></li>
+      <!-- li class="cms-tabs__element" ngClass="{'active': tabIndex === 1}" ng-if="cmsConfig.hasProducts"><a href="javascript:void(0);" class="cms-tabs__toggle" (click)="tabIndex = 2">Producten</a></li -->
+      <li class="cms-tabs__element" [ngClass]="{'active': tabIndex === 2}"><a href="javascript:void(0);" class="cms-tabs__toggle" (click)="tabIndex = 2">SEO {{articleService.article.seoScore}}%</a></li>
+      <li class="cms-tabs__element" [ngClass]="{'active': tabIndex === 3}"><a href="javascript:void(0);" class="cms-tabs__toggle" (click)="tabIndex = 3">Publiceren</a></li>
+    </ul>
 
-  <label class="cms__label">Auteur</label>
-  <select class="cms__select" name="author" [compareWith]="objectById" [(ngModel)]="articleService.article.author">
-    <option *ngFor="let author of authorService.authors" [ngValue]="author">
-      {{ author.username }}
-    </option>
-  </select>
+    <div class="cms-tabs__content" *ngIf="tabIndex === 1">
+      <label class="cms__label">Auteur</label>
+      <select class="cms__select" name="author" [compareWith]="objectById" [(ngModel)]="articleService.article.author">
+        <option *ngFor="let author of authorService.authors" [ngValue]="author">
+          {{ author.username }}
+        </option>
+      </select>
 
-  <label class="cms__label">Categorie</label>
-  <select class="cms__select" name="category" [compareWith]="objectById" [(ngModel)]="articleService.article.category">
-    <option *ngFor="let category of categoryService.categories" [ngValue]="category">
-      {{ category.name }}
-    </option>
-  </select>
+      <label class="cms__label">Categorie</label>
+      <select class="cms__select" name="category" [compareWith]="objectById" [(ngModel)]="articleService.article.category">
+        <option *ngFor="let category of categoryService.categories" [ngValue]="category">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
 
-  <label class="cms__label">Publiceer datum</label>
-  <input class="cms__input"
-         [ngModel]="articleService.article.publishDate|date:'dd MM y H:mm'"
-         [locale]="'nl'"
-         [mode]="'dropdown'"
-         [theme]="'#222628'"
-         [autoClose]="true"
-         [(dateTimePicker)]="articleService.article.publishDate" readonly />
+    <div class="cms-tabs__content" *ngIf="tabIndex === 3">
+      <label class="cms__label">Publiceer datum</label>
+      <input class="cms__input"
+            [ngModel]="articleService.article.publishDate|date:'dd MM y H:mm'"
+            [locale]="'nl'"
+            [mode]="'dropdown'"
+            [theme]="'#222628'"
+            [autoClose]="true"
+            [(dateTimePicker)]="articleService.article.publishDate" readonly />
 
-  <label class="cms__label">Depubliceer datum</label>
-  <input class="cms__input"
-         [ngModel]="articleService.article.expiryDate|date:'dd MM y H:mm'"
-         [locale]="'nl'"
-         [mode]="'dropdown'"
-         [theme]="'#222628'"
-         [autoClose]="true"
-         [(dateTimePicker)]="articleService.article.expiryDate" readonly />
+      <label class="cms__label">Depubliceer datum</label>
+      <input class="cms__input"
+            [ngModel]="articleService.article.expiryDate|date:'dd MM y H:mm'"
+            [locale]="'nl'"
+            [mode]="'dropdown'"
+            [theme]="'#222628'"
+            [autoClose]="true"
+            [(dateTimePicker)]="articleService.article.expiryDate" readonly />
+    </div>
 
+    <div class="cms-editor-actions">
+      <button class="cms__button" (click)="goBack()">Back</button>
+      <button class="cms__button" (click)="save()">Save</button>
+      <button class="cms__button" (click)="save(true)">Save and continue</button>
+    </div>
+  </div>
 
-  <button class="cms__button" (click)="goBack()">Back</button>
-  <button class="cms__button" (click)="save()">Save</button>
-  <button class="cms__button" (click)="save(true)">Save and continue</button>
 </div>

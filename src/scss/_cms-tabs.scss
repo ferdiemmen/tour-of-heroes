@@ -1,0 +1,45 @@
+
+
+#cms-tabs {
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+
+  .cms-tabs {
+    @extend %list-reset;
+    display: flex;
+
+    &__element {
+      flex: 1;
+      text-align: center;
+      border-bottom: 1px solid $cms-inactive;
+
+      &.active {
+        border-bottom: 1px solid $cms-highlight;
+
+        .cms-tabs__toggle {
+          color: #fff;
+        }
+      }
+    }
+
+    &__content {
+      overflow-x: hidden;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    &__toggle {
+      color: lighten($cms-inactive, 15);
+      font-size: 70%;
+      padding: 10px 0 10px;
+      display: block;
+      transition: all ease-out 0.2s;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}

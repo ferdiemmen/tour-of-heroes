@@ -21,6 +21,7 @@ import { ArticleService } from './article.service';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
+  private tabIndex: number;
 
   constructor(
     public articleService: ArticleService,
@@ -28,7 +29,9 @@ export class ArticleComponent implements OnInit {
     public authorService: AuthorService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location) {
+      this.tabIndex = 1;
+    }
 
   goBack(): void {
     this.location.back();
