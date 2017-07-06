@@ -12,8 +12,8 @@ input, textarea {
   border: 1px solid $cms-inactive;
   padding: 5px;
   color: #fff;
-  transition: all 0.3s ease 0s;
   font-size: .7em;
+  cursor: text;
 
   &:hover {
     border: 1px solid $cms-highlight;
@@ -33,7 +33,7 @@ input, textarea {
   font-size: .7em;
   padding: 0.44444rem;
   border-radius: 0;
-  transition: border-color .1s ease-out;
+  cursor: pointer;
 
   &:hover {
     border-color: $cms-highlight;

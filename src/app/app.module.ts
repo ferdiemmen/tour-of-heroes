@@ -25,6 +25,7 @@ import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { ArticleService } from './components/article/article.service';
 
+import { AuthorService } from './components/author/author.service';
 import { CategoryService } from './components/category/category.service';
 
 import { HeroesComponent } from './components/heroes/heroes.component';
@@ -57,6 +58,7 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     ApiService,
     ArticleService,
     CategoryService,
+    AuthorService,
     HeroService,
     HeroSearchService,
     CacheService,

@@ -7,6 +7,8 @@ import { ObservableInput } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/switchMap';
 
+import { User } from '../user/user';
+import { AuthorService } from '../author/author.service';
 import { Category } from '../category/category';
 import { CategoryService } from '../category/category.service';
 import { Article } from './article';
@@ -23,6 +25,7 @@ export class ArticleComponent implements OnInit {
   constructor(
     public articleService: ArticleService,
     public categoryService: CategoryService,
+    public authorService: AuthorService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location) { }
@@ -50,9 +53,40 @@ export class ArticleComponent implements OnInit {
       });
   }
 
-  categoryById(item1: any, item2: any) {
+  objectById(item1: any, item2: any) {
     if (!item1 || !item2) { return };
     return item1.id === item2.id;
+  }
+
+
+  private getCategories(): Promise<Category[]> {
+    // Get all the categories.
+    return this.categoryService.getCategories();
+  }
+
+  private getAuthors(): Promise<User[]> {
+    // Get all the authors.
+    return this.authorService.getAuthors();
+  }
+
+  private setDefault(property: string): void {
+
+    switch (property) {
+      case 'author':
+        // A new article doesn't have a author by default. After we got
+        // all the authors we set it to the site's default author.
+        this.articleService.article[property] = this.authorService.authors
+                                                  .find(c => c.slug === 'tsja');
+        break;
+      case 'category':
+        // A new article doesn't have a category by default. After we got
+        // all the categories we set it to the site's default category.
+        this.articleService.article[property] = this.categoryService.categories
+                                                  .find(c => c.slug === 'nieuws');
+        break;
+      default:
+        break;
+    }
   }
 
   ngOnInit(): void {
@@ -63,18 +97,8 @@ export class ArticleComponent implements OnInit {
         // Clear previous Article instance on service.
         this.articleService.article = new Article();
 
-        // Get all the categories.
-        this.categoryService
-          .getCategories()
-          .then(_ => {
-
-            if (!params.get('id')) {
-              // A new article doesn't have a category by default. After we got
-              // all the categories we set it to the site's default category.
-              this.articleService.article.category = this.categoryService.categories
-                                                       .find(c => c.slug === 'nieuws');
-            }
-          });
+        this.getCategories().then(_ => this.setDefault('category'));
+        this.getAuthors().then(_ => this.setDefault('author'));
 
         if (!params.get('id')) {
           return [];

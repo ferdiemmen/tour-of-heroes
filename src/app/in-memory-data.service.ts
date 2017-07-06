@@ -23,6 +23,11 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 2, name: 'Review', slug: 'review' },
       { id: 3, name: 'Algemeen', slug: 'algemeen' },
     ];
+    const authors = [
+      { id: 1, username: 'Apenbroek', slug: 'apenbroek' },
+      { id: 2, username: 'Broekpak', slug: 'broekpak' },
+      { id: 3, username: 'Tsja', slug: 'tsja' },
+    ];
     const user = {
       id: 88141,
       followers: 0,
@@ -94,6 +99,11 @@ export class InMemoryDataService implements InMemoryDbService {
       zipCode: ''
     };
 
-    return {articles: articles, categories: categories, user: user};
+    return {
+      articles: articles,
+      authors: authors,
+      categories: categories,
+      user: user
+    };
   }
 }
