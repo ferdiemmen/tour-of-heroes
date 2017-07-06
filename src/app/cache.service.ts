@@ -11,7 +11,7 @@ export class CacheService {
 
   getCache(id: any): any {
     if (!this.cache[id]) { return false }
-    return Promise.resolve(this.cache[id]);
+    return this.cache[id];
   }
 
   checkCacheKey(id: string): boolean {
@@ -20,12 +20,12 @@ export class CacheService {
   }
 
   addToCacheArray(id: any, object: any): void {
-    if (!this.cache.hasOwnProperty(id)) { return; }    
+    if (!this.cache.hasOwnProperty(id)) { return; }
     this.cache[id].unshift(object);
   }
 
   updateObjectInCacheArray(id, object): void {
-    if (!this.cache.hasOwnProperty(id)) { return; }    
+    if (!this.cache.hasOwnProperty(id)) { return; }
     this.cache[id][this.cache[id].findIndex(el => el.id === object.id)] = object;
   }
 

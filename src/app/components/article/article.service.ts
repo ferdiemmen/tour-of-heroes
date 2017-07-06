@@ -8,6 +8,8 @@ import { CacheService } from '../../cache.service';
 
 @Injectable()
 export class ArticleService {
+  public article: Article = new Article();
+  public articles: Article[] = [];
 
   private articlesUrl = 'api/articles'; // URL to web api
 
@@ -21,67 +23,76 @@ export class ArticleService {
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
-      return Promise.resolve(this.cacheService.getCache(cacheKey));
+      this.article = this.cacheService.getCache(cacheKey);
     }
 
     return this.apiService
       .get(url)
       .then(response => {
-        const article = response.json().data as Article;
-        
-        // Add response to cache.
-        this.cacheService.setCache(cacheKey, article);
+        // Set article on this service.
+        this.article = response.json().data as Article;
 
-        return article;
+        // Add response to cache.
+        this.cacheService.setCache(cacheKey, response.json().data as Article);
+
+        return this.article;
       });
   }
 
-  getArticles(): Promise<Article[]> {
+  getArticles(): void {
     const url = `${this.articlesUrl}`;
     const cacheKey = 'articles';
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
-      return Promise.resolve(this.cacheService.getCache(cacheKey));
+      this.articles = this.cacheService.getCache(cacheKey) as Article[];
     }
-    
-    return this.apiService
+
+    this.apiService
       .get(url)
       .then(response => {
-        const articles = response.json().data as Article[];
+        // Set articles on this service.
+        this.articles = response.json().data as Article[];
 
         // Add articles to cache.
-        this.cacheService.setCache(cacheKey, articles);
+        this.cacheService.setCache(cacheKey, this.articles);
 
-        return articles;
+        return this.articles;
       });
   }
 
-  create(article: Article): Promise<Article> {
+  create(): Promise<Article> {
     const url = `${this.articlesUrl}`;
-    
+
     return this.apiService
-      .post(url, article)
+      .post(url, this.article)
       .then(response => {
-        const article = response.json().data as Article;
+        // Set new article on this service.
+        this.article = response.json().data as Article;
 
         // Add article to cached articles.
         this.cacheService
-          .addToCacheArray('articles', article);
-        
-        return article;
+          .addToCacheArray('articles', response.json().data as Article);
+
+        // Add article to articles.
+        this.articles.unshift(this.article);
+
+        return this.article;
       });
   }
 
-  update(article: Article): Promise<Article> {
-    const url = `${this.articlesUrl}/${article.id}/`;
+  update(): Promise<Article> {
+    const url = `${this.articlesUrl}/${this.article.id}/`;
     return this.apiService
-      .put(url, article)
+      .put(url, this.article)
       .then(response => {
 
         // Update article in cached articles.
         this.cacheService
-          .updateObjectInCacheArray('articles', article);
+          .updateObjectInCacheArray('articles', this.article);
+
+        // Update article in articles.
+        this.articles[this.articles.findIndex(el => el.id === this.article.id)] = this.article;
 
         return response;
       })

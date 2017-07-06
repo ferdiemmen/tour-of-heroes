@@ -1,32 +1,32 @@
 
 <div class="cms-preview cms-preview--article article">
-  <medium-editor class="article__title cms-outline" [(editorModel)]="article.title"
+  <medium-editor class="article__title cms-outline" [(editorModel)]="articleService.article.title"
     [editorOptions]="{'disableReturn': true, 'toolbar': false}">
     <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
   </medium-editor>
-  <medium-editor class="article__subtitle" [(editorModel)]="article.subtitle"
+  <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
     [editorOptions]="{'disableReturn': true, 'toolbar': false}">
   </medium-editor>
-  <pre>{{article|json}}</pre>
+  <pre>{{articleService.article|json}}</pre>
 </div>
 
 <div class="cms-advanced">
-  <pre>{{article|json}}</pre>
+  <pre>{{articleService.article|json}}</pre>
 </div>
 
 <div class="cms-editor cms-editor--article">
 
   <label class="cms__label">Publiceer datum</label>
   <input class="cms__input"
-         [ngModel]="article.publishDate|date:'dd MM y H:mm'"
+         [ngModel]="articleService.article.publishDate|date:'dd MM y H:mm'"
          [locale]="'nl'"
          [mode]="'dropdown'"
          [theme]="'#222628'"
          [autoClose]="true"
-         [(dateTimePicker)]="article.publishDate" readonly />
+         [(dateTimePicker)]="articleService.article.publishDate" readonly />
 
   <label class="cms__label">Categorie</label>
-  <select class="cms__select" name="category" [compareWith]="categoryById" *ngIf="article.category" [(ngModel)]="article.category">
+  <select class="cms__select" name="category" [compareWith]="categoryById" *ngIf="articleService.article.category" [(ngModel)]="articleService.article.category">
     <option *ngFor="let category of categoryService.categories" [ngValue]="category">
       {{ category.name }}
     </option>

@@ -10,11 +10,10 @@ import { ArticleService } from '../article/article.service';
   styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
-  private articles: Article[];
 
   constructor(public articleService: ArticleService) { }
 
   ngOnInit(): void {
-    this.articleService.getArticles().then(articles => this.articles = articles);
+    this.articleService.getArticles();
   }
 }

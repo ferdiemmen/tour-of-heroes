@@ -19,7 +19,6 @@ import { ArticleService } from './article.service';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-  article: Article = new Article();
 
   constructor(
     public articleService: ArticleService,
@@ -34,11 +33,11 @@ export class ArticleComponent implements OnInit {
 
   save(cont: boolean): void {
     let link;
-    let action = (this.article.id) ? 'update' : 'create';
+    let action = (this.articleService.article.id) ? 'update' : 'create';
 
-    this.articleService[action](this.article)
+    this.articleService[action]()
       .then(article => {
-        const id = (article.id) ? article.id : this.article.id;
+        const id = (article.id) ? article.id : this.articleService.article.id;
         if (action === 'create' || cont) {
           link = ['/cms/article/edit', id];
           action = 'update';
@@ -58,26 +57,33 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Get all the categories.
-    this.categoryService
-      .getCategories()
-      .then(_ => {
-
-        // A new article doesn't have a category by default. After we got
-        // all the categories we set it to the site's default category.
-        if (!this.article.id) {
-          this.article.category = this.categoryService.categories
-                                    .find(c => c.slug === 'nieuws');
-        }
-      });
-
     this.route.paramMap
       .switchMap((params: ParamMap) => {
-        if (!params.get('id')) { return []; }
+
+        // Clear previous Article instance on service.
+        this.articleService.article = new Article();
+
+        // Get all the categories.
+        this.categoryService
+          .getCategories()
+          .then(_ => {
+
+            if (!params.get('id')) {
+              // A new article doesn't have a category by default. After we got
+              // all the categories we set it to the site's default category.
+              this.articleService.article.category = this.categoryService.categories
+                                                       .find(c => c.slug === 'nieuws');
+            }
+          });
+
+        if (!params.get('id')) {
+          return [];
+        }
+
         return this.articleService.getArticle(+params.get('id'));
       }
     )
-    .subscribe(article => this.article = article);
+    .subscribe();
   }
 
 }
