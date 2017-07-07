@@ -1,15 +1,19 @@
 
-<div class="cms-column">
-  <div class="cms-preview cms-preview--article article">
-    <medium-editor class="article__title cms-outline" [(editorModel)]="articleService.article.title"
-      [editorOptions]="{'disableReturn': true, 'toolbar': false}">
-      <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
-    </medium-editor>
-    <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
-      [editorOptions]="{'disableReturn': true, 'toolbar': false}">
-    </medium-editor>
-    <pre>{{articleService.article|json}}</pre>
+<div class="cms-columns cms-columns--column">
+  <div class="cms-header">header</div>
+  <div class="cms-columns__column scrollable--y">
+    <div class="cms-preview cms-preview--article article">
+      <medium-editor class="article__title cms-outline" [(editorModel)]="articleService.article.title"
+        [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+        <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
+      </medium-editor>
+      <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
+        [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+      </medium-editor>
+      <pre>{{articleService.article|json}}</pre>
+    </div>
   </div>
+  <div class="cms-footer">footer</div>
 </div>
 
 <div class="cms-advanced">

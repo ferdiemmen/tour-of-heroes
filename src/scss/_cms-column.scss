@@ -1,5 +1,13 @@
 
-.cms-column {
+.cms-columns {
+  display: flex;
   flex: 1;
-  overflow-y: auto;
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &__column {
+    flex: 1;
+  }
 }

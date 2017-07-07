@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Location } from '@angular/common';
 import { ObservableInput } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/switchMap';
@@ -29,16 +28,11 @@ export class ArticleComponent implements OnInit {
     public feedService: FeedService,
     public siteService: SiteService,
     private router: Router,
-    private route: ActivatedRoute,
-    private location: Location) {
+    private route: ActivatedRoute) {
 
       // Set initial tab index.
       this.tabIndex = 1;
     }
-
-  goBack(): void {
-    this.location.back();
-  }
 
   save(cont: boolean): void {
     let link;

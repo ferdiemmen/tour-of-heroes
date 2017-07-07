@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth-guard.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthenticationComponent } from './components/user/authentication.component';
+import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
@@ -10,17 +12,18 @@ import { HeroDetailComponent } from './components/hero-detail/hero-detail.compon
 
 const routes: Routes = [
   { path: 'cms',
-    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         children: [
-          { path: '', component: DashboardComponent },
-          { path: 'article-list', component: ArticleListComponent },
-          { path: 'article/create', component: ArticleComponent },
-          { path: 'article/edit/:id', component: ArticleComponent },
-          { path: 'detail/:id', component: HeroDetailComponent },
-          { path: 'heroes', component: HeroesComponent }
+          { path: '', component: DashboardComponent, canActivate: [AuthGuard], },
+          { path: 'login', component: AuthenticationComponent },
+          { path: 'password-reset', component: PasswordResetComponent },
+          { path: 'article-list', component: ArticleListComponent, canActivate: [AuthGuard], },
+          { path: 'article/create', component: ArticleComponent, canActivate: [AuthGuard], },
+          { path: 'article/edit/:id', component: ArticleComponent, canActivate: [AuthGuard], },
+          { path: 'detail/:id', component: HeroDetailComponent, canActivate: [AuthGuard], },
+          { path: 'heroes', component: HeroesComponent, canActivate: [AuthGuard], }
         ],
       }
     ]

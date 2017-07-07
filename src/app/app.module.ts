@@ -19,6 +19,8 @@ import { ApiService } from './api.service';
 import { AuthGuard } from './auth-guard.service';
 import { CacheService } from './cache.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthenticationComponent } from './components/user/authentication.component';
+import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { ArticleComponent } from './components/article/article.component';
@@ -48,6 +50,8 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
   declarations: [
     MediumEditorDirective,
     AppComponent,
+    AuthenticationComponent,
+    PasswordResetComponent,
     ToolbarComponent,
     ArticleComponent,
     ArticleListComponent,
