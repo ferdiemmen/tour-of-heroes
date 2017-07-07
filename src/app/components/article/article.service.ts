@@ -4,6 +4,12 @@ import { Injectable } from '@angular/core';
 import { Article } from './article';
 import { ApiService } from '../../api.service';
 import { CacheService } from '../../cache.service';
+import { User } from '../user/user';
+import { AuthorService } from '../author/author.service';
+import { Category } from '../category/category';
+import { CategoryService } from '../category/category.service';
+import { Feed } from '../feed/feed';
+import { FeedService } from '../feed/feed.service';
 
 
 @Injectable()
@@ -14,6 +20,9 @@ export class ArticleService {
   private articlesUrl = 'api/articles'; // URL to web api
 
   constructor(
+    public categoryService: CategoryService,
+    public authorService: AuthorService,
+    public feedService: FeedService,
     private apiService: ApiService,
     private cacheService: CacheService) { }
 
@@ -21,9 +30,22 @@ export class ArticleService {
     const url = `${this.articlesUrl}/${id}/`;
     const cacheKey = `article_${id}`;
 
+    if (!id) {
+      // Clear previous Article instance on service.
+      this.article = new Article();
+
+      // Set article defaults.
+      this.setDefaults();
+      return Promise.resolve(this.article);
+    }
+
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
       this.article = this.cacheService.getCache(cacheKey);
+
+      // Set article defaults.
+      this.setDefaults();
+      return Promise.resolve(this.article);
     }
 
     return this.apiService
@@ -34,6 +56,9 @@ export class ArticleService {
 
         // Add response to cache.
         this.cacheService.setCache(cacheKey, response.json().data as Article);
+
+        // Set article defaults.
+        this.setDefaults();
 
         return this.article;
       });
@@ -96,5 +121,68 @@ export class ArticleService {
 
         return response;
       })
+  }
+
+  private setDefault(property: string): void {
+    switch (property) {
+      case 'author':
+        // A new article doesn't have a author by default. After we got
+        // all the authors we set it to the site's default author.
+        this.article[property] = this.authorService.authors
+                                                  .find(a => a.slug === 'tsja');
+        break;
+      case 'category':
+        // A new article doesn't have a category by default. After we got
+        // all the categories we set it to the site's default category.
+        this.article[property] = this.categoryService.categories
+                                                  .find(c => c.slug === 'nieuws');
+        break;
+      case 'RATable':
+        // A new article doesn't have feeds by default. After we got
+        // all the feeds we set it to the site's default feeds.
+
+        if (this.article[property] && !this.article[property].length) {
+          this.feedService.feeds.map(o => {
+            if (o['default']) {
+              this.toggleProperty(property, o);
+            }
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  hasProperty(property, value) {
+    if (!this.article[property]) {
+      return false;
+    }
+
+    return this.article[property].some(o => {
+      if (o.id === value.id) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  setDefaults() {
+
+    // Get categories, authors and feeds. Set the defaults for this article.
+    this.categoryService.getCategories().then(_ => this.setDefault('category'));
+    this.authorService.getAuthors().then(_ => this.setDefault('author'));
+    this.feedService.getFeeds().then(_ => this.setDefault('RATable'));
+  }
+
+  toggleProperty(property: string, obj: object) {
+    if (!this.article[property]) { this.article[property] = [] }
+
+    // Toggle a property on the article.
+    if (this.article[property].findIndex(el => el.id === obj['id']) !== -1) {
+      this.article[property].splice([this.article[property].findIndex(el => el.id === obj['id'])], 1);
+    } else {
+      this.article[property].push(obj);
+    }
   }
 }

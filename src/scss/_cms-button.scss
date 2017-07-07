@@ -10,7 +10,6 @@
   width: 100%;
   position: relative;
   cursor: pointer;
-  margin-top: 5px;
 
   &.active {
     border-color: $cms-highlight;
@@ -19,5 +18,43 @@
 
   &:hover {
     border-color: $cms-highlight;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &--icon {
+    i {
+      position: absolute;
+      color: lighten($cms-background, 30);
+
+      &.fa-chevron-right,
+      &.fa-chevron-left {
+        top: 9px;
+        font-size: 70%;
+      }
+      &.fa-chevron-left {
+        left: 12px;
+      }
+      &.fa-circle,
+      &.fa-check,
+      &.fa-clock-o,
+      &.fa-check-circle,
+      &.fa-circle-o-notch,
+      &.fa-close,
+      &.fa-files-o {
+        top: 7px;
+        left: 12px;
+      }
+      &.fa-chevron-right {
+        left: auto;
+        right: 12px;
+      }
+      &.fa-check-circle,
+      &.fa-check {
+        color: $cms-highlight;
+      }
+    }
   }
 }

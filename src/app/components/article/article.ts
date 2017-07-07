@@ -2,6 +2,7 @@
 import * as moment from 'moment';
 import { User } from '../user/user';
 import { Category } from '../category/category';
+import { Feed } from '../feed/feed';
 
 export class Article {
   id: number;
@@ -12,6 +13,11 @@ export class Article {
   expiryDate: string;
   category: Category;
   seoScore: number;
+  published: boolean;
+  isPartner: boolean;
+  showComments: boolean;
+  featured: boolean;
+  RATable: Feed[];
 
   constructor() {
     this.author = null;
@@ -21,5 +27,10 @@ export class Article {
     this.expiryDate = '';
     this.category = null;
     this.seoScore = 0;
+    this.published = false;
+    this.isPartner = false;
+    this.showComments = false;
+    this.featured = false;
+    this.RATable = [];
   }
 }

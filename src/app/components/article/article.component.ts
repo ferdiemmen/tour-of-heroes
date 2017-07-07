@@ -7,13 +7,11 @@ import { ObservableInput } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/switchMap';
 
-import { User } from '../user/user';
-import { AuthorService } from '../author/author.service';
-import { Category } from '../category/category';
-import { CategoryService } from '../category/category.service';
 import { Article } from './article';
 import { ArticleService } from './article.service';
-
+import { AuthorService } from '../author/author.service';
+import { CategoryService } from '../category/category.service';
+import { FeedService } from '../feed/feed.service';
 
 @Component({
   selector: 'app-article',
@@ -27,6 +25,7 @@ export class ArticleComponent implements OnInit {
     public articleService: ArticleService,
     public categoryService: CategoryService,
     public authorService: AuthorService,
+    public feedService: FeedService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location) {
@@ -61,56 +60,21 @@ export class ArticleComponent implements OnInit {
     return item1.id === item2.id;
   }
 
-
-  private getCategories(): Promise<Category[]> {
-    // Get all the categories.
-    return this.categoryService.getCategories();
-  }
-
-  private getAuthors(): Promise<User[]> {
-    // Get all the authors.
-    return this.authorService.getAuthors();
-  }
-
-  private setDefault(property: string): void {
-
-    switch (property) {
-      case 'author':
-        // A new article doesn't have a author by default. After we got
-        // all the authors we set it to the site's default author.
-        this.articleService.article[property] = this.authorService.authors
-                                                  .find(c => c.slug === 'tsja');
-        break;
-      case 'category':
-        // A new article doesn't have a category by default. After we got
-        // all the categories we set it to the site's default category.
-        this.articleService.article[property] = this.categoryService.categories
-                                                  .find(c => c.slug === 'nieuws');
-        break;
-      default:
-        break;
-    }
-  }
-
   ngOnInit(): void {
+
+    this.categoryService.getCategories();
+    this.authorService.getAuthors();
+    this.feedService.getFeeds();
+    this.articleService.article = new Article();
 
     this.route.paramMap
       .switchMap((params: ParamMap) => {
 
-        // Clear previous Article instance on service.
-        this.articleService.article = new Article();
+        this.articleService.getArticle(+params.get('id'));
 
-        this.getCategories().then(_ => this.setDefault('category'));
-        this.getAuthors().then(_ => this.setDefault('author'));
-
-        if (!params.get('id')) {
-          return [];
-        }
-
-        return this.articleService.getArticle(+params.get('id'));
+        return [];
       }
     )
     .subscribe();
   }
-
 }

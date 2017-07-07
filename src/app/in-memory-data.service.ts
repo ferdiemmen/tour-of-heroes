@@ -6,8 +6,8 @@ import * as moment from 'moment';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const articles = [
-      { id: 0, title: 'Zero', subtitle: '', publishDate: moment().format(), category: { id: 3, name: 'Algemene', slug: 'algemeen' } },
-      { id: 11, title: 'Mr. Nice', subtitle: 'guy', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' } },
+      { id: 11, title: 'Mr. Nice', subtitle: 'guy', publishDate: moment().format(), category: { id: 1, name: 'Nieuws', slug: 'nieuws' },
+        'RATable': [{ id: 1, name: 'Gamer.nl feed voor Gamingtotaal', default: true }] },
       { id: 12, title: 'Narco', subtitle: '', publishDate: moment().format(), category: { id: 2, name: 'Review', slug: 'review' } },
       { id: 13, title: 'Bombasto', subtitle: '', publishDate: moment().format(), category: { id: 3, name: 'Algemeen', slug: 'algemeen' } },
       { id: 14, title: 'Celeritas', subtitle: '', publishDate: moment().format(), category: { id: 2, name: 'Review', slug: 'review' } },
@@ -21,12 +21,18 @@ export class InMemoryDataService implements InMemoryDbService {
     const categories = [
       { id: 1, name: 'Nieuws', slug: 'nieuws' },
       { id: 2, name: 'Review', slug: 'review' },
-      { id: 3, name: 'Algemeen', slug: 'algemeen' },
+      { id: 3, name: 'Algemeen', slug: 'algemeen' }
     ];
     const authors = [
       { id: 1, username: 'Apenbroek', slug: 'apenbroek' },
       { id: 2, username: 'Broekpak', slug: 'broekpak' },
-      { id: 3, username: 'Tsja', slug: 'tsja' },
+      { id: 3, username: 'Tsja', slug: 'tsja' }
+    ];
+    const feeds = [
+      { id: 1, name: 'Gamer.nl feed voor Gamingtotaal', default: true },
+      { id: 2, name: 'Gamer.nl feed voor Computer!Totaal' },
+      { id: 3, name: 'Gamer.nl RSS', default: true },
+      { id: 4, name: 'Gamer.nl nieuws voor NU.nl' }
     ];
     const user = {
       id: 88141,
@@ -102,6 +108,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return {
       articles: articles,
       authors: authors,
+      feeds: feeds,
       categories: categories,
       user: user
     };

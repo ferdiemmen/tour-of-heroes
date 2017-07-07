@@ -40,30 +40,78 @@
     </div>
 
     <div class="cms-tabs__content" *ngIf="tabIndex === 3">
-      <label class="cms__label">Publiceer datum</label>
-      <input class="cms__input"
-            [ngModel]="articleService.article.publishDate|date:'dd MM y H:mm'"
-            [locale]="'nl'"
-            [mode]="'dropdown'"
-            [theme]="'#222628'"
-            [autoClose]="true"
-            [(dateTimePicker)]="articleService.article.publishDate" readonly />
 
-      <label class="cms__label">Depubliceer datum</label>
-      <input class="cms__input"
-            [ngModel]="articleService.article.expiryDate|date:'dd MM y H:mm'"
-            [locale]="'nl'"
-            [mode]="'dropdown'"
-            [theme]="'#222628'"
-            [autoClose]="true"
-            [(dateTimePicker)]="articleService.article.expiryDate" readonly />
+      <label class="cms__label">Status</label>
+      <button class="cms__button cms__button--icon" [ngClass]="{'active': articleService.article.published}" (click)="articleService.article.published = !articleService.article.published">
+        <span *ngIf="articleService.article.published"><i class="fa fa-check-circle" aria-hidden="true"></i> Gepubliceerd</span>
+        <span *ngIf="!articleService.article.published"><i class="fa fa-clock-o" aria-hidden="true"></i> Concept</span>
+      </button>
+
+      <div class="cms-group">
+        <div class="cms-group__item">
+          <label class="cms__label">Publiceer datum</label>
+          <input class="cms__input"
+                [ngModel]="articleService.article.publishDate|date:'dd MM y H:mm'"
+                [locale]="'nl'"
+                [mode]="'dropdown'"
+                [theme]="'#222628'"
+                [autoClose]="true"
+                [(dateTimePicker)]="articleService.article.publishDate" readonly />
+        </div>
+
+        <div class="cms-group__item">
+          <label class="cms__label">Depubliceer datum</label>
+          <input class="cms__input"
+                [ngModel]="articleService.article.expiryDate|date:'dd MM y H:mm'"
+                [locale]="'nl'"
+                [mode]="'dropdown'"
+                [theme]="'#222628'"
+                [autoClose]="true"
+                [(dateTimePicker)]="articleService.article.expiryDate" readonly />
+        </div>
+      </div>
+
+      <hr class="cms__hr">
+
+      <div class="cms-group">
+        <div class="cms-group__item">
+          <label class="cms__label">Uitgelicht?</label>
+          <button class="cms__button cms__button--icon" [ngClass]="{'active': articleService.article.featured}" (click)="articleService.article.featured = !articleService.article.featured">
+            <span *ngIf="articleService.article.featured"><i class="fa fa-check" aria-hidden="true"></i> Ja</span>
+            <span *ngIf="!articleService.article.featured"><i class="fa fa-close" aria-hidden="true"></i> Nee</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="cms-group">
+        <div class="cms-group__item">
+          <label class="cms__label">Partner bijdrage?</label>
+          <button class="cms__button cms__button--icon" [ngClass]="{'active': articleService.article.isPartner}" (click)="articleService.article.isPartner = !articleService.article.isPartner">
+            <span *ngIf="articleService.article.isPartner"><i class="fa fa-check" aria-hidden="true"></i> Ja</span>
+            <span *ngIf="!articleService.article.isPartner"><i class="fa fa-close" aria-hidden="true"></i> Nee</span>
+          </button>
+        </div>
+
+        <div class="cms-group__item">
+          <label class="cms__label">Berichten tonen?</label>
+          <button class="cms__button cms__button--icon" [ngClass]="{'active': articleService.article.showComments}" (click)="articleService.article.showComments = !articleService.article.showComments">
+            <span *ngIf="articleService.article.showComments"><i class="fa fa-check" aria-hidden="true"></i> Ja</span>
+            <span *ngIf="!articleService.article.showComments"><i class="fa fa-close" aria-hidden="true"></i> Nee</span>
+          </button>
+        </div>
+      </div>
+
+      <label class="cms__label">Feeds</label>
+      <label class="cms-checkbox" *ngFor="let feed of feedService.feeds" >
+        <input class="cms-checkbox__element" type="checkbox" [checked]="articleService.hasProperty('RATable', feed)" (click)="articleService.toggleProperty('RATable', feed)">
+        <span class="cms-checkbox__name">{{feed.name}}</span>
+      </label>
     </div>
 
     <div class="cms-editor-actions">
-      <button class="cms__button" (click)="goBack()">Back</button>
-      <button class="cms__button" (click)="save()">Save</button>
-      <button class="cms__button" (click)="save(true)">Save and continue</button>
+      <button class="cms__button" (click)="goBack()">Terug</button>
+      <button class="cms__button active" (click)="save()">Opslaan</button>
+      <button class="cms__button active" (click)="save(true)">Opslaan en opnieuw bewerken</button>
     </div>
   </div>
-
 </div>
