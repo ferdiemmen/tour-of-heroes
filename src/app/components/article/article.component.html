@@ -1,20 +1,22 @@
 
-<div class="cms-preview cms-preview--article article">
-  <medium-editor class="article__title cms-outline" [(editorModel)]="articleService.article.title"
-    [editorOptions]="{'disableReturn': true, 'toolbar': false}">
-    <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
-  </medium-editor>
-  <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
-    [editorOptions]="{'disableReturn': true, 'toolbar': false}">
-  </medium-editor>
-  <pre>{{articleService.article|json}}</pre>
+<div class="cms-column">
+  <div class="cms-preview cms-preview--article article">
+    <medium-editor class="article__title cms-outline" [(editorModel)]="articleService.article.title"
+      [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+      <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
+    </medium-editor>
+    <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
+      [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+    </medium-editor>
+    <pre>{{articleService.article|json}}</pre>
+  </div>
 </div>
 
 <div class="cms-advanced">
   <pre>{{articleService.article|json}}</pre>
 </div>
 
-<div class="cms-editor cms-editor--article">
+<div class="cms-editor">
   <div id="cms-tabs">
     <ul class="cms-tabs">
       <li class="cms-tabs__element" [ngClass]="{'active': tabIndex === 1}"><a href="javascript:void(0);" class="cms-tabs__toggle" (click)="tabIndex = 1">Basis</a></li>
@@ -101,10 +103,18 @@
         </div>
       </div>
 
+      <hr class="cms__hr">
+
       <label class="cms__label">Feeds</label>
       <label class="cms-checkbox" *ngFor="let feed of feedService.feeds" >
         <input class="cms-checkbox__element" type="checkbox" [checked]="articleService.hasProperty('RATable', feed)" (click)="articleService.toggleProperty('RATable', feed)">
         <span class="cms-checkbox__name">{{feed.name}}</span>
+      </label>
+
+      <label class="cms__label">Sites</label>
+      <label class="cms-checkbox" *ngFor="let site of siteService.sites" >
+        <input class="cms-checkbox__element" type="checkbox" [checked]="articleService.hasProperty('site', site)" (click)="articleService.toggleProperty('site', site)">
+        <span class="cms-checkbox__name">{{site.name}}</span>
       </label>
     </div>
 

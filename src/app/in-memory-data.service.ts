@@ -34,6 +34,12 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 3, name: 'Gamer.nl RSS', default: true },
       { id: 4, name: 'Gamer.nl nieuws voor NU.nl' }
     ];
+    const sites = [
+      { id: 1, name: 'Gamer.nl' },
+      { id: 2, name: 'Computertotaal.nl' },
+      { id: 3, name: 'Macworld.nl' },
+      { id: 4, name: 'PCMweb.nl' }
+    ];
     const user = {
       id: 88141,
       followers: 0,
@@ -109,6 +115,7 @@ export class InMemoryDataService implements InMemoryDbService {
       articles: articles,
       authors: authors,
       feeds: feeds,
+      sites: sites,
       categories: categories,
       user: user
     };

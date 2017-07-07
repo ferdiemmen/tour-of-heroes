@@ -7,6 +7,11 @@
   overflow: hidden;
 }
 
+.cms-header,
+.cms-footer {
+  background: $cms-background;
+}
+
 .cms-editor-actions {
   .cms__button {
     margin-top: 5px;

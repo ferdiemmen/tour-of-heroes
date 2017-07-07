@@ -12,6 +12,7 @@ import { ArticleService } from './article.service';
 import { AuthorService } from '../author/author.service';
 import { CategoryService } from '../category/category.service';
 import { FeedService } from '../feed/feed.service';
+import { SiteService } from '../site/site.service';
 
 @Component({
   selector: 'app-article',
@@ -26,9 +27,12 @@ export class ArticleComponent implements OnInit {
     public categoryService: CategoryService,
     public authorService: AuthorService,
     public feedService: FeedService,
+    public siteService: SiteService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location) {
+
+      // Set initial tab index.
       this.tabIndex = 1;
     }
 
@@ -65,6 +69,7 @@ export class ArticleComponent implements OnInit {
     this.categoryService.getCategories();
     this.authorService.getAuthors();
     this.feedService.getFeeds();
+    this.siteService.getSites();
     this.articleService.article = new Article();
 
     this.route.paramMap

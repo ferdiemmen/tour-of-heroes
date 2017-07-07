@@ -28,6 +28,7 @@ import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
 import { CategoryService } from './components/category/category.service';
 import { FeedService } from './components/feed/feed.service';
+import { SiteService } from './components/site/site.service';
 
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
@@ -60,6 +61,7 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     ArticleService,
     CategoryService,
     FeedService,
+    SiteService,
     AuthorService,
     HeroService,
     HeroSearchService,

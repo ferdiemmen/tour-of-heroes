@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { User } from '../user/user';
 import { Category } from '../category/category';
 import { Feed } from '../feed/feed';
+import { Site } from '../site/site';
 
 export class Article {
   id: number;
@@ -18,6 +19,7 @@ export class Article {
   showComments: boolean;
   featured: boolean;
   RATable: Feed[];
+  site: Site[];
 
   constructor() {
     this.author = null;
@@ -32,5 +34,6 @@ export class Article {
     this.showComments = false;
     this.featured = false;
     this.RATable = [];
+    this.site = [];
   }
 }

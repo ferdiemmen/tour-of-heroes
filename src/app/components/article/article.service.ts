@@ -10,6 +10,7 @@ import { Category } from '../category/category';
 import { CategoryService } from '../category/category.service';
 import { Feed } from '../feed/feed';
 import { FeedService } from '../feed/feed.service';
+import { SiteService } from '../site/site.service';
 
 
 @Injectable()
@@ -23,6 +24,7 @@ export class ArticleService {
     public categoryService: CategoryService,
     public authorService: AuthorService,
     public feedService: FeedService,
+    public siteService: SiteService,
     private apiService: ApiService,
     private cacheService: CacheService) { }
 
@@ -43,8 +45,6 @@ export class ArticleService {
     if (this.cacheService.checkCacheKey(cacheKey)) {
       this.article = this.cacheService.getCache(cacheKey);
 
-      // Set article defaults.
-      this.setDefaults();
       return Promise.resolve(this.article);
     }
 
@@ -56,9 +56,6 @@ export class ArticleService {
 
         // Add response to cache.
         this.cacheService.setCache(cacheKey, response.json().data as Article);
-
-        // Set article defaults.
-        this.setDefaults();
 
         return this.article;
       });
@@ -140,7 +137,6 @@ export class ArticleService {
       case 'RATable':
         // A new article doesn't have feeds by default. After we got
         // all the feeds we set it to the site's default feeds.
-
         if (this.article[property] && !this.article[property].length) {
           this.feedService.feeds.map(o => {
             if (o['default']) {
@@ -148,6 +144,17 @@ export class ArticleService {
             }
           });
         }
+        break;
+      case 'site':
+        // A new article doesn't have site by default. After we got
+        // all the sites we set it to the site's.
+        // if (this.article[property] && !this.article[property].length) {
+        //   this.feedService.feeds.map(o => {
+        //     if (o['default']) {
+        //       this.toggleProperty(property, o);
+        //     }
+        //   });
+        // }
         break;
       default:
         break;
@@ -173,6 +180,7 @@ export class ArticleService {
     this.categoryService.getCategories().then(_ => this.setDefault('category'));
     this.authorService.getAuthors().then(_ => this.setDefault('author'));
     this.feedService.getFeeds().then(_ => this.setDefault('RATable'));
+    this.siteService.getSites().then(_ => this.setDefault('site'));
   }
 
   toggleProperty(property: string, obj: object) {
