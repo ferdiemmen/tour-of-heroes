@@ -37,7 +37,7 @@ import { SiteService } from './components/site/site.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
     DateTimePickerModule
   ],

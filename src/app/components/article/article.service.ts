@@ -18,7 +18,7 @@ export class ArticleService {
   public article: Article = new Article();
   public articles: Article[] = [];
 
-  private articlesUrl = 'api/articles'; // URL to web api
+  private articlesUrl = 'modules/articles'; // URL to web api
 
   constructor(
     public categoryService: CategoryService,
@@ -52,29 +52,34 @@ export class ArticleService {
       .get(url)
       .then(response => {
         // Set article on this service.
-        this.article = response.json().data as Article;
+        this.article = response.json() as Article;
 
         // Add response to cache.
-        this.cacheService.setCache(cacheKey, response.json().data as Article);
+        this.cacheService.setCache(cacheKey, response.json() as Article);
 
         return this.article;
       });
   }
 
-  getArticles(): void {
-    const url = `${this.articlesUrl}`;
+  getArticles(page: number): Promise<Article[]> {
+    let url = `${this.articlesUrl}/site/2/20`;
     const cacheKey = 'articles';
+
+    if (page) {
+      url = url += '?page=' + page;
+    }
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
       this.articles = this.cacheService.getCache(cacheKey) as Article[];
     }
 
-    this.apiService
+    return this.apiService
       .get(url)
       .then(response => {
+
         // Set articles on this service.
-        this.articles = response.json().data as Article[];
+        this.articles = response.json().results as Article[];
 
         // Add articles to cache.
         this.cacheService.setCache(cacheKey, this.articles);

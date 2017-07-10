@@ -57,6 +57,10 @@
   "defaults": {
     "styleExt": "scss",
     "component": {
+    },
+    "serve": {
+      "host": "local.cms.nl",
+      "port": 4000
     }
   }
 }
