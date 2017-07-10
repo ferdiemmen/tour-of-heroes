@@ -16,7 +16,9 @@
 - Snippet twitter
 - Snippet kieskeurig
 
-- Media 
+- Media upload
+- Media update
+- Media remove
 - Mediabrowser
 - Productbrowser
 
