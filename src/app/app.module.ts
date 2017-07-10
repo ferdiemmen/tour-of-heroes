@@ -25,10 +25,13 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
-import { ArticleService } from './components/article/article.service';
+import { MediaListComponent } from './components/media/media-list.component';
+import { MediaResizedComponent } from './components/media/media-resized.component';
 
+import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
 import { CategoryService } from './components/category/category.service';
+import { MediaService } from './components/media/media.service';
 import { FeedService } from './components/feed/feed.service';
 import { SiteService } from './components/site/site.service';
 
@@ -49,12 +52,15 @@ import { SiteService } from './components/site/site.service';
     ToolbarComponent,
     ArticleComponent,
     ArticleListComponent,
+    MediaListComponent,
+    MediaResizedComponent,
     DashboardComponent
   ],
   providers: [
     ApiService,
     ArticleService,
     CategoryService,
+    MediaService,
     FeedService,
     SiteService,
     AuthorService,

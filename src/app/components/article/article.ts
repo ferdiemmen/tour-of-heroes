@@ -2,6 +2,7 @@
 import * as moment from 'moment';
 import { User } from '../user/user';
 import { Category } from '../category/category';
+import { Media } from '../media/media';
 import { Feed } from '../feed/feed';
 import { Site } from '../site/site';
 
@@ -10,6 +11,8 @@ export class Article {
   author: User;
   title: string;
   subtitle: string;
+  intro: string;
+  media: Media;
   publishDate: string;
   expiryDate: string;
   category: Category[];
@@ -25,6 +28,8 @@ export class Article {
     this.author = null;
     this.title = '';
     this.subtitle = '';
+    this.intro = '';
+    this.media = null;
     this.publishDate = moment().format();
     this.expiryDate = '';
     this.category = [];

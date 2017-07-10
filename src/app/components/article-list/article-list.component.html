@@ -26,8 +26,8 @@
       <td>
         {{article.expiryDate|date:'dd MMMM y H:mm'}}
       </td>
-      <td *ngIf="article.category">
-        {{article.category.name}}
+      <td *ngIf="article.category[0]">
+        {{article.category[0].name}}
       </td>
       <td>
         {{article.isPartner}}

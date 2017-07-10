@@ -36,7 +36,7 @@ export class FeedService {
       .get(url)
       .then(response => {
         this.feeds = response.json() as Feed[];
-        this.cacheService.setCache('feeds', this.feeds);
+        this.cacheService.setCache(cacheKey, this.feeds);
         return this.feeds;
       });
   }
