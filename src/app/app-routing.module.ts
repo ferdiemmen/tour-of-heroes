@@ -7,8 +7,6 @@ import { AuthenticationComponent } from './components/user/authentication.compon
 import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
-import { HeroesComponent } from './components/heroes/heroes.component';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 
 const routes: Routes = [
   { path: 'cms',
@@ -21,9 +19,7 @@ const routes: Routes = [
           { path: 'password-reset', component: PasswordResetComponent },
           { path: 'article-list', component: ArticleListComponent, canActivate: [AuthGuard], },
           { path: 'article/create', component: ArticleComponent, canActivate: [AuthGuard], },
-          { path: 'article/edit/:id', component: ArticleComponent, canActivate: [AuthGuard], },
-          { path: 'detail/:id', component: HeroDetailComponent, canActivate: [AuthGuard], },
-          { path: 'heroes', component: HeroesComponent, canActivate: [AuthGuard], }
+          { path: 'article/edit/:id', component: ArticleComponent, canActivate: [AuthGuard], }
         ],
       }
     ]

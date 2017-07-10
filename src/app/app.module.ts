@@ -32,12 +32,6 @@ import { CategoryService } from './components/category/category.service';
 import { FeedService } from './components/feed/feed.service';
 import { SiteService } from './components/site/site.service';
 
-import { HeroesComponent } from './components/heroes/heroes.component';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
-import { HeroSearchComponent } from './components/hero-search/hero-search.compontent';
-import { HeroService } from './components/hero/hero.service';
-import { HeroSearchService } from './components/hero-search/hero-search.service';
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -55,10 +49,7 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     ToolbarComponent,
     ArticleComponent,
     ArticleListComponent,
-    DashboardComponent,
-    HeroesComponent,
-    HeroDetailComponent,
-    HeroSearchComponent
+    DashboardComponent
   ],
   providers: [
     ApiService,
@@ -67,8 +58,6 @@ import { HeroSearchService } from './components/hero-search/hero-search.service'
     FeedService,
     SiteService,
     AuthorService,
-    HeroService,
-    HeroSearchService,
     CacheService,
     AuthGuard,
     {
