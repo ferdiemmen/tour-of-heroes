@@ -10,7 +10,7 @@ import { CacheService } from '../../cache.service';
 export class AuthorService {
   public authors: User[];
 
-  private authorsUrl = 'api/authors'; // URL to web api
+  private authorsUrl = 'accounts/authors/site/2/'; // URL to web api
 
   constructor(
     private apiService: ApiService,
@@ -20,7 +20,7 @@ export class AuthorService {
     const url = `${this.authorsUrl}/${id}/`;
     return this.apiService
       .get(url)
-      .then(response => response.json().data as User);
+      .then(response => response.json() as User);
   }
 
   getAuthors(): Promise<User[]> {
@@ -35,7 +35,7 @@ export class AuthorService {
     return this.apiService
       .get(url)
       .then(response => {
-        this.authors = response.json().data as User[];
+        this.authors = response.json() as User[];
         this.cacheService.setCache('authors', this.authors);
         return this.authors;
       });

@@ -10,7 +10,7 @@ import { CacheService } from '../../cache.service';
 export class FeedService {
   public feeds: Feed[];
 
-  private feedsUrl = 'api/feeds'; // URL to web api
+  private feedsUrl = 'feeds/site/2/'; // URL to web api
 
   constructor(
     private apiService: ApiService,
@@ -20,7 +20,7 @@ export class FeedService {
     const url = `${this.feedsUrl}/${id}/`;
     return this.apiService
       .get(url)
-      .then(response => response.json().data as Feed);
+      .then(response => response.json() as Feed);
   }
 
   getFeeds(): Promise<Feed[]> {
@@ -35,7 +35,7 @@ export class FeedService {
     return this.apiService
       .get(url)
       .then(response => {
-        this.feeds = response.json().data as Feed[];
+        this.feeds = response.json() as Feed[];
         this.cacheService.setCache('feeds', this.feeds);
         return this.feeds;
       });

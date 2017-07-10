@@ -59,8 +59,11 @@
     "component": {
     },
     "serve": {
-      "host": "local.cms.nl",
-      "port": 4000
+      "port": 4000,
+      "host": "local.gamer.nl",
+      "ssl": true,
+      "key": "/Users/ferdi/ownCloud/SSL Certificates/nl.gamer/current/private.key",
+      "cert": "/Users/ferdi/ownCloud/SSL Certificates/nl.gamer/current/certificate.crt"
     }
   }
 }

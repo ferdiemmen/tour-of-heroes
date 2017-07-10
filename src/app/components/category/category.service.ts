@@ -10,7 +10,7 @@ import { CacheService } from '../../cache.service';
 export class CategoryService {
   public categories: Category[];
 
-  private categoriesUrl = 'api/categories'; // URL to web api
+  private categoriesUrl = 'modules/articles/site/2/categories/'; // URL to web api
 
   constructor(
     private apiService: ApiService,
@@ -20,7 +20,7 @@ export class CategoryService {
     const url = `${this.categoriesUrl}/${id}/`;
     return this.apiService
       .get(url)
-      .then(response => response.json().data as Category);
+      .then(response => response.json() as Category);
   }
 
   getCategories(): Promise<Category[]> {
@@ -35,7 +35,7 @@ export class CategoryService {
     return this.apiService
       .get(url)
       .then(response => {
-        this.categories = response.json().data as Category[];
+        this.categories = response.json() as Category[];
         this.cacheService.setCache('categories', this.categories);
         return this.categories;
       });

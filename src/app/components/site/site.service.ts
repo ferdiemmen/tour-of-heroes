@@ -10,7 +10,7 @@ import { CacheService } from '../../cache.service';
 export class SiteService {
   public sites: Site[];
 
-  private sitesUrl = 'api/sites'; // URL to web api
+  private sitesUrl = 'modules/base/sites/'; // URL to web api
 
   constructor(
     private apiService: ApiService,
@@ -20,7 +20,7 @@ export class SiteService {
     const url = `${this.sitesUrl}/${id}/`;
     return this.apiService
       .get(url)
-      .then(response => response.json().data as Site);
+      .then(response => response.json() as Site);
   }
 
   getSites(): Promise<Site[]> {
@@ -35,7 +35,7 @@ export class SiteService {
     return this.apiService
       .get(url)
       .then(response => {
-        this.sites = response.json().data as Site[];
+        this.sites = response.json() as Site[];
         this.cacheService.setCache('sites', this.sites);
         return this.sites;
       });

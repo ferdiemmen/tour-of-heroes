@@ -38,7 +38,7 @@
       </select>
 
       <label class="cms__label">Categorie</label>
-      <select class="cms__select" name="category" [compareWith]="objectById" [(ngModel)]="articleService.article.category">
+      <select class="cms__select" name="category" [compareWith]="objectById" [(ngModel)]="articleService.article.category[0]">
         <option *ngFor="let category of categoryService.categories" [ngValue]="category">
           {{ category.name }}
         </option>

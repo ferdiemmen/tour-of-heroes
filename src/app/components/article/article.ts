@@ -12,7 +12,7 @@ export class Article {
   subtitle: string;
   publishDate: string;
   expiryDate: string;
-  category: Category;
+  category: Category[];
   seoScore: number;
   published: boolean;
   isPartner: boolean;
@@ -27,7 +27,7 @@ export class Article {
     this.subtitle = '';
     this.publishDate = moment().format();
     this.expiryDate = '';
-    this.category = null;
+    this.category = [];
     this.seoScore = 0;
     this.published = false;
     this.isPartner = false;

@@ -131,35 +131,31 @@ export class ArticleService {
         // A new article doesn't have a author by default. After we got
         // all the authors we set it to the site's default author.
         this.article[property] = this.authorService.authors
-                                                  .find(a => a.slug === 'tsja');
+                                                  .find(a => a.slug === 'monstercrab'); // @TODO: Get from site's default.
         break;
       case 'category':
         // A new article doesn't have a category by default. After we got
         // all the categories we set it to the site's default category.
-        this.article[property] = this.categoryService.categories
-                                                  .find(c => c.slug === 'nieuws');
+        this.article[property][0] = this.categoryService.categories
+                                                  .find(c => c.slug === 'nieuws'); // @TODO: Get from site's default.
         break;
       case 'RATable':
         // A new article doesn't have feeds by default. After we got
         // all the feeds we set it to the site's default feeds.
-        if (this.article[property] && !this.article[property].length) {
-          this.feedService.feeds.map(o => {
-            if (o['default']) {
-              this.toggleProperty(property, o);
-            }
-          });
-        }
+        this.feedService.feeds.map(f => {
+          if (f['default']) {
+            this.toggleProperty(property, f);
+          }
+        });
         break;
       case 'site':
         // A new article doesn't have site by default. After we got
         // all the sites we set it to the site's.
-        // if (this.article[property] && !this.article[property].length) {
-        //   this.feedService.feeds.map(o => {
-        //     if (o['default']) {
-        //       this.toggleProperty(property, o);
-        //     }
-        //   });
-        // }
+        this.siteService.sites.map(s => {
+          if (s.id === 2) {
+            this.toggleProperty(property, s);
+          }
+        });
         break;
       default:
         break;
