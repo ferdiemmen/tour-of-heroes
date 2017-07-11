@@ -17,6 +17,7 @@ import { SiteService } from '../site/site.service';
 export class ArticleService {
   public article: Article = new Article();
   public articles: Article[] = [];
+  public pages: Article[] = [];
 
   private articlesUrl = 'modules/articles'; // URL to web api
 
@@ -38,14 +39,14 @@ export class ArticleService {
 
       // Set article defaults.
       this.setDefaults();
-      return Promise.resolve(this.article);
+      return Promise.resolve(this.article as Article);
     }
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
       this.article = this.cacheService.getCache(cacheKey);
 
-      return Promise.resolve(this.article);
+      return Promise.resolve(this.article as Article);
     }
 
     return this.apiService
@@ -57,13 +58,13 @@ export class ArticleService {
         // Add response to cache.
         this.cacheService.setCache(cacheKey, response.json() as Article);
 
-        return this.article;
+        return this.article as Article;
       });
   }
 
-  getArticles(page: number): Promise<Article[]> {
-    let url = `${this.articlesUrl}/site/2/20`;
-    const cacheKey = 'articles';
+  getArticles(page: number, pages?: boolean): Promise<Article[]> {
+    let url = `${this.articlesUrl}/site/2/${(pages) ? 'flatpages/' : ''}20/?admin_view=true`;
+    const cacheKey = (pages) ? 'pages' : 'articles';
 
     if (page) {
       url = url += '?page=' + page;
@@ -71,7 +72,7 @@ export class ArticleService {
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
-      this.articles = this.cacheService.getCache(cacheKey) as Article[];
+      this[(pages) ? 'pages' : 'articles'] = this.cacheService.getCache(cacheKey) as Article[];
     }
 
     return this.apiService
@@ -79,12 +80,12 @@ export class ArticleService {
       .then(response => {
 
         // Set articles on this service.
-        this.articles = response.json().results as Article[];
+        this[(pages) ? 'pages' : 'articles'] = response.json().results as Article[];
 
         // Add articles to cache.
-        this.cacheService.setCache(cacheKey, this.articles);
+        this.cacheService.setCache(cacheKey, this[(pages) ? 'pages' : 'articles']);
 
-        return this.articles;
+        return this[(pages) ? 'pages' : 'articles'];
       });
   }
 

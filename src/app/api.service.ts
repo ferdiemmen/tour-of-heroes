@@ -11,7 +11,7 @@ const apiUrl = 'https://localapi.reshift.nl:8001/';
 
 @Injectable()
 export class ApiService {
-  private headers = new Headers({
+  private headers: Headers = new Headers({
     'Content-Type': 'application/json',
     'X-RESHIFT-SITE-ID': 2
   });
@@ -21,19 +21,28 @@ export class ApiService {
 
   get(url: string): Promise<any> {
     return this.http
-      .get(this.getApiUrl(url), {headers: this.headers})
+      .get(this.getApiUrl(url), {
+        headers: this.headers,
+        withCredentials: true
+      })
       .toPromise();
   }
 
   post(url: string, object: any): Promise<any> {
     return this.http
-      .post(this.getApiUrl(url), JSON.stringify(object), {headers: this.headers})
+      .post(this.getApiUrl(url), JSON.stringify(object), {
+        headers: this.headers,
+        withCredentials: true
+      })
       .toPromise();
   }
 
   put(url: string, object: any): Promise<any> {
     return this.http
-      .put(this.getApiUrl(url), JSON.stringify(object), {headers: this.headers})
+      .put(this.getApiUrl(url), JSON.stringify(object), {
+        headers: this.headers,
+        withCredentials: true
+      })
       .toPromise();
   }
 

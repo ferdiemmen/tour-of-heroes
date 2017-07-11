@@ -1,9 +1,9 @@
 
 <table cellspacing="0" cellpadding="0">
   <tbody>
-    <tr *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" (click)="mediaService.pickMedia(media)">
+    <tr *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" (click)="mediaService.selectedMedia(media)">
       <td>
-        <app-media-resized [media]="media"></app-media-resized>
+        <app-media-resized [media]="media" [width]="200"></app-media-resized>
       </td>
     </tr>
   </tbody>

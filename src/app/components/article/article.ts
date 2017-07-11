@@ -13,6 +13,7 @@ export class Article {
   subtitle: string;
   intro: string;
   media: Media;
+  flatpageSlug: string;
   publishDate: string;
   expiryDate: string;
   category: Category[];
@@ -31,6 +32,7 @@ export class Article {
     this.subtitle = '';
     this.intro = '';
     this.media = null;
+    this.flatpageSlug = '';
     this.publishDate = moment().format();
     this.expiryDate = '';
     this.category = [];

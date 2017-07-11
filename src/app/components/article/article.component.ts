@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ObservableInput } from 'rxjs/Observable';
 
@@ -8,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { Article } from './article';
 import { ArticleService } from './article.service';
+import { Media } from '../media/media';
 import { MediaService } from '../media/media.service';
 import { AuthorService } from '../author/author.service';
 import { CategoryService } from '../category/category.service';
@@ -29,6 +31,7 @@ export class ArticleComponent implements OnInit {
     public authorService: AuthorService,
     public feedService: FeedService,
     public siteService: SiteService,
+    private location: Location,
     private router: Router,
     private route: ActivatedRoute) {
 
@@ -55,6 +58,14 @@ export class ArticleComponent implements OnInit {
       });
   }
 
+  setHeaderMedia(): void {
+    this.mediaService.pickMedia()
+      .then(res => {
+        this.location.back();
+        this.articleService.article.media = res;
+      });
+  }
+
   objectById(item1: any, item2: any) {
     if (!item1 || !item2) { return };
     return item1.id === item2.id;
@@ -66,7 +77,8 @@ export class ArticleComponent implements OnInit {
     this.authorService.getAuthors();
     this.feedService.getFeeds();
     this.siteService.getSites();
-    this.articleService.article = new Article();
+
+    // this.articleService.article = new Article();
 
     this.route.paramMap
       .switchMap((params: ParamMap) => this.articleService.getArticle(+params.get('id')))

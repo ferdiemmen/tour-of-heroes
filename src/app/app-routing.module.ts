@@ -7,6 +7,7 @@ import { AuthenticationComponent } from './components/user/authentication.compon
 import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { PageListComponent } from './components/page-list/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
           { path: 'login', component: AuthenticationComponent },
           { path: 'password-reset', component: PasswordResetComponent },
           { path: 'article-list', component: ArticleListComponent, canActivate: [AuthGuard], },
+          { path: 'page-list', component: PageListComponent, canActivate: [AuthGuard], },
           { path: 'media-list', component: MediaListComponent, canActivate: [AuthGuard], },
           { path: 'article/create', component: ArticleComponent, canActivate: [AuthGuard], },
           { path: 'article/edit/:id', component: ArticleComponent, canActivate: [AuthGuard], }

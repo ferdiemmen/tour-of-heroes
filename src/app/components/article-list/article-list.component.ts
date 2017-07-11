@@ -16,7 +16,7 @@ export class ArticleListComponent implements OnInit {
 
   constructor(
     public articleService: ArticleService,
-    private route: ActivatedRoute) { }
+    public route: ActivatedRoute) { }
 
   ngOnInit(): void {
 

@@ -25,6 +25,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { PageListComponent } from './components/page-list/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 import { MediaResizedComponent } from './components/media/media-resized.component';
 
@@ -52,6 +53,7 @@ import { SiteService } from './components/site/site.service';
     ToolbarComponent,
     ArticleComponent,
     ArticleListComponent,
+    PageListComponent,
     MediaListComponent,
     MediaResizedComponent,
     DashboardComponent
