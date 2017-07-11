@@ -27,13 +27,13 @@ export class ApiService {
 
   post(url: string, object: any): Promise<any> {
     return this.http
-      .post(url, JSON.stringify(object), {headers: this.headers})
+      .post(this.getApiUrl(url), JSON.stringify(object), {headers: this.headers})
       .toPromise();
   }
 
   put(url: string, object: any): Promise<any> {
     return this.http
-      .put(url, JSON.stringify(object), {headers: this.headers})
+      .put(this.getApiUrl(url), JSON.stringify(object), {headers: this.headers})
       .toPromise();
   }
 

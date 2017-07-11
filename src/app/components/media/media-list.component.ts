@@ -10,7 +10,7 @@ import { MediaService } from './media.service';
 @Component({
   selector: 'app-media-list',
   templateUrl: './media-list.component.html',
-//   styleUrls: ['./media-list.component.scss']
+  // styleUrls: ['./media-list.component.scss']
 })
 export class MediaListComponent implements OnInit {
 
@@ -21,8 +21,8 @@ export class MediaListComponent implements OnInit {
   ngOnInit(): void {
 
     this.route
-      .queryParams
-      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects(params['type']))
+      .paramMap
+      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects(params.get('type')))
       .subscribe();
   }
 }

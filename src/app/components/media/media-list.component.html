@@ -1,12 +1,7 @@
 
 <table cellspacing="0" cellpadding="0">
-  <thead>
-    <tr>
-      <th>Id</th>
-    </tr>
-  </thead>
   <tbody>
-    <tr *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+    <tr *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" (click)="mediaService.pickMedia(media)">
       <td>
         <app-media-resized [media]="media"></app-media-resized>
       </td>

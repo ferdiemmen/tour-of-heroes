@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Media } from './media';
 import { ApiService } from '../../api.service';
@@ -10,11 +11,13 @@ import { CacheService } from '../../cache.service';
 export class MediaService {
   public media: Media;
   public mediaObjects: Media[];
+  private mediaPromise: Promise<Media>;
 
   private mediaUrl = 'modules/media/'; // URL to web api
 
   constructor(
     private apiService: ApiService,
+    private router: Router,
     private cacheService: CacheService) { }
 
   getMedia(id: number): Promise<Media> {
@@ -25,7 +28,7 @@ export class MediaService {
   }
 
   getMediaObjects(type: string): Promise<Media[]> {
-    const url = `${this.mediaUrl}/${type}/`;
+    const url = `${this.mediaUrl}${type}/?sort=true&details=true`;
     const cacheKey = 'mediaobjects';
 
     // Check if a cached version exist and return it.
@@ -44,7 +47,19 @@ export class MediaService {
   }
 
   getResizedImage(media: Media, width: number, height: number, crop: string): string {
-    return `https://localapi.reshift.nl:8001/${this.mediaUrl}show_image/${media.file.id}/?width=200&height=200&crop=center`;
+    let url = `https://localapi.reshift.nl:8001/${this.mediaUrl}show_image/${media.file.id}/?width=${width}&crop=${crop}`;
+    if (height) { url += `&height=${height}`};
+    return url;
+  }
+
+  selectMedia(media: Media): void {
+    this.router.navigate(['/cms/media-list', {type: 'images'}]);
+
+  }
+
+  pickMedia(file: File): void {
+
+    // this.mediaPromise = new Promise(file);
   }
 
   /**
@@ -53,7 +68,7 @@ export class MediaService {
    * @returns { Array } mediaArray - An array containing Media objects.
    */
   private wrapFilesInMedia(data: File[]): Media[] {
-    let mediaArray: Media[] = [];
+    const mediaArray: Media[] = [];
     data.map(i => {
       mediaArray.push(new Media(i));
     });

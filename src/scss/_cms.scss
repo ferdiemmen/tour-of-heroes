@@ -3,6 +3,7 @@
 
   &__outline {
     outline: 1px solid transparent;
+    outline-style: inset;
 
     &:hover {
       outline: 1px solid $cms-highlight;

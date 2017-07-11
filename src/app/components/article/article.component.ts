@@ -8,6 +8,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { Article } from './article';
 import { ArticleService } from './article.service';
+import { MediaService } from '../media/media.service';
 import { AuthorService } from '../author/author.service';
 import { CategoryService } from '../category/category.service';
 import { FeedService } from '../feed/feed.service';
@@ -23,6 +24,7 @@ export class ArticleComponent implements OnInit {
 
   constructor(
     public articleService: ArticleService,
+    public mediaService: MediaService,
     public categoryService: CategoryService,
     public authorService: AuthorService,
     public feedService: FeedService,

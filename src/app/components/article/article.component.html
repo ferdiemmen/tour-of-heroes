@@ -3,7 +3,17 @@
   <div class="cms-header">header</div>
   <div class="cms-columns__column scrollable--y">
     <div class="cms-preview cms-preview--article article">
-      <medium-editor class="article__title cms-outline" [(editorModel)]="articleService.article.title"
+
+      <div class="article__media cms__outline" (click)="mediaService.selectMedia(articleService.article.media)">
+        <app-media-resized
+          *ngIf="articleService.article.media"
+          [media]="articleService.article.media"
+          width="640"
+          height="360"
+          [crop]="articleService.article.headerCrop"></app-media-resized>
+      </div>
+
+      <medium-editor class="article__title" [(editorModel)]="articleService.article.title"
         [editorOptions]="{'disableReturn': true, 'toolbar': false}">
         <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
       </medium-editor>

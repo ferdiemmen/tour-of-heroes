@@ -23,6 +23,7 @@ export class Article {
   featured: boolean;
   RATable: Feed[];
   site: Site[];
+  headerCrop: string;
 
   constructor() {
     this.author = null;
@@ -40,5 +41,6 @@ export class Article {
     this.featured = false;
     this.RATable = [];
     this.site = [];
+    this.headerCrop = 'center';
   }
 }
