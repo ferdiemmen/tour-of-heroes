@@ -12,6 +12,7 @@ import { MediaListComponent } from './components/media/media-list.component';
 
 const routes: Routes = [
   { path: 'cms',
+    // runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
       {
