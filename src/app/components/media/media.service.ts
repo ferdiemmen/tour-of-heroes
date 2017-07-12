@@ -1,10 +1,10 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Deferred } from '../../deferred.class';
+import { Location } from '@angular/common';
 import { Media } from './media';
 import { ApiService } from '../../api.service';
+import { DeferredService } from '../deferred/deferred.service';
 import { CacheService } from '../../cache.service';
 
 
@@ -12,13 +12,14 @@ import { CacheService } from '../../cache.service';
 export class MediaService {
   public media: Media;
   public mediaObjects: Media[];
-  private deferred: Deferred<Media>;
 
   private mediaUrl = 'modules/media/'; // URL to web api
 
   constructor(
     private apiService: ApiService,
     private router: Router,
+    private location: Location,
+    private deferredService: DeferredService,
     private cacheService: CacheService) { }
 
   getMedia(id: number): Promise<Media> {
@@ -54,13 +55,14 @@ export class MediaService {
   }
 
   selectedMedia(media: Media): void {
-    this.deferred.resolve(media);
+    if (!this.deferredService.get()) { return; }
+    this.deferredService.resolve(media);
+    this.location.back();
   }
 
   pickMedia(): Promise<Media> {
     this.router.navigate(['/cms/media-list', {type: 'images'}]);
-    this.deferred = new Deferred<Media>();
-    return this.deferred.promise;
+    return this.deferredService.set();
   }
 
   /**

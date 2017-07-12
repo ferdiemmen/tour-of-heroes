@@ -1,7 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ObservableInput } from 'rxjs/Observable';
 
@@ -31,7 +30,6 @@ export class ArticleComponent implements OnInit {
     public authorService: AuthorService,
     public feedService: FeedService,
     public siteService: SiteService,
-    private location: Location,
     private router: Router,
     private route: ActivatedRoute) {
 
@@ -61,8 +59,7 @@ export class ArticleComponent implements OnInit {
   setHeaderMedia(): void {
     this.mediaService.pickMedia()
       .then(res => {
-        this.location.back();
-        this.articleService.article.media = res;
+        this.articleService.updateProperty('media', res);
       });
   }
 
@@ -72,16 +69,15 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.categoryService.getCategories();
     this.authorService.getAuthors();
     this.feedService.getFeeds();
     this.siteService.getSites();
 
-    // this.articleService.article = new Article();
-
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.articleService.getArticle(+params.get('id')))
+      .switchMap((params: ParamMap) => {
+        return this.articleService.getArticle(+params.get('id'));
+      })
       .subscribe();
   }
 }

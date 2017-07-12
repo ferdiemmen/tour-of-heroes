@@ -29,6 +29,11 @@ export class CacheService {
     this.cache[id][this.cache[id].findIndex(el => el.id === object.id)] = object;
   }
 
+  updateObject(id, object): void {
+    if (!this.cache.hasOwnProperty(id)) { return; }
+    this.cache[id] = object;
+  }
+
   clearFromCacheArray(id: any, object: any): void {
     this.cache[id] = this.cache[id].filter(o => o !== object);
   }

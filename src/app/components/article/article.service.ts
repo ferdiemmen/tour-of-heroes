@@ -8,6 +8,7 @@ import { User } from '../user/user';
 import { AuthorService } from '../author/author.service';
 import { Category } from '../category/category';
 import { CategoryService } from '../category/category.service';
+import { DeferredService } from '../deferred/deferred.service';
 import { Feed } from '../feed/feed';
 import { FeedService } from '../feed/feed.service';
 import { SiteService } from '../site/site.service';
@@ -24,6 +25,7 @@ export class ArticleService {
   constructor(
     public categoryService: CategoryService,
     public authorService: AuthorService,
+    public deferredService: DeferredService,
     public feedService: FeedService,
     public siteService: SiteService,
     private apiService: ApiService,
@@ -34,13 +36,20 @@ export class ArticleService {
     const cacheKey = `article_${id}`;
 
     if (!id) {
-      // Clear previous Article instance on service.
-      this.article = new Article();
+      if (!this.deferredService.get()) {
+        // Clear previous Article instance on service.
+        this.article = new Article();
+      }
 
       // Set article defaults.
       this.setDefaults();
       return Promise.resolve(this.article as Article);
+    } else {
+      // Clear previous Article instance on service.
+      this.article = new Article();
+      this.deferredService.reset();
     }
+
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
@@ -161,6 +170,11 @@ export class ArticleService {
       default:
         break;
     }
+  }
+
+  updateProperty(property: string, value: any) {
+    this.article[property] = value;
+    this.cacheService.updateObject(`article_${this.article.id}`, this.article);
   }
 
   hasProperty(property, value) {

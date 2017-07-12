@@ -6,7 +6,6 @@
 
       <div class="article__media cms__outline" (click)="setHeaderMedia()">
         <app-media-resized
-          *ngIf="articleService.article.media"
           [media]="articleService.article.media"
           width="640"
           height="360"

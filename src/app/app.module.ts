@@ -33,6 +33,7 @@ import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
 import { CategoryService } from './components/category/category.service';
 import { MediaService } from './components/media/media.service';
+import { DeferredService } from './components/deferred/deferred.service';
 import { FeedService } from './components/feed/feed.service';
 import { SiteService } from './components/site/site.service';
 
@@ -63,6 +64,7 @@ import { SiteService } from './components/site/site.service';
     ArticleService,
     CategoryService,
     MediaService,
+    DeferredService,
     FeedService,
     SiteService,
     AuthorService,

@@ -13,28 +13,26 @@ import { MediaService } from './media.service';
 })
 export class MediaResizedComponent implements OnInit {
   private _media: Media;
+  private url: string;
 
   @Input('width') width: number;
   @Input('height') height: number;
   @Input('crop') crop: string;
 
-  url: string;
-
-  @Input('media')
-  set media(media: Media) {
-    console.log('prev value: ', this._media);
-    console.log('got media: ', media);
-    this._media = media;
-  }
-
   constructor(public mediaService: MediaService) { }
 
   ngOnInit(): void {
+    if (!this._media) { return; }
     this.url = this.mediaService.getResizedImage(this._media, this.width, this.height, this.crop || 'center');
   }
 
-  // get media(): Media {
-  //   return this._media;
-  // }
-  
+
+  @Input('media') set media(value: Media) {
+    this._media = value as Media;
+  }
+
+  get media(): Media {
+    return this._media as Media;
+  }
+
 }
