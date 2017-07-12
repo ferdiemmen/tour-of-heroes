@@ -12,22 +12,23 @@ import { MediaListComponent } from './components/media/media-list.component';
 
 const routes: Routes = [
   { path: 'cms',
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         children: [
-          { path: '', component: DashboardComponent, canActivate: [AuthGuard], },
-          { path: 'login', component: AuthenticationComponent },
-          { path: 'password-reset', component: PasswordResetComponent },
-          { path: 'article-list', component: ArticleListComponent, canActivate: [AuthGuard], },
-          { path: 'page-list', component: PageListComponent, canActivate: [AuthGuard], },
-          { path: 'media-list', component: MediaListComponent, canActivate: [AuthGuard], },
-          { path: 'article/create', component: ArticleComponent, canActivate: [AuthGuard], },
-          { path: 'article/edit/:id', component: ArticleComponent, canActivate: [AuthGuard], }
+          { path: '', component: DashboardComponent, },
+          { path: 'article-list', component: ArticleListComponent },
+          { path: 'page-list', component: PageListComponent },
+          { path: 'media-list', component: MediaListComponent },
+          { path: 'article/create', component: ArticleComponent },
+          { path: 'article/edit/:id', component: ArticleComponent }
         ],
       }
     ]
   },
+  { path: 'cms/login', component: AuthenticationComponent },
+  { path: 'cms/password-reset', component: PasswordResetComponent },
   {
     path: '**',
     redirectTo: '/cms',

@@ -21,7 +21,7 @@ import { SiteService } from '../site/site.service';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-  private tabIndex: number;
+  public tabIndex: number;
 
   constructor(
     public articleService: ArticleService,
@@ -37,7 +37,7 @@ export class ArticleComponent implements OnInit {
       this.tabIndex = 1;
     }
 
-  save(cont: boolean): void {
+  save(cont?: boolean): void {
     let link;
     let action = (this.articleService.article.id) ? 'update' : 'create';
 

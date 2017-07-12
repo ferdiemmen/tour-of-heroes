@@ -12,8 +12,8 @@ import { MediaService } from './media.service';
   styleUrls: ['./media-resized.component.scss']
 })
 export class MediaResizedComponent implements OnInit {
+  public url: string;
   private _media: Media;
-  private url: string;
 
   @Input('width') width: number;
   @Input('height') height: number;

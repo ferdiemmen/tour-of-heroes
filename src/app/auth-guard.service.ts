@@ -15,13 +15,14 @@ export class AuthGuard implements CanActivate {
   canActivate() {
     const url = 'accounts/login/';
 
-    this.apiService.get(url)
+    return this.apiService.get(url)
       .then(response => {
-        // console.log(response);
+        if (!response._body) {
+          this.router.navigate(['/cms/login']);
+          return false;
+        } else {
+          return true;
+        }
       });
-    
-    // this.router.navigate(['/cms/login']);
-
-    return true;
   }
 }
