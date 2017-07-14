@@ -24,8 +24,4 @@
   padding: 20px;
 }
 
-.placeholder {
-  &:after {
-    content: 'foobar';
-  }
-}
+.ui-state-highlight { height: 3em; line-height: 3em; }

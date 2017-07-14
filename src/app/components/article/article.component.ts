@@ -87,12 +87,13 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     $('#snippets').sortable({
-      containment: 'parent',
-      handle: '.handle',
-      helper: 'original',
-      placeholder: 'placeholder',
+      // containment: 'parent',
+      // handle: '.handle',
+      // helper: 'original',
+      placeholder: 'ui-state-highlight',
       forcePlaceholderSize: true,
     });
+    $('#snippets').disableSelection();
     let sortedIDs = $('#snippets').sortable('toArray');
     console.log(sortedIDs);
   }
