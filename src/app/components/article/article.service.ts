@@ -102,7 +102,7 @@ export class ArticleService {
     const url = `${this.articlesUrl}`;
 
     return this.apiService
-      .post(url, this.article)
+      .put(url, this.article)
       .then(response => {
         // Set new article on this service.
         this.article = response.json().data as Article;
@@ -121,12 +121,16 @@ export class ArticleService {
   update(): Promise<Article> {
     const url = `${this.articlesUrl}/${this.article.id}/`;
     return this.apiService
-      .put(url, this.article)
+      .post(url, this.article)
       .then(response => {
+
+        this.article = response.json() as Article;
 
         // Update article in cached articles.
         this.cacheService
           .updateObjectInCacheArray('articles', this.article);
+        this.cacheService
+          .updateObject(`article_${this.article.id}`, this.article);
 
         // Update article in articles.
         this.articles[this.articles.findIndex(el => el.id === this.article.id)] = this.article;

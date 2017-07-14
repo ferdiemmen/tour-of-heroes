@@ -2,27 +2,24 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 
-import { ApiService } from './api.service';
+
+import { UserService } from './components/user/user.service';
 
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private apiService: ApiService,
+    private userService: UserService,
     private router: Router) { }
 
   canActivate() {
-    const url = 'accounts/login/';
-
-    return this.apiService.get(url)
-      .then(response => {
-        if (!response._body) {
+    return this.userService.login()
+      .then(loggedIn => {
+        if (!loggedIn) {
           this.router.navigate(['/cms/login']);
-          return false;
-        } else {
-          return true;
         }
+        return loggedIn;
       });
   }
 }

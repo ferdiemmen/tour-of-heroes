@@ -36,6 +36,8 @@ import { MediaService } from './components/media/media.service';
 import { DeferredService } from './components/deferred/deferred.service';
 import { FeedService } from './components/feed/feed.service';
 import { SiteService } from './components/site/site.service';
+import { UserService } from './components/user/user.service';
+import { ConfigService } from './app-config.service';
 
 @NgModule({
   imports: [
@@ -69,6 +71,8 @@ import { SiteService } from './components/site/site.service';
     SiteService,
     AuthorService,
     CacheService,
+    UserService,
+    ConfigService,
     AuthGuard,
     {
       provide: LOCALE_ID,

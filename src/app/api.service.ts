@@ -7,22 +7,21 @@ import { Observable } from 'rxjs/Observable';
 // Convert a Observable to a Promise
 import 'rxjs/add/operator/toPromise';
 
+import { ConfigService } from './app-config.service';
+
 const apiUrl = 'https://localapi.reshift.nl:8001/';
 
 @Injectable()
 export class ApiService {
-  private headers: Headers = new Headers({
-    'Content-Type': 'application/json',
-    'X-RESHIFT-SITE-ID': 2
-  });
 
   constructor(
-    private http: Http) { }
+    private http: Http,
+    private configService: ConfigService) { }
 
   get(url: string): Promise<any> {
     return this.http
       .get(this.getApiUrl(url), {
-        headers: this.headers,
+        headers: this._getHeaders(),
         withCredentials: true
       })
       .toPromise();
@@ -31,7 +30,7 @@ export class ApiService {
   post(url: string, object: any): Promise<any> {
     return this.http
       .post(this.getApiUrl(url), JSON.stringify(object), {
-        headers: this.headers,
+        headers: this._getHeaders(),
         withCredentials: true
       })
       .toPromise();
@@ -40,7 +39,7 @@ export class ApiService {
   put(url: string, object: any): Promise<any> {
     return this.http
       .put(this.getApiUrl(url), JSON.stringify(object), {
-        headers: this.headers,
+        headers: this._getHeaders(),
         withCredentials: true
       })
       .toPromise();
@@ -48,5 +47,13 @@ export class ApiService {
 
   getApiUrl(url: string): string {
     return [apiUrl, url].join('');
+  }
+
+  private _getHeaders(): Headers {
+     return new Headers({
+      'X-CSRFTOKEN': this.configService.getProperty('csrftoken'),
+      'Content-Type': 'application/json',
+      'X-RESHIFT-SITE-ID': 2
+    });
   }
 }

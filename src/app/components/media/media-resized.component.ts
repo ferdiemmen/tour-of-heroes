@@ -29,6 +29,9 @@ export class MediaResizedComponent implements OnInit {
 
   @Input('media') set media(value: Media) {
     this._media = value as Media;
+    if (this._media) {
+      this.url = this.mediaService.getResizedImage(this._media, this.width, this.height, this.crop || 'center');
+    }
   }
 
   get media(): Media {
