@@ -259,6 +259,10 @@ angular-in-memory-web-api@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/angular-in-memory-web-api/-/angular-in-memory-web-api-0.3.2.tgz#8836d9e2534d37b728f3cb5a1caf6fe1e7fbbecd"
 
+"angular2-medium-editor@git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git":
+  version "1.0.6"
+  resolved "git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git#faf1c4d1eade1eb61f851bee8c586a21d7af56c2"
+
 ansi-escapes@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-2.0.0.tgz#5bae52be424878dd9783e8910e3fc2922e83c81b"
@@ -2532,6 +2536,14 @@ jasminewd2@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.1.0.tgz#da595275d1ae631de736ac0a7c7d85c9f73ef652"
 
+jquery@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
+
+jqueryui@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/jqueryui/-/jqueryui-1.11.1.tgz#8718550705f5568d1199196169094db73b2291bc"
+
 js-base64@^2.1.5, js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
@@ -3034,9 +3046,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng-pick-datetime@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/ng-pick-datetime/-/ng-pick-datetime-4.2.0.tgz#a9b063b4dc5dff1164e63f5f15b8c38fac131b50"
+ng-pick-datetime@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/ng-pick-datetime/-/ng-pick-datetime-4.2.2.tgz#13bb80ad20b9c113774d961bfdceddced3dde8a0"
   dependencies:
     moment "^2.17.0"
 

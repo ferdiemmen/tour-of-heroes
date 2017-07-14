@@ -1,10 +1,13 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ObservableInput } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/switchMap';
+
+import * as $ from 'jquery';
+import 'jqueryui';
 
 import { Article } from './article';
 import { ArticleService } from './article.service';
@@ -20,7 +23,7 @@ import { SiteService } from '../site/site.service';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, AfterViewInit {
   public tabIndex: number;
 
   constructor(
@@ -35,6 +38,7 @@ export class ArticleComponent implements OnInit {
 
       // Set initial tab index.
       this.tabIndex = 1;
+
     }
 
   save(cont?: boolean): void {
@@ -79,5 +83,17 @@ export class ArticleComponent implements OnInit {
         return this.articleService.getArticle(+params.get('id'));
       })
       .subscribe();
+  }
+
+  ngAfterViewInit() {
+    $('#snippets').sortable({
+      containment: 'parent',
+      handle: '.handle',
+      helper: 'original',
+      placeholder: 'placeholder',
+      forcePlaceholderSize: true,
+    });
+    let sortedIDs = $('#snippets').sortable('toArray');
+    console.log(sortedIDs);
   }
 }

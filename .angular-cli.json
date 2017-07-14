@@ -21,10 +21,14 @@
       "styles": [
         "../node_modules/medium-editor/dist/css/medium-editor.min.css",
         "../node_modules/medium-editor/dist/css/themes/default.min.css",
+        "../node_modules/jqueryui/jquery-ui.min.css",
+        "../node_modules/jqueryui/jquery-ui.theme.min.css",
         "scss/styles.scss"
       ],
       "scripts": [
-        "../node_modules/medium-editor/dist/js/medium-editor.min.js"
+        "../node_modules/medium-editor/dist/js/medium-editor.min.js",
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/jqueryui/jquery-ui.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

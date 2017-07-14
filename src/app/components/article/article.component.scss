@@ -12,3 +12,20 @@
     font-size: 2em;
   }
 }
+
+#snippets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.snippet {
+  background: beige;
+  padding: 20px;
+}
+
+.placeholder {
+  &:after {
+    content: 'foobar';
+  }
+}

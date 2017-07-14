@@ -99,20 +99,16 @@ export class ArticleService {
   }
 
   create(): Promise<Article> {
-    const url = `${this.articlesUrl}`;
+    const url = `${this.articlesUrl}/`;
 
     return this.apiService
       .put(url, this.article)
       .then(response => {
-        // Set new article on this service.
-        this.article = response.json().data as Article;
+        const cacheKey = `article_${response.json().id}`;
+        this.cacheService.setCache(cacheKey, response.json() as Article);
 
         // Add article to cached articles.
-        this.cacheService
-          .addToCacheArray('articles', response.json().data as Article);
-
-        // Add article to articles.
-        this.articles.unshift(this.article);
+        this.cacheService.clearCache('articles');
 
         return this.article;
       });

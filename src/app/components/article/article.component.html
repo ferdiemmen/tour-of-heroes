@@ -19,6 +19,13 @@
       <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
         [editorOptions]="{'disableReturn': true, 'toolbar': false}">
       </medium-editor>
+
+      <ul id="snippets">
+        <li id="snippet_{{snippet.type}}_{{snippet.id}}_{{index}}" class="snippet" *ngFor="let snippet of articleService.article.snippetsJson; let index = index">
+          <i class="fa fa-arrows handle" aria-hidden="true"></i> {{snippet.body}}
+        </li>
+      </ul>
+
       <pre>{{articleService.article|json}}</pre>
     </div>
   </div>

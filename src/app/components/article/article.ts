@@ -4,6 +4,7 @@ import { User } from '../user/user';
 import { Category } from '../category/category';
 import { Media } from '../media/media';
 import { Feed } from '../feed/feed';
+import { Snippet } from '../snippet/snippet';
 import { Site } from '../site/site';
 
 export class Article {
@@ -24,6 +25,7 @@ export class Article {
   featured: boolean;
   RATable: Feed[];
   site: Site[];
+  snippetsJson: Snippet[];
   headerCrop: string;
 
   constructor() {
@@ -43,6 +45,15 @@ export class Article {
     this.featured = false;
     this.RATable = [];
     this.site = [];
+    this.snippetsJson = [{
+      id: 1,
+      type: 'paragraph',
+      body: 'abrikoos'
+    }, {
+      id: 2,
+      type: 'header',
+      body: 'apenbroek'
+    }];
     this.headerCrop = 'center';
   }
 }
