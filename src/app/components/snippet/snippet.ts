@@ -1,6 +1,10 @@
 
 export class Snippet {
-  id: number;
   type: string;
-  body: any;
+  data: object;
+
+  constructor(snippet) {
+    this.type = snippet.type || null;
+    this.data = snippet.data || null;
+  }
 }

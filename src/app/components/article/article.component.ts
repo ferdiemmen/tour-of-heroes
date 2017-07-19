@@ -1,5 +1,5 @@
 
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ObservableInput } from 'rxjs/Observable';
@@ -33,6 +33,7 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     public authorService: AuthorService,
     public feedService: FeedService,
     public siteService: SiteService,
+    private chRef: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute) {
 
@@ -86,15 +87,26 @@ export class ArticleComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    let previousIndex: number;
     $('#snippets').sortable({
-      // containment: 'parent',
-      // handle: '.handle',
-      // helper: 'original',
+      handle: '.handle',
+      helper: 'original',
       placeholder: 'ui-state-highlight',
       forcePlaceholderSize: true,
     });
     $('#snippets').disableSelection();
-    let sortedIDs = $('#snippets').sortable('toArray');
-    console.log(sortedIDs);
+    $('#snippets').sortable({
+      start: ( event, ui ) => {
+        previousIndex = $(ui.item).index()
+      },
+      stop: ( event, ui ) => {
+        if (previousIndex === $(ui.item).index()) { return; }
+
+        const a = this.articleService.article.snippetsJson[previousIndex];
+        this.articleService.article.snippetsJson.splice(previousIndex, 1);
+        this.articleService.article.snippetsJson.splice($(ui.item).index(), 0, a);
+        this.chRef.detectChanges();
+      }
+    });
   }
 }

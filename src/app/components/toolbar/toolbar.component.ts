@@ -23,7 +23,7 @@ import { Location } from '@angular/common';
       <a class="cms-toolbar__link" routerLink="/cms/article-list">
         <i class="fa fa-file-text-o" aria-hidden="true"></i>
       </a>
-      
+
       <a class="cms-toolbar__link" routerLink="/cms/page-list">
         <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
       </a>

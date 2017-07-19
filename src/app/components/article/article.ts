@@ -45,15 +45,7 @@ export class Article {
     this.featured = false;
     this.RATable = [];
     this.site = [];
-    this.snippetsJson = [{
-      id: 1,
-      type: 'paragraph',
-      body: 'abrikoos'
-    }, {
-      id: 2,
-      type: 'header',
-      body: 'apenbroek'
-    }];
+    this.snippetsJson = [];
     this.headerCrop = 'center';
   }
 }

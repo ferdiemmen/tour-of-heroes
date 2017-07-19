@@ -26,12 +26,11 @@ export class MediaResizedComponent implements OnInit {
     this.url = this.mediaService.getResizedImage(this._media, this.width, this.height, this.crop || 'center');
   }
 
-
   @Input('media') set media(value: Media) {
+    if (!value) { return; }
+
     this._media = value as Media;
-    if (this._media) {
-      this.url = this.mediaService.getResizedImage(this._media, this.width, this.height, this.crop || 'center');
-    }
+    this.url = this.mediaService.getResizedImage(this._media, this.width, this.height, this.crop || 'center');
   }
 
   get media(): Media {

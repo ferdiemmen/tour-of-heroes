@@ -16,14 +16,14 @@ export class MediaService {
   private mediaUrl = 'modules/media/'; // URL to web api
 
   constructor(
+    public deferredService: DeferredService,
     private apiService: ApiService,
     private router: Router,
     private location: Location,
-    private deferredService: DeferredService,
     private cacheService: CacheService) { }
 
   getMedia(id: number): Promise<Media> {
-    const url = `${this.mediaUrl}/${id}/`;
+    const url = `${this.mediaUrl}${id}/`;
     return this.apiService
       .get(url)
       .then(response => this.media = response.json() as Media);
@@ -49,6 +49,8 @@ export class MediaService {
   }
 
   getResizedImage(media: Media, width: number, height: number, crop: string): string {
+    if (!media.file) { return ''; }
+
     let url = `https://localapi.reshift.nl:8001/${this.mediaUrl}show_image/${media.file.id}/?width=${width}&crop=${crop}`;
     if (height) { url += `&height=${height}`};
     return url;
@@ -56,6 +58,7 @@ export class MediaService {
 
   selectedMedia(media: Media): void {
     if (!this.deferredService.get()) { return; }
+    this.media = media;
     this.deferredService.resolve(media);
     this.location.back();
   }

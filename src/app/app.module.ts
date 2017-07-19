@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { InMemoryDataService } from './in-memory-data.service';
 
 // Imports from third party components
 import { MediumEditorDirective } from 'angular2-medium-editor/medium-editor.directive';
@@ -28,6 +28,9 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 import { PageListComponent } from './components/page-list/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 import { MediaResizedComponent } from './components/media/media-resized.component';
+import { SnippetPickerComponent } from './components/snippet-picker/snippet-picker.component';
+import { SnippetImageComponent } from './components/snippet/snippet-image/snippet-image.component';
+import { SnippetParagraphComponent } from './components/snippet/snippet-paragraph/snippet-paragraph.component';
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
@@ -59,7 +62,10 @@ import { ConfigService } from './app-config.service';
     PageListComponent,
     MediaListComponent,
     MediaResizedComponent,
-    DashboardComponent
+    DashboardComponent,
+    SnippetPickerComponent,
+    SnippetImageComponent,
+    SnippetParagraphComponent
   ],
   providers: [
     ApiService,

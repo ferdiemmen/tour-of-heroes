@@ -21,15 +21,19 @@
       </medium-editor>
 
       <ul id="snippets">
-        <li id="snippet_{{snippet.type}}_{{snippet.id}}_{{index}}" class="snippet" *ngFor="let snippet of articleService.article.snippetsJson; let index = index">
-          <i class="fa fa-arrows handle" aria-hidden="true"></i> {{snippet.body}}
+        <li class="snippet" *ngFor="let snippet of articleService.article.snippetsJson">
+          <i class="fa fa-arrows handle" aria-hidden="true"></i> {{snippet.data.body}}
+          <app-snippet-paragraph *ngIf="snippet.type === 'paragraph'" [snippet]="snippet"></app-snippet-paragraph>
+          <app-snippet-image *ngIf="snippet.type === 'image'" [snippet]="snippet"></app-snippet-image>
         </li>
       </ul>
 
       <pre>{{articleService.article|json}}</pre>
     </div>
   </div>
-  <div class="cms-footer">footer</div>
+  <div class="cms-footer">
+    <app-snippet-picker [snippets]="articleService.article.snippetsJson"></app-snippet-picker>
+  </div>
 </div>
 
 <div class="cms-advanced">
