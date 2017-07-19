@@ -7,6 +7,7 @@ import 'rxjs/add/operator/debounceTime';
 
 import { Snippet } from '../snippet';
 
+'https://stackoverflow.com/questions/32051273/angular2-and-debounce'
 
 @Component({
   selector: 'app-snippet-youtube',
