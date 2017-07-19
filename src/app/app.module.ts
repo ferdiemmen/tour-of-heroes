@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
@@ -31,6 +31,8 @@ import { MediaResizedComponent } from './components/media/media-resized.componen
 import { SnippetPickerComponent } from './components/snippet-picker/snippet-picker.component';
 import { SnippetImageComponent } from './components/snippet/snippet-image/snippet-image.component';
 import { SnippetParagraphComponent } from './components/snippet/snippet-paragraph/snippet-paragraph.component';
+import { SnippetHeaderComponent } from './components/snippet/snippet-header/snippet-header.component';
+import { SnippetYoutubeComponent } from './components/snippet/snippet-youtube/snippet-youtube.component';
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
@@ -47,6 +49,7 @@ import { ConfigService } from './app-config.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
     DateTimePickerModule
@@ -65,7 +68,9 @@ import { ConfigService } from './app-config.service';
     DashboardComponent,
     SnippetPickerComponent,
     SnippetImageComponent,
-    SnippetParagraphComponent
+    SnippetParagraphComponent,
+    SnippetHeaderComponent,
+    SnippetYoutubeComponent
   ],
   providers: [
     ApiService,
