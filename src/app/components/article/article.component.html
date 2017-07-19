@@ -22,9 +22,11 @@
 
       <ul id="snippets">
         <li class="snippet" *ngFor="let snippet of articleService.article.snippetsJson">
-          <i class="fa fa-arrows handle" aria-hidden="true"></i> {{snippet.data.body}}
+          <i class="fa fa-arrows handle" aria-hidden="true"></i>
+          <app-snippet-header *ngIf="snippet.type === 'header'" [snippet]="snippet"></app-snippet-header>
           <app-snippet-paragraph *ngIf="snippet.type === 'paragraph'" [snippet]="snippet"></app-snippet-paragraph>
           <app-snippet-image *ngIf="snippet.type === 'image'" [snippet]="snippet"></app-snippet-image>
+          <app-snippet-youtube *ngIf="snippet.type === 'youtube'" [snippet]="snippet"></app-snippet-youtube>
         </li>
       </ul>
 

@@ -8,13 +8,25 @@ const defaults = {
   paragraph: {
     type: 'paragraph',
     data: {
-      body: 'Leuk bericht'
+      body: ''
+    }
+  },
+  header: {
+    type: 'header',
+    data: {
+      body: ''
     }
   },
   image: {
     type: 'image',
     data: {
       mediaId: 484506
+    }
+  },
+  youtube: {
+    type: 'youtube',
+    data: {
+      body: '3jWRrafhO7M'
     }
   }
 }
@@ -28,12 +40,22 @@ const defaults = {
       <ul>
         <li>
           <button type="button" (click)="addSnippet('paragraph')">
-            <i class="fa fa-picture-o" aria-hidden="true"></i>
+            <i class="fa fa-paragraph" aria-hidden="true"></i>
+          </button>
+        </li>
+        <li>
+          <button type="button" (click)="addSnippet('header')">
+            <i class="fa fa-header" aria-hidden="true"></i>
           </button>
         </li>
         <li>
           <button type="button" (click)="addSnippet('image')">
             <i class="fa fa-picture-o" aria-hidden="true"></i>
+          </button>
+        </li>
+        <li>
+          <button type="button" (click)="addSnippet('youtube')">
+            <i class="fa fa-youtube-play" aria-hidden="true"></i>
           </button>
         </li>
       </ul>

@@ -94,7 +94,6 @@ export class ArticleComponent implements OnInit, AfterViewInit {
       placeholder: 'ui-state-highlight',
       forcePlaceholderSize: true,
     });
-    $('#snippets').disableSelection();
     $('#snippets').sortable({
       start: ( event, ui ) => {
         previousIndex = $(ui.item).index()
