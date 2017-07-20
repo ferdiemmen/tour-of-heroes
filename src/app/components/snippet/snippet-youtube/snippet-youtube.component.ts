@@ -18,6 +18,7 @@ import { Snippet } from '../snippet';
       class="video-embed-container video-embed-container--16x9 snippet snippet__youtube">
       <div class="snippet-edit" *ngIf="edit">
         <input [value]="snippet.data.body" [formControl]="urlControl" />
+        <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <iframe
         class="cms__outline"
