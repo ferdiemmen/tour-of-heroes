@@ -17,6 +17,12 @@ const defaults = {
       body: ''
     }
   },
+  quote: {
+    type: 'quote',
+    data: {
+      body: ''
+    }
+  },
   image: {
     type: 'image',
     data: {}
@@ -49,6 +55,11 @@ const defaults = {
       <li>
         <button type="button" (click)="addSnippet('header')">
           <i class="fa fa-header" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('quote')">
+          <i class="fa fa-quote-right" aria-hidden="true"></i>
         </button>
       </li>
       <li>

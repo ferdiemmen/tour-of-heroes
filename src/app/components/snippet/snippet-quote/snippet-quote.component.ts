@@ -5,16 +5,16 @@ import { Snippet } from '../snippet';
 
 
 @Component({
-  selector: 'app-snippet-header',
+  selector: 'app-snippet-quote',
   template: `
     <medium-editor
-      class="snippet snippet__header cms__outline"
+      class="snippet snippet__quote cms__outline"
       [(editorModel)]="snippet.data.body"
       [editorOptions]="{'disableReturn': true, 'toolbar': false}">
     </medium-editor>
   `,
 })
-export class SnippetHeaderComponent {
+export class SnippetQuoteComponent {
 
   @Input('snippet') snippet: Snippet;
 
