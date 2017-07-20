@@ -9,20 +9,21 @@ import { Snippet } from '../snippet';
 
 
 @Component({
-  selector: 'app-snippet-youtube',
+  selector: 'app-snippet-iframe',
   template: `
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
     <div
       name="media"
-      class="video-embed-container video-embed-container--16x9 snippet snippet__youtube">
+      class="video-embed-container video-embed-container--16x9 snippet snippet__iframe">
       <div class="snippet-edit" *ngIf="edit">
         <input [value]="snippet.data.body" [formControl]="urlControl" />
+        <input [value]="snippet.data.height" [formControl]="heightControl" />
         <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <iframe
         class="cms__outline"
         width="640"
-        height="360"
+        [height]="snippet.data.height"
         [src]="url"
         frameborder="0"
         allowfullscreen>
@@ -30,8 +31,9 @@ import { Snippet } from '../snippet';
     </div>
   `,
 })
-export class SnippetYoutubeComponent implements OnInit {
+export class SnippetIframeComponent implements OnInit {
   urlControl: FormControl = new FormControl();
+  heightControl: FormControl = new FormControl();
   url: SafeResourceUrl;
 
   @Input('snippet') snippet: Snippet;
@@ -40,6 +42,10 @@ export class SnippetYoutubeComponent implements OnInit {
     this.urlControl.valueChanges
       .debounceTime(300)
       .subscribe(value => this.updateUrl(value));
+    
+    this.heightControl.valueChanges
+      .debounceTime(300)
+      .subscribe(value => this.snippet['height'] = value);
   }
 
   ngOnInit(): void {
@@ -49,7 +55,7 @@ export class SnippetYoutubeComponent implements OnInit {
   }
 
   updateUrl(value: string): void {
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + value);
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(value);
     this.snippet.data['body'] = value;
   }
 }

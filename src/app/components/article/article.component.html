@@ -4,7 +4,7 @@
   <div class="cms-columns__column scrollable--y">
     <div class="cms-preview cms-preview--article article">
 
-      <div class="article__media cms__outline" (click)="setHeaderMedia()">
+      <div class="article__media cms__outline" (click)="setHeaderMedia()" data-type="Hoofd beeld">
         <app-media-resized
           [media]="articleService.article.media"
           width="640"
@@ -12,12 +12,16 @@
           [crop]="articleService.article.headerCrop"></app-media-resized>
       </div>
 
-      <medium-editor class="article__title" [(editorModel)]="articleService.article.title"
+      <medium-editor class="article__title cms__outline" [(editorModel)]="articleService.article.title" data-type="Titel"
         [editorOptions]="{'disableReturn': true, 'toolbar': false}">
         <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
       </medium-editor>
-      <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
+      <medium-editor class="article__subtitle cms__outline" [(editorModel)]="articleService.article.subtitle" data-type="Ondertitel"
         [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+      </medium-editor>
+
+      <medium-editor class="article__intro cms__outline" [(editorModel)]="articleService.article.intro" data-type="Inleiding"
+        [editorOptions]="{'toolbar': false}">
       </medium-editor>
 
       <ul id="snippets">
@@ -27,6 +31,7 @@
           <app-snippet-paragraph *ngIf="snippet.type === 'paragraph'" [snippet]="snippet"></app-snippet-paragraph>
           <app-snippet-quote *ngIf="snippet.type === 'quote'" [snippet]="snippet"></app-snippet-quote>
           <app-snippet-image *ngIf="snippet.type === 'image'" [snippet]="snippet"></app-snippet-image>
+          <app-snippet-iframe *ngIf="snippet.type === 'iframe'" [snippet]="snippet"></app-snippet-iframe>
           <app-snippet-youtube *ngIf="snippet.type === 'youtube'" [snippet]="snippet"></app-snippet-youtube>
           <app-snippet-instagram *ngIf="snippet.type === 'instagram'" [snippet]="snippet"></app-snippet-instagram>
         </li>

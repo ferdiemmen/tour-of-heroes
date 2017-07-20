@@ -27,6 +27,13 @@ const defaults = {
     type: 'image',
     data: {}
   },
+  iframe: {
+    type: 'iframe',
+    data: {
+      body: '',
+      height: 360
+    }
+  },
   youtube: {
     type: 'youtube',
     data: {
@@ -65,6 +72,11 @@ const defaults = {
       <li>
         <button type="button" (click)="addSnippet('image')">
           <i class="fa fa-picture-o" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('iframe')">
+          <i class="fa fa-code" aria-hidden="true"></i>
         </button>
       </li>
       <li>

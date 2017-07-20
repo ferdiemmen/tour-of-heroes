@@ -32,6 +32,8 @@ import { SnippetPickerComponent } from './components/snippet-picker/snippet-pick
 import { SnippetImageComponent } from './components/snippet/snippet-image/snippet-image.component';
 import { SnippetParagraphComponent } from './components/snippet/snippet-paragraph/snippet-paragraph.component';
 import { SnippetHeaderComponent } from './components/snippet/snippet-header/snippet-header.component';
+import { SnippetQuoteComponent } from './components/snippet/snippet-quote/snippet-quote.component';
+import { SnippetIframeComponent } from './components/snippet/snippet-iframe/snippet-iframe.component';
 import { SnippetYoutubeComponent } from './components/snippet/snippet-youtube/snippet-youtube.component';
 import { SnippetInstagramComponent } from './components/snippet/snippet-instagram/snippet-instagram.component';
 
@@ -72,6 +74,8 @@ import { ConfigService } from './app-config.service';
     SnippetImageComponent,
     SnippetParagraphComponent,
     SnippetHeaderComponent,
+    SnippetQuoteComponent,
+    SnippetIframeComponent,
     SnippetYoutubeComponent,
     SnippetInstagramComponent
   ],
