@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Request, Response, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -19,43 +19,37 @@ export class ApiService {
     private configService: ConfigService) { }
 
   get(url: string): Promise<any> {
-    return this.http
-      .get(this.getApiUrl(url), {
-        headers: this._getHeaders(),
-        withCredentials: true
-      })
-      .toPromise()
-      .catch(err => {
-        console.log(err);
-      })
+    return this._apiCall('GET', url);
   }
 
-  post(url: string, object: any): Promise<any> {
-    return this.http
-      .post(this.getApiUrl(url), JSON.stringify(object), {
-        headers: this._getHeaders(),
-        withCredentials: true
-      })
-      .toPromise()
-      .catch(err => {
-        console.log(err);
-      })
+  post(url: string, body: any): Promise<any> {
+    return this._apiCall('POST', url, body);
   }
 
-  put(url: string, object: any): Promise<any> {
-    return this.http
-      .put(this.getApiUrl(url), JSON.stringify(object), {
-        headers: this._getHeaders(),
-        withCredentials: true
-      })
-      .toPromise()
-      .catch(err => {
-        console.log(err);
-      })
+  put(url: string, body: any): Promise<any> {
+    return this._apiCall('PUT', url, body);
   }
 
-  getApiUrl(url: string): string {
+  private _getApiUrl(url: string): string {
     return [apiUrl, url].join('');
+  }
+
+  private _apiCall(method: string, url: string, body?: any): Promise<any> {
+    const req = new RequestOptions({
+      method: method,
+      url: this._getApiUrl(url),
+      body: (body) ? JSON.stringify(body) : null,
+      headers: this._getHeaders(),
+      withCredentials: true
+    });
+
+    const request = new Request(req);
+
+    return this.http.request(request)
+      .toPromise()
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   private _getHeaders(): Headers {
