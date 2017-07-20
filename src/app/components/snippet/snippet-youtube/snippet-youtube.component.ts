@@ -15,11 +15,12 @@ import { Snippet } from '../snippet';
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
     <div
       name="media"
-      class="video-embed-container video-embed-container--16x9 snippet snippet__youtube cms__outline">
+      class="video-embed-container video-embed-container--16x9 snippet snippet__youtube">
       <div class="snippet-edit" *ngIf="edit">
         <input [value]="snippet.data.body" [formControl]="urlControl" />
       </div>
       <iframe
+        class="cms__outline"
         width="640"
         height="360"
         [src]="url"

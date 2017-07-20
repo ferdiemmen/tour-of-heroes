@@ -26,38 +26,47 @@ const defaults = {
     data: {
       body: '3jWRrafhO7M'
     }
+  },
+  instagram: {
+    type: 'instagram',
+    data: {
+      body: '8Qk4RJrDcV'
+    }
   }
 }
 
 
 @Component({
   selector: 'app-snippet-picker',
-  // styleUrls: ['./toolbar.component.scss'],
+  styleUrls: ['./snippet-picker.component.scss'],
   template: `
-    <div class="snippet-picker">
-      <ul>
-        <li>
-          <button type="button" (click)="addSnippet('paragraph')">
-            <i class="fa fa-paragraph" aria-hidden="true"></i>
-          </button>
-        </li>
-        <li>
-          <button type="button" (click)="addSnippet('header')">
-            <i class="fa fa-header" aria-hidden="true"></i>
-          </button>
-        </li>
-        <li>
-          <button type="button" (click)="addSnippet('image')">
-            <i class="fa fa-picture-o" aria-hidden="true"></i>
-          </button>
-        </li>
-        <li>
-          <button type="button" (click)="addSnippet('youtube')">
-            <i class="fa fa-youtube-play" aria-hidden="true"></i>
-          </button>
-        </li>
-      </ul>
-    </div>
+    <ul class="snippet-picker">
+      <li>
+        <button type="button" (click)="addSnippet('paragraph')">
+          <i class="fa fa-paragraph" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('header')">
+          <i class="fa fa-header" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('image')">
+          <i class="fa fa-picture-o" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('youtube')">
+          <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('instagram')">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </button>
+      </li>
+    </ul>
   `
 })
 export class SnippetPickerComponent {

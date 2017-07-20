@@ -28,7 +28,8 @@
       "scripts": [
         "../node_modules/medium-editor/dist/js/medium-editor.min.js",
         "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/jqueryui/jquery-ui.min.js"
+        "../node_modules/jqueryui/jquery-ui.min.js",
+        "js/instagram/embeds.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

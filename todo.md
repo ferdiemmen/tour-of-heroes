@@ -9,10 +9,10 @@
 - Snippet drag and drop
 
 - Snippet paragraph
-- Snippet header
-- Snippet image
-- Snippet youtube
-- Snippet instagram
+✓ Snippet header
+✓ Snippet image
+✓ Snippet youtube
+✓ Snippet instagram
 - Snippet twitter
 - Snippet kieskeurig
 

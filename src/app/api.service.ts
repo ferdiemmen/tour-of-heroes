@@ -24,7 +24,10 @@ export class ApiService {
         headers: this._getHeaders(),
         withCredentials: true
       })
-      .toPromise();
+      .toPromise()
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   post(url: string, object: any): Promise<any> {
@@ -33,7 +36,10 @@ export class ApiService {
         headers: this._getHeaders(),
         withCredentials: true
       })
-      .toPromise();
+      .toPromise()
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   put(url: string, object: any): Promise<any> {
@@ -42,7 +48,10 @@ export class ApiService {
         headers: this._getHeaders(),
         withCredentials: true
       })
-      .toPromise();
+      .toPromise()
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   getApiUrl(url: string): string {

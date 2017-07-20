@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
 // import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -33,6 +33,7 @@ import { SnippetImageComponent } from './components/snippet/snippet-image/snippe
 import { SnippetParagraphComponent } from './components/snippet/snippet-paragraph/snippet-paragraph.component';
 import { SnippetHeaderComponent } from './components/snippet/snippet-header/snippet-header.component';
 import { SnippetYoutubeComponent } from './components/snippet/snippet-youtube/snippet-youtube.component';
+import { SnippetInstagramComponent } from './components/snippet/snippet-instagram/snippet-instagram.component';
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
@@ -49,6 +50,7 @@ import { ConfigService } from './app-config.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
     ReactiveFormsModule,
     // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
@@ -70,7 +72,8 @@ import { ConfigService } from './app-config.service';
     SnippetImageComponent,
     SnippetParagraphComponent,
     SnippetHeaderComponent,
-    SnippetYoutubeComponent
+    SnippetYoutubeComponent,
+    SnippetInstagramComponent
   ],
   providers: [
     ApiService,
