@@ -19,9 +19,7 @@ const defaults = {
   },
   image: {
     type: 'image',
-    data: {
-      mediaId: 484506
-    }
+    data: {}
   },
   youtube: {
     type: 'youtube',

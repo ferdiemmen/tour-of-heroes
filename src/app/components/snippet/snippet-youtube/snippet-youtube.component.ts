@@ -7,14 +7,18 @@ import 'rxjs/add/operator/debounceTime';
 
 import { Snippet } from '../snippet';
 
-'https://stackoverflow.com/questions/32051273/angular2-and-debounce'
 
 @Component({
   selector: 'app-snippet-youtube',
   styleUrls: ['./snippet-youtube.component.scss'],
   template: `
-    <div name="media" class="video-embed-container video-embed-container--16x9 snippet snippet__youtube cms__outline">
-      <input [formControl]="urlController" />
+    <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
+    <div
+      name="media"
+      class="video-embed-container video-embed-container--16x9 snippet snippet__youtube cms__outline">
+      <div class="snippet-edit" *ngIf="edit">
+        <input [value]="snippet.data.body" [formControl]="urlControl" />
+      </div>
       <iframe
         width="640"
         height="360"
@@ -26,25 +30,25 @@ import { Snippet } from '../snippet';
   `,
 })
 export class SnippetYoutubeComponent implements OnInit {
-  urlController: FormControl;
+  urlControl: FormControl = new FormControl();
   url: SafeResourceUrl;
 
   @Input('snippet') snippet: Snippet;
 
   constructor(private sanitizer: DomSanitizer) {
-    this.urlController = new FormControl();
-    this.urlController.registerOnChange((event, foo, bar) => {
-      console.log(event, foo, bar);
-    })
+    this.urlControl.valueChanges
+      .debounceTime(300)
+      .subscribe(value => this.updateUrl(value));
   }
 
   ngOnInit(): void {
     if (!this.snippet.data['body']) { return; }
 
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.snippet.data['body']);
+    this.updateUrl(this.snippet.data['body']);
   }
 
   updateUrl(value: string): void {
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + value);
+    this.snippet.data['body'] = value;
   }
 }
