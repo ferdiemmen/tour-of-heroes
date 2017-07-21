@@ -12,6 +12,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 // Imports from third party components
 import { MediumEditorDirective } from 'angular2-medium-editor/medium-editor.directive';
 import { DateTimePickerModule } from 'ng-pick-datetime';
+import { HotkeyModule } from 'angular2-hotkeys';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +29,7 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 import { PageListComponent } from './components/page-list/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 import { MediaResizedComponent } from './components/media/media-resized.component';
+import { SnippetsComponent } from './components/snippet/snippet.component';
 import { SnippetPickerComponent } from './components/snippet-picker/snippet-picker.component';
 import { SnippetImageComponent } from './components/snippet/snippet-image/snippet-image.component';
 import { SnippetParagraphComponent } from './components/snippet/snippet-paragraph/snippet-paragraph.component';
@@ -38,6 +40,7 @@ import { SnippetYoutubeComponent } from './components/snippet/snippet-youtube/sn
 import { SnippetInstagramComponent } from './components/snippet/snippet-instagram/snippet-instagram.component';
 import { SnippetTwitterComponent } from './components/snippet/snippet-twitter/snippet-twitter.component';
 import { SnippetTwitchComponent } from './components/snippet/snippet-twitch/snippet-twitch.component';
+import { SnippetPagebreakComponent } from './components/snippet/snippet-pagebreak/snippet-pagebreak.component';
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
@@ -58,7 +61,8 @@ import { ConfigService } from './app-config.service';
     ReactiveFormsModule,
     // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
-    DateTimePickerModule
+    DateTimePickerModule,
+    HotkeyModule.forRoot()
   ],
   declarations: [
     MediumEditorDirective,
@@ -72,6 +76,7 @@ import { ConfigService } from './app-config.service';
     MediaListComponent,
     MediaResizedComponent,
     DashboardComponent,
+    SnippetsComponent,
     SnippetPickerComponent,
     SnippetImageComponent,
     SnippetParagraphComponent,
@@ -81,7 +86,8 @@ import { ConfigService } from './app-config.service';
     SnippetYoutubeComponent,
     SnippetInstagramComponent,
     SnippetTwitterComponent,
-    SnippetTwitchComponent
+    SnippetTwitchComponent,
+    SnippetPagebreakComponent
   ],
   providers: [
     ApiService,

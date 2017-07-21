@@ -57,7 +57,13 @@ const defaults = {
     data: {
       body: 'officialgamernl'
     }
-  }
+  },
+  pagebreak: {
+    type: 'pagebreak',
+    data: {
+      body: ''
+    }
+  },
 }
 
 
@@ -109,6 +115,11 @@ const defaults = {
       <li>
         <button type="button" (click)="addSnippet('twitch')">
           <i class="fa fa-twitch" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('pagebreak')">
+          <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
         </button>
       </li>
     </ul>

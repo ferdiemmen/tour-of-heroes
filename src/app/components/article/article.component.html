@@ -24,20 +24,7 @@
         [editorOptions]="{'toolbar': false}">
       </medium-editor>
 
-      <ul id="snippets">
-        <li class="snippet" *ngFor="let snippet of articleService.article.snippetsJson">
-          <i class="fa fa-arrows handle" aria-hidden="true"></i>
-          <app-snippet-header *ngIf="snippet.type === 'header'" [snippet]="snippet"></app-snippet-header>
-          <app-snippet-paragraph *ngIf="snippet.type === 'paragraph'" [snippet]="snippet"></app-snippet-paragraph>
-          <app-snippet-quote *ngIf="snippet.type === 'quote'" [snippet]="snippet"></app-snippet-quote>
-          <app-snippet-image *ngIf="snippet.type === 'image'" [snippet]="snippet"></app-snippet-image>
-          <app-snippet-iframe *ngIf="snippet.type === 'iframe'" [snippet]="snippet"></app-snippet-iframe>
-          <app-snippet-youtube *ngIf="snippet.type === 'youtube'" [snippet]="snippet"></app-snippet-youtube>
-          <app-snippet-instagram *ngIf="snippet.type === 'instagram'" [snippet]="snippet"></app-snippet-instagram>
-          <app-snippet-twitter *ngIf="snippet.type === 'twitter'" [snippet]="snippet"></app-snippet-twitter>
-          <app-snippet-twitch *ngIf="snippet.type === 'twitch'" [snippet]="snippet"></app-snippet-twitch>
-        </li>
-      </ul>
+      <app-snippets [snippets]="articleService.article.snippetsJson"></app-snippets>
 
       <pre>{{articleService.article|json}}</pre>
     </div>

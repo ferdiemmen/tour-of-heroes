@@ -163,6 +163,10 @@
   dependencies:
     "@types/jasmine" "*"
 
+"@types/mousetrap@^1.5.32":
+  version "1.5.34"
+  resolved "https://registry.yarnpkg.com/@types/mousetrap/-/mousetrap-1.5.34.tgz#22b338d9c4bcdfd8f81c30684aefeb04a4727168"
+
 "@types/node@^6.0.46", "@types/node@~6.0.60":
   version "6.0.79"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.79.tgz#5efe7d4a6d8c453c7e9eaf55d931f4a22fac5169"
@@ -258,6 +262,13 @@ amdefine@>=0.0.4:
 angular-in-memory-web-api@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/angular-in-memory-web-api/-/angular-in-memory-web-api-0.3.2.tgz#8836d9e2534d37b728f3cb5a1caf6fe1e7fbbecd"
+
+angular2-hotkeys@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/angular2-hotkeys/-/angular2-hotkeys-2.0.1.tgz#20bf63a4d46e0977b4d92caf3145f4469c4073fa"
+  dependencies:
+    "@types/mousetrap" "^1.5.32"
+    mousetrap "^1.6.0"
 
 "angular2-medium-editor@git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git":
   version "1.0.6"
@@ -3015,6 +3026,10 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
 moment@^2.17.0, moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
+mousetrap@^1.6.0:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/mousetrap/-/mousetrap-1.6.1.tgz#2a085f5c751294c75e7e81f6ec2545b29cbf42d9"
 
 ms@0.7.1:
   version "0.7.1"
