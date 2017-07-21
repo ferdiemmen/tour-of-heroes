@@ -1,8 +1,7 @@
 
 import { Component, Input, OnInit, ElementRef } from '@angular/core';
-import { Http, Jsonp } from '@angular/http';
+import { Jsonp } from '@angular/http';
 import { FormControl } from '@angular/forms';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 // Convert a Observable to a Promise
 import 'rxjs/add/operator/toPromise';
@@ -19,9 +18,7 @@ declare var instgrm: any;
   selector: 'app-snippet-instagram',
   template: `
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
-    <div
-      name="media"
-      class="video-embed-container video-embed-container--16x9 snippet snippet__instagram">
+    <div class="snippet snippet__instagram">
       <div class="snippet-edit" *ngIf="edit">
         <input [value]="snippet.data.body" [formControl]="urlControl" />
         <button type="button" (click)="edit = !edit">Aanpassen</button>
@@ -32,15 +29,12 @@ declare var instgrm: any;
 })
 export class SnippetInstagramComponent implements OnInit {
   urlControl: FormControl = new FormControl();
-  url: SafeResourceUrl;
 
   @Input('snippet') snippet: Snippet;
 
   constructor(
-    private sanitizer: DomSanitizer,
     private elementRef: ElementRef,
-    private jsonp: Jsonp,
-    private http: Http) {
+    private jsonp: Jsonp) {
     this.urlControl.valueChanges
       .debounceTime(300)
       .subscribe(value => this.updateUrl(value));

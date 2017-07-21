@@ -36,6 +36,7 @@ import { SnippetQuoteComponent } from './components/snippet/snippet-quote/snippe
 import { SnippetIframeComponent } from './components/snippet/snippet-iframe/snippet-iframe.component';
 import { SnippetYoutubeComponent } from './components/snippet/snippet-youtube/snippet-youtube.component';
 import { SnippetInstagramComponent } from './components/snippet/snippet-instagram/snippet-instagram.component';
+import { SnippetTwitterComponent } from './components/snippet/snippet-twitter/snippet-twitter.component';
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
@@ -77,7 +78,8 @@ import { ConfigService } from './app-config.service';
     SnippetQuoteComponent,
     SnippetIframeComponent,
     SnippetYoutubeComponent,
-    SnippetInstagramComponent
+    SnippetInstagramComponent,
+    SnippetTwitterComponent
   ],
   providers: [
     ApiService,

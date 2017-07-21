@@ -45,6 +45,12 @@ const defaults = {
     data: {
       body: '8Qk4RJrDcV'
     }
+  },
+  twitter: {
+    type: 'twitter',
+    data: {
+      body: '51434244341383168'
+    }
   }
 }
 
@@ -87,6 +93,11 @@ const defaults = {
       <li>
         <button type="button" (click)="addSnippet('instagram')">
           <i class="fa fa-instagram" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('twitter')">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
         </button>
       </li>
     </ul>

@@ -12,9 +12,7 @@ import { Snippet } from '../snippet';
   selector: 'app-snippet-iframe',
   template: `
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
-    <div
-      name="media"
-      class="video-embed-container video-embed-container--16x9 snippet snippet__iframe">
+    <div class="video-embed-container video-embed-container--16x9 snippet snippet__iframe">
       <div class="snippet-edit" *ngIf="edit">
         <input [value]="snippet.data.body" [formControl]="urlControl" />
         <input [value]="snippet.data.height" [formControl]="heightControl" />
@@ -42,7 +40,7 @@ export class SnippetIframeComponent implements OnInit {
     this.urlControl.valueChanges
       .debounceTime(300)
       .subscribe(value => this.updateUrl(value));
-    
+
     this.heightControl.valueChanges
       .debounceTime(300)
       .subscribe(value => this.snippet['height'] = value);
