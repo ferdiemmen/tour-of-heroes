@@ -51,6 +51,12 @@ const defaults = {
     data: {
       body: '51434244341383168'
     }
+  },
+  twitch: {
+    type: 'twitch',
+    data: {
+      body: 'officialgamernl'
+    }
   }
 }
 
@@ -98,6 +104,11 @@ const defaults = {
       <li>
         <button type="button" (click)="addSnippet('twitter')">
           <i class="fa fa-twitter" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li>
+        <button type="button" (click)="addSnippet('twitch')">
+          <i class="fa fa-twitch" aria-hidden="true"></i>
         </button>
       </li>
     </ul>

@@ -9,19 +9,18 @@ import { Snippet } from '../snippet';
 
 
 @Component({
-  selector: 'app-snippet-iframe',
+  selector: 'app-snippet-twitch',
   template: `
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
-    <div class="video-embed-container video-embed-container--16x9 snippet snippet__iframe">
+    <div class="video-embed-container video-embed-container--16x9 snippet snippet__twitch">
       <div class="snippet-edit" *ngIf="edit">
         <input [value]="snippet.data.body" [formControl]="urlControl" />
-        <input [value]="snippet.data.height" [formControl]="heightControl" />
         <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <iframe
         class="cms__outline"
         width="640"
-        [height]="snippet.data.height"
+        height="360"
         [src]="url"
         frameborder="0"
         allowfullscreen>
@@ -29,9 +28,8 @@ import { Snippet } from '../snippet';
     </div>
   `,
 })
-export class SnippetIframeComponent implements OnInit {
+export class SnippetTwitchComponent implements OnInit {
   urlControl: FormControl = new FormControl();
-  heightControl: FormControl = new FormControl();
   url: SafeResourceUrl;
 
   @Input('snippet') snippet: Snippet;
@@ -40,10 +38,6 @@ export class SnippetIframeComponent implements OnInit {
     this.urlControl.valueChanges
       .debounceTime(1000)
       .subscribe(value => this.updateUrl(value));
-
-    this.heightControl.valueChanges
-      .debounceTime(1000)
-      .subscribe(value => this.snippet['height'] = value);
   }
 
   ngOnInit(): void {
@@ -53,7 +47,7 @@ export class SnippetIframeComponent implements OnInit {
   }
 
   updateUrl(value: string): void {
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(value);
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.twitch.tv/?channel=' + value);
     this.snippet.data['body'] = value;
   }
 }

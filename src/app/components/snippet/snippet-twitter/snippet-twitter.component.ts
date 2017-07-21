@@ -32,7 +32,7 @@ export class SnippetTwitterComponent implements OnInit {
   constructor(
     private elementRef: ElementRef) {
     this.tweetControl.valueChanges
-      .debounceTime(300)
+      .debounceTime(1000)
       .subscribe(value => this.updateUrl(value));
   }
 

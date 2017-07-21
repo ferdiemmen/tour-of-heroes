@@ -36,7 +36,7 @@ export class SnippetYoutubeComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer) {
     this.urlControl.valueChanges
-      .debounceTime(300)
+      .debounceTime(1000)
       .subscribe(value => this.updateUrl(value));
   }
 

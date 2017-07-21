@@ -36,7 +36,7 @@ export class SnippetInstagramComponent implements OnInit {
     private elementRef: ElementRef,
     private jsonp: Jsonp) {
     this.urlControl.valueChanges
-      .debounceTime(300)
+      .debounceTime(1000)
       .subscribe(value => this.updateUrl(value));
   }
 
