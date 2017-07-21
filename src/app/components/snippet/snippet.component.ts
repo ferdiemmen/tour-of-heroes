@@ -14,20 +14,21 @@ import { Snippet } from './snippet';
   ],
   template: `
     <ul id="snippets">
-      <li class="snippet" *ngFor="let snippet of snippets;trackBy: trackByFn">
+      <li class="snippet" *ngFor="let snippet of snippets">
         <i class="fa fa-arrows handle" aria-hidden="true"></i>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="removeSnippet(snippet)"></i>
-
-        <app-snippet-paragraph *ngIf="snippet.type === 'paragraph'" [snippet]="snippet"></app-snippet-paragraph>
-        <app-snippet-header *ngIf="snippet.type === 'header'" [snippet]="snippet"></app-snippet-header>
-        <app-snippet-quote *ngIf="snippet.type === 'quote'" [snippet]="snippet"></app-snippet-quote>
-        <app-snippet-image *ngIf="snippet.type === 'image'" [snippet]="snippet"></app-snippet-image>
-        <app-snippet-iframe *ngIf="snippet.type === 'iframe'" [snippet]="snippet"></app-snippet-iframe>
-        <app-snippet-youtube *ngIf="snippet.type === 'youtube'" [snippet]="snippet"></app-snippet-youtube>
-        <app-snippet-instagram *ngIf="snippet.type === 'instagram'" [snippet]="snippet"></app-snippet-instagram>
-        <app-snippet-twitter *ngIf="snippet.type === 'twitter'" [snippet]="snippet"></app-snippet-twitter>
-        <app-snippet-twitch *ngIf="snippet.type === 'twitch'" [snippet]="snippet"></app-snippet-twitch>
-        <app-snippet-pagebreak *ngIf="snippet.type === 'pagebreak'" [snippet]="snippet"></app-snippet-pagebreak>
+        <div [ngSwitch]="snippet.type">
+          <app-snippet-paragraph *ngSwitchCase="'paragraph'" [snippet]="snippet"></app-snippet-paragraph>
+          <app-snippet-header *ngSwitchCase="'header'" [snippet]="snippet"></app-snippet-header>
+          <app-snippet-quote *ngSwitchCase="'quote'" [snippet]="snippet"></app-snippet-quote>
+          <app-snippet-image *ngSwitchCase="'image'" [snippet]="snippet"></app-snippet-image>
+          <app-snippet-iframe *ngSwitchCase="'iframe'" [snippet]="snippet"></app-snippet-iframe>
+          <app-snippet-youtube *ngSwitchCase="'youtube'" [snippet]="snippet"></app-snippet-youtube>
+          <app-snippet-instagram *ngSwitchCase="'instagram'" [snippet]="snippet"></app-snippet-instagram>
+          <app-snippet-twitter *ngSwitchCase="'twitter'" [snippet]="snippet"></app-snippet-twitter>
+          <app-snippet-twitch *ngSwitchCase="'twitch'" [snippet]="snippet"></app-snippet-twitch>
+          <app-snippet-pagebreak *ngSwitchCase="'pagebreak'" [snippet]="snippet"></app-snippet-pagebreak>
+        </div>
       </li>
     </ul>
   `,
@@ -63,9 +64,5 @@ export class SnippetsComponent implements OnInit {
       snippet: snippet
     });
     this.snippets.splice(this.snippets.indexOf(snippet), 1);
-  }
-
-  trackByFn(index: string, snippet: Snippet): string {
-    return snippet ? snippet.id : index;
   }
 }

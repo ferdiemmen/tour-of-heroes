@@ -1,5 +1,6 @@
 
 import { Component, Input } from '@angular/core';
+import * as $ from 'jquery';
 
 import { Snippet } from '../snippet/snippet';
 
@@ -130,7 +131,7 @@ export class SnippetPickerComponent {
   @Input('snippets') snippets: Snippet[];
 
   addSnippet(type: string): void {
-    this.snippets.push(new Snippet(defaults[type]));
+    this.snippets.push(new Snippet($.extend(true, {}, defaults[type])));
   }
 }
 
