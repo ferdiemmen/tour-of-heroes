@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit } from '@angular/core';
 import * as $ from 'jquery';
 
 import { Snippet } from '../snippet/snippet';
@@ -44,17 +44,14 @@ import { SnippetService } from '../snippet/snippet.service';
     </ul>
   `
 })
-export class SnippetPickerComponent implements OnInit, AfterViewInit {
+export class SnippetPickerComponent implements AfterViewInit {
 
   @Input('snippets') snippets: Snippet[];
 
   constructor(public snippetService: SnippetService) { }
 
-  ngOnInit(): void {
-    this.snippetService.snippets = this.snippets;
-  }
-
   ngAfterViewInit(): void {
+    this.snippetService.snippets = this.snippets;
 
     // Users can add a snippet by dragging it from the picker to the snippets list.
     $('.snippet-picker li').draggable({

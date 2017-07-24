@@ -12,6 +12,7 @@ import { DeferredService } from '../deferred/deferred.service';
 import { Feed } from '../feed/feed';
 import { FeedService } from '../feed/feed.service';
 import { SiteService } from '../site/site.service';
+import { SnippetService } from '../snippet/snippet.service';
 
 
 @Injectable()
@@ -28,6 +29,7 @@ export class ArticleService {
     public deferredService: DeferredService,
     public feedService: FeedService,
     public siteService: SiteService,
+    private snippetService: SnippetService,
     private apiService: ApiService,
     private cacheService: CacheService) { }
 
@@ -39,6 +41,7 @@ export class ArticleService {
       if (!this.deferredService.get()) {
         // Clear previous Article instance on service.
         this.article = new Article();
+        this.snippetService.setSnippets([]);
       }
 
       // Set article defaults.
@@ -47,6 +50,7 @@ export class ArticleService {
     } else {
       // Clear previous Article instance on service.
       this.article = new Article();
+      this.snippetService.setSnippets([]);
       this.deferredService.reset();
     }
 
@@ -54,6 +58,7 @@ export class ArticleService {
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
       this.article = this.cacheService.getCache(cacheKey);
+      this.snippetService.setSnippets(this.article.snippetsJson);
 
       return Promise.resolve(this.article as Article);
     }
@@ -63,6 +68,7 @@ export class ArticleService {
       .then(response => {
         // Set article on this service.
         this.article = response.json() as Article;
+        this.snippetService.setSnippets(this.article.snippetsJson);
 
         // Add response to cache.
         this.cacheService.setCache(cacheKey, response.json() as Article);

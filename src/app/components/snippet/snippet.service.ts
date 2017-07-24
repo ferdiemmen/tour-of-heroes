@@ -44,4 +44,14 @@ export class SnippetService {
       this.snippets.push(snippet);
     }
   }
+
+  /**
+   * Sets the snippets on this service.
+   *
+   * @param {Snippet[]} snippets
+   * @memberof SnippetService
+   */
+  setSnippets(snippets: Snippet[]): void {
+    this.snippets = snippets;
+  }
 }

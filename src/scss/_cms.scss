@@ -42,4 +42,10 @@
 }
 
 
-.ui-state-highlight { height: 3em; line-height: 3em; }
+.ui-state-highlight {
+  height: 3em;
+  line-height: 3em;
+  border: none;
+  outline: 1px dashed $cms-highlight;
+  background: none;
+}

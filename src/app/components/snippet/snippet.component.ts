@@ -13,7 +13,7 @@ import { Snippet } from './snippet';
     SnippetParagraphComponent
   ],
   template: `
-    <ul id="snippets">
+    <ul id="snippets" [ngClass]="{'empty' : !snippets.length}">
       <li class="snippet" *ngFor="let snippet of snippets">
         <i class="fa fa-arrows handle" aria-hidden="true"></i>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="removeSnippet(snippet)"></i>
