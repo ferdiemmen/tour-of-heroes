@@ -8,6 +8,7 @@ import 'jqueryui';
 import { Snippet } from './snippet';
 import { SnippetService } from './snippet.service';
 
+// https://github.com/ilikenwf/nestedSortable
 
 @Component({
   selector: 'app-snippets',
