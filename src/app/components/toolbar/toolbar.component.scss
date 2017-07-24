@@ -10,6 +10,8 @@ $cms-toolbar-background:          $cms-background !default;
   width: $cms-toolbar-width;
   background: $cms-toolbar-background;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 
   .fa {
     color: #fff;
@@ -28,6 +30,10 @@ $cms-toolbar-background:          $cms-background !default;
 
     &:visited {
       color: #fff;
+    }
+
+    &.last {
+      margin-top: auto;
     }
   }
 

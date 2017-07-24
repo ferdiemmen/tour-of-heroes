@@ -23,7 +23,9 @@ const routes: Routes = [
           { path: 'page-list', component: PageListComponent },
           { path: 'media-list', component: MediaListComponent },
           { path: 'article/create', component: ArticleComponent },
-          { path: 'article/edit/:id', component: ArticleComponent }
+          { path: 'article/edit/:id', component: ArticleComponent },
+          { path: 'page/create', component: ArticleComponent },
+          { path: 'page/edit/:id', component: ArticleComponent }
         ],
       }
     ]

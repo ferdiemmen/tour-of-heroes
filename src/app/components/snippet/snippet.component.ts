@@ -1,19 +1,18 @@
 
-import { Component, ElementRef, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
+import * as $ from 'jquery';
+import 'jqueryui';
 
-import { SnippetParagraphComponent } from './snippet-paragraph/snippet-paragraph.component';
 import { Snippet } from './snippet';
+import { SnippetService } from './snippet.service';
 
 
 @Component({
   selector: 'app-snippets',
-  entryComponents: [
-    SnippetParagraphComponent
-  ],
   template: `
-    <ul id="snippets" [ngClass]="{'empty' : !snippets.length}">
+    <ul class="snippets" [ngClass]="{'empty' : !snippets.length}">
       <li class="snippet" *ngFor="let snippet of snippets">
         <i class="fa fa-arrows handle" aria-hidden="true"></i>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="removeSnippet(snippet)"></i>
@@ -28,18 +27,22 @@ import { Snippet } from './snippet';
           <app-snippet-twitter *ngSwitchCase="'twitter'" [snippet]="snippet"></app-snippet-twitter>
           <app-snippet-twitch *ngSwitchCase="'twitch'" [snippet]="snippet"></app-snippet-twitch>
           <app-snippet-pagebreak *ngSwitchCase="'pagebreak'" [snippet]="snippet"></app-snippet-pagebreak>
+          <app-snippet-container *ngSwitchCase="'snippetcontainer'" [snippet]="snippet"></app-snippet-container>
         </div>
       </li>
     </ul>
   `,
 })
-export class SnippetsComponent implements OnInit {
+export class SnippetsComponent implements AfterViewInit {
   trashbin: Object[] = [];
 
   @Input('snippets') snippets: Snippet[];
 
-  constructor(private _hotkeysService: HotkeysService) {
-    this._hotkeysService.add(new Hotkey(['ctrl+z', 'command+z'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
+  constructor(
+    private _hotkeysService: HotkeysService,
+    private snippetService: SnippetService) {
+
+      this._hotkeysService.add(new Hotkey(['ctrl+z', 'command+z'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
       if (!this.trashbin.length) { return event; }
 
       // Put snippet back to snippets array.
@@ -54,15 +57,39 @@ export class SnippetsComponent implements OnInit {
     }));
   }
 
-  ngOnInit(): void {
-    if (!this.snippets.length) { return; }
-  }
-
   removeSnippet(snippet: Snippet): void {
     this.trashbin.push({
       index: this.snippets.indexOf(snippet),
       snippet: snippet
     });
     this.snippets.splice(this.snippets.indexOf(snippet), 1);
+  }
+
+  ngAfterViewInit(): void {
+    let previousIndex: number;
+
+    $('.snippets').sortable({
+      handle: '.handle',
+      helper: 'original',
+      placeholder: 'ui-state-highlight',
+      forcePlaceholderSize: true,
+      tolerance: 'pointer',
+      start: ( event, ui ) => {
+        previousIndex = ui.item.index();
+      },
+      stop: ( event, ui ) => {
+        if (previousIndex === ui.item.index() || ui.item.index() === -1) { return; }
+
+        const a = this.snippets[previousIndex];
+        this.snippets.splice(previousIndex, 1);
+        this.snippets.splice(ui.item.index(), 0, a);
+      },
+      receive: ( event, ui ) => {
+        const index = $('.snippets').data('ui-sortable').currentItem.index();
+        this.snippetService.addSnippet($(ui.item).data('type'), 'article', index);
+
+        $('.snippets .ui-draggable').remove();
+      }
+    });
   }
 }

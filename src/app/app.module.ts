@@ -41,6 +41,7 @@ import { SnippetInstagramComponent } from './components/snippet/snippet-instagra
 import { SnippetTwitterComponent } from './components/snippet/snippet-twitter/snippet-twitter.component';
 import { SnippetTwitchComponent } from './components/snippet/snippet-twitch/snippet-twitch.component';
 import { SnippetPagebreakComponent } from './components/snippet/snippet-pagebreak/snippet-pagebreak.component';
+import { SnippetContainerComponent } from './components/snippet/snippet-container/snippet-container.component';
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
@@ -88,7 +89,8 @@ import { ConfigService } from './app-config.service';
     SnippetInstagramComponent,
     SnippetTwitterComponent,
     SnippetTwitchComponent,
-    SnippetPagebreakComponent
+    SnippetPagebreakComponent,
+    SnippetContainerComponent
   ],
   providers: [
     ApiService,

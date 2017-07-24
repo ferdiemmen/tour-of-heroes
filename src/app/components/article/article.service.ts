@@ -41,7 +41,7 @@ export class ArticleService {
       if (!this.deferredService.get()) {
         // Clear previous Article instance on service.
         this.article = new Article();
-        this.snippetService.setSnippets([]);
+        this.snippetService.setSnippets([], 'article');
       }
 
       // Set article defaults.
@@ -50,7 +50,7 @@ export class ArticleService {
     } else {
       // Clear previous Article instance on service.
       this.article = new Article();
-      this.snippetService.setSnippets([]);
+      this.snippetService.setSnippets([], 'article');
       this.deferredService.reset();
     }
 
@@ -58,7 +58,7 @@ export class ArticleService {
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
       this.article = this.cacheService.getCache(cacheKey);
-      this.snippetService.setSnippets(this.article.snippetsJson);
+      this.snippetService.setSnippets(this.article.snippetsJson, 'article');
 
       return Promise.resolve(this.article as Article);
     }
@@ -68,7 +68,7 @@ export class ArticleService {
       .then(response => {
         // Set article on this service.
         this.article = response.json() as Article;
-        this.snippetService.setSnippets(this.article.snippetsJson);
+        this.snippetService.setSnippets(this.article.snippetsJson, 'article');
 
         // Add response to cache.
         this.cacheService.setCache(cacheKey, response.json() as Article);
