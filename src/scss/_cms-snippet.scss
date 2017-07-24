@@ -6,15 +6,6 @@
   &.empty {
     border-top: 1px dashed #ccc;
     border-bottom: 1px dashed #ccc;
-
-    &:after {
-      content: 'Geen snippets. Voeg een aantal snippets toe.';
-      color: #ccc;
-      text-align: center;
-      padding-top: .9em;
-      width: 100%;
-      display: block;
-    }
   }
 }
 
