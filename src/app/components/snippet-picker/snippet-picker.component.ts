@@ -55,6 +55,8 @@ export class SnippetPickerComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+    // Users can add a snippet by dragging it from the picker to the snippets list.
     $('.snippet-picker li').draggable({
       helper: 'clone',
       connectToSortable: '#snippets',
