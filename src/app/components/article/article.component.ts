@@ -17,6 +17,7 @@ import { AuthorService } from '../author/author.service';
 import { CategoryService } from '../category/category.service';
 import { FeedService } from '../feed/feed.service';
 import { SiteService } from '../site/site.service';
+import { SnippetService } from '../snippet/snippet.service';
 
 @Component({
   selector: 'app-article',
@@ -33,13 +34,13 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     public authorService: AuthorService,
     public feedService: FeedService,
     public siteService: SiteService,
+    private snippetService: SnippetService,
     private chRef: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute) {
 
       // Set initial tab index.
       this.tabIndex = 1;
-
     }
 
   save(cont?: boolean): void {
@@ -62,7 +63,8 @@ export class ArticleComponent implements OnInit, AfterViewInit {
   }
 
   setHeaderMedia(): void {
-    this.mediaService.pickMedia()
+    this.mediaService
+      .pickMedia()
       .then(res => {
         this.articleService.updateProperty('media', res);
       });
@@ -88,23 +90,30 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     let previousIndex: number;
+
     $('#snippets').sortable({
       handle: '.handle',
       helper: 'original',
       placeholder: 'ui-state-highlight',
       forcePlaceholderSize: true,
-    });
-    $('#snippets').sortable({
+      tolerance: 'pointer',
       start: ( event, ui ) => {
-        previousIndex = $(ui.item).index()
+        previousIndex = ui.item.index();
       },
       stop: ( event, ui ) => {
-        if (previousIndex === $(ui.item).index()) { return; }
+        if (previousIndex === ui.item.index() || ui.item.index() === -1) { return; }
 
         const a = this.articleService.article.snippetsJson[previousIndex];
         this.articleService.article.snippetsJson.splice(previousIndex, 1);
-        this.articleService.article.snippetsJson.splice($(ui.item).index(), 0, a);
+        this.articleService.article.snippetsJson.splice(ui.item.index(), 0, a);
         this.chRef.detectChanges();
+      },
+      receive: ( event, ui ) => {
+        const index = $('#snippets').data('ui-sortable').currentItem.index();
+        this.snippetService.addSnippet($(ui.item).data('type'), index);
+        this.chRef.detectChanges();
+
+        $('#snippets .ui-draggable').remove();
       }
     });
   }

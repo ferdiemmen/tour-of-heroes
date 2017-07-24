@@ -1,7 +1,28 @@
 
+@import '../../../scss/_settings.scss';
+
 .snippet-picker {
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
+  justify-content: center;
+  align-items: center;
+
+  &__item {
+    cursor: pointer;
+
+    i {
+      color: #fff;
+      padding: 15px 20px;
+      font-size: 1.5em;
+      background: $cms-toolbar-background;
+    }
+
+    &:hover {
+      i {
+        background: lighten($cms-toolbar-background, 15);
+      }
+    }
+  }
 }

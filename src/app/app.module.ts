@@ -50,6 +50,7 @@ import { DeferredService } from './components/deferred/deferred.service';
 import { FeedService } from './components/feed/feed.service';
 import { SiteService } from './components/site/site.service';
 import { UserService } from './components/user/user.service';
+import { SnippetService } from './components/snippet/snippet.service';
 import { ConfigService } from './app-config.service';
 
 @NgModule({
@@ -101,6 +102,7 @@ import { ConfigService } from './app-config.service';
     CacheService,
     UserService,
     ConfigService,
+    SnippetService,
     AuthGuard,
     {
       provide: LOCALE_ID,
