@@ -23,7 +23,7 @@ const defaults = {
 
 @Injectable()
 export class SnippetService {
-  public snippets: Object = {};
+  public snippets: Snippet[] = [];
 
   constructor(private chRef: ApplicationRef) { }
 
@@ -35,17 +35,26 @@ export class SnippetService {
    * @param {number} [index] - The position in which to add the new snippet.
    * @memberof SnippetService
    */
-  addSnippet(type: string, key: string, index?: number): void {
+  addSnippet(type: string, parentIndex?: number, index?: number): void {
 
     // We use the $.extend function to make a copy of the defaults object.
     // This prevents a scoping issue which would update the defaults objects.
     const snippet = new Snippet($.extend(true, {}, defaults[type]));
 
-    if (index || index === 0) {
-      this.snippets[key].splice(index, 0, snippet);
+    if (parentIndex && parentIndex !== -1 || parentIndex === 0) {
+      if (index || index === 0) {
+        this.snippets[parentIndex].data['subSnippets'].splice(index, 0, snippet);
+      } else {
+        this.snippets[parentIndex].data['subSnippets'].push(snippet);
+      }
     } else {
-      this.snippets[key].push(snippet);
+      if (index || index === 0) {
+        this.snippets.splice(index, 0, snippet);
+      } else {
+        this.snippets.push(snippet);
+      }
     }
+
     this.chRef.tick();
   }
 
@@ -55,7 +64,7 @@ export class SnippetService {
    * @param {Snippet[]} snippets
    * @memberof SnippetService
    */
-  setSnippets(snippets: Snippet[], key: string): void {
-    this.snippets[key] = snippets;
+  setSnippets(snippets: Snippet[]): void {
+    this.snippets = snippets;
   }
 }

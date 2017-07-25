@@ -14,7 +14,7 @@ import { SnippetService } from './snippet.service';
   selector: 'app-snippets',
   template: `
     <ul class="snippets" [ngClass]="{'empty' : !snippets.length}">
-      <li class="snippet" *ngFor="let snippet of snippets">
+      <li class="snippet" *ngFor="let snippet of snippets;let i = index" [id]="i">
         <i class="fa fa-arrows handle" aria-hidden="true"></i>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="removeSnippet(snippet)"></i>
         <div [ngSwitch]="snippet.type">
@@ -41,6 +41,7 @@ export class SnippetsComponent implements AfterViewInit {
 
   constructor(
     private _hotkeysService: HotkeysService,
+    private _elementRef: ElementRef,
     private snippetService: SnippetService) {
 
       this._hotkeysService.add(new Hotkey(['ctrl+z', 'command+z'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
@@ -68,8 +69,10 @@ export class SnippetsComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     let previousIndex: number;
+    let parentIndex;
+    const _self = this;
 
-    $('.snippets').sortable({
+    $('> ul', this._elementRef.nativeElement).sortable({
       handle: '.handle',
       helper: 'original',
       placeholder: 'ui-state-highlight',
@@ -85,9 +88,13 @@ export class SnippetsComponent implements AfterViewInit {
         this.snippets.splice(previousIndex, 1);
         this.snippets.splice(ui.item.index(), 0, a);
       },
-      receive: ( event, ui ) => {
-        const index = $('.snippets').data('ui-sortable').currentItem.index();
-        this.snippetService.addSnippet($(ui.item).data('type'), 'article', index);
+      receive: function( event, ui ) {
+        if ($(this).closest('.snippet__container')) {
+          parentIndex = $(this).closest('li.snippet').index();
+        }
+
+        const index = $('> ul', _self._elementRef.nativeElement).data('ui-sortable').currentItem.index();
+        _self.snippetService.addSnippet($(ui.item).data('type'), parentIndex, index);
 
         $('.snippets .ui-draggable').remove();
       }
