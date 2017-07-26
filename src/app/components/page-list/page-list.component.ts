@@ -20,13 +20,13 @@ export class PageListComponent extends ArticleListComponent implements OnInit {
     route: ActivatedRoute
   ) {
      super(articleService, route);
-  }  
+  }
 
   ngOnInit(): void {
 
     this.route
       .queryParams
-      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true))
+      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true, true))
       .subscribe();
   }
 }

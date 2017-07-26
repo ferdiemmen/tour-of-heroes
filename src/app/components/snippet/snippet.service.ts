@@ -4,6 +4,8 @@ import * as $ from 'jquery';
 
 import { Snippet } from './snippet';
 
+declare var _rs: any;
+
 // Snippet default settings.
 const defaults = {
   paragraph:          { type: 'paragraph',        data: { body: '' } },
@@ -17,6 +19,7 @@ const defaults = {
   twitch:             { type: 'twitch',           data: { body: 'officialgamernl' } },
   pagebreak:          { type: 'pagebreak',        data: { body: '' } },
   html:               { type: 'html',             data: { body: '' } },
+  list:               { type: 'list',             data: { site: _rs.siteId, amount: 5, tag: '', categories: [], slug: '' } },
   snippetcontainer:   { type: 'snippetcontainer', data: { subSnippets: [] } },
 }
 

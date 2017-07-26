@@ -22,7 +22,7 @@ export class ArticleListComponent implements OnInit {
 
     this.route
       .queryParams
-      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page']))
+      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], null, true))
       .subscribe();
   }
 }

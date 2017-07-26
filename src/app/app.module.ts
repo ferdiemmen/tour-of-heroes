@@ -44,6 +44,7 @@ import { SnippetTwitterComponent } from './components/snippet/snippet-twitter/sn
 import { SnippetTwitchComponent } from './components/snippet/snippet-twitch/snippet-twitch.component';
 import { SnippetPagebreakComponent } from './components/snippet/snippet-pagebreak/snippet-pagebreak.component';
 import { SnippetHtmlComponent } from './components/snippet/snippet-html/snippet-html.component';
+import { SnippetListComponent } from './components/snippet/snippet-list/snippet-list.component';
 import { SnippetContainerComponent } from './components/snippet/snippet-container/snippet-container.component';
 
 import { ArticleService } from './components/article/article.service';
@@ -94,6 +95,7 @@ import { ConfigService } from './app-config.service';
     SnippetTwitchComponent,
     SnippetPagebreakComponent,
     SnippetHtmlComponent,
+    SnippetListComponent,
     SnippetContainerComponent,
     CapitalizePipe
   ],

@@ -8,7 +8,6 @@ import 'jqueryui';
 import { Snippet } from './snippet';
 import { SnippetService } from './snippet.service';
 
-// https://github.com/ilikenwf/nestedSortable
 
 @Component({
   selector: 'app-snippets',
@@ -29,6 +28,7 @@ import { SnippetService } from './snippet.service';
           <app-snippet-twitch *ngSwitchCase="'twitch'" [snippet]="snippet"></app-snippet-twitch>
           <app-snippet-pagebreak *ngSwitchCase="'pagebreak'" [snippet]="snippet"></app-snippet-pagebreak>
           <app-snippet-html *ngSwitchCase="'html'" [snippet]="snippet"></app-snippet-html>
+          <app-snippet-list *ngSwitchCase="'list'" [snippet]="snippet"></app-snippet-list>
           <app-snippet-container *ngSwitchCase="'snippetcontainer'" [snippet]="snippet"></app-snippet-container>
         </div>
       </li>

@@ -14,6 +14,7 @@ import { FeedService } from '../feed/feed.service';
 import { SiteService } from '../site/site.service';
 import { SnippetService } from '../snippet/snippet.service';
 
+declare var _rs: any;
 
 @Injectable()
 export class ArticleService {
@@ -81,8 +82,8 @@ export class ArticleService {
       });
   }
 
-  getArticles(page: number, pages?: boolean): Promise<Article[]> {
-    let url = `${this.articlesUrl}/site/2/${(pages) ? 'flatpages/' : ''}20/?admin_view=true`;
+  getArticles(page: number, pages?: boolean, cached?: boolean): Promise<Article[]> {
+    let url = `${this.articlesUrl}/site/${_rs.siteId}/${(pages) ? 'flatpages/' : ''}20/?admin_view=true`;
     const cacheKey = (pages) ? 'pages' : 'articles';
 
     if (page) {
@@ -90,7 +91,7 @@ export class ArticleService {
     }
 
     // Check if a cached version exist and return it.
-    if (this.cacheService.checkCacheKey(cacheKey)) {
+    if (this.cacheService.checkCacheKey(cacheKey) && cached) {
       this[(pages) ? 'pages' : 'articles'] = this.cacheService.getCache(cacheKey) as Article[];
     }
 
@@ -102,7 +103,9 @@ export class ArticleService {
         this[(pages) ? 'pages' : 'articles'] = response.json().results as Article[];
 
         // Add articles to cache.
-        this.cacheService.setCache(cacheKey, this[(pages) ? 'pages' : 'articles']);
+        if (cached) {
+          this.cacheService.setCache(cacheKey, this[(pages) ? 'pages' : 'articles']);
+        }
 
         return this[(pages) ? 'pages' : 'articles'];
       });
@@ -151,13 +154,13 @@ export class ArticleService {
         // A new article doesn't have a author by default. After we got
         // all the authors we set it to the site's default author.
         this.article[property] = this.authorService.authors
-                                                  .find(a => a.slug === 'monstercrab'); // @TODO: Get from site's default.
+                                                  .find(a => a.slug === _rs.defaultAuthor); // @TODO: Get from site's default.
         break;
       case 'category':
         // A new article doesn't have a category by default. After we got
         // all the categories we set it to the site's default category.
         this.article[property][0] = this.categoryService.categories
-                                                  .find(c => c.slug === 'nieuws'); // @TODO: Get from site's default.
+                                                  .find(c => c.slug === _rs.defaultCategory); // @TODO: Get from site's default.
         break;
       case 'RATable':
         // A new article doesn't have feeds by default. After we got
