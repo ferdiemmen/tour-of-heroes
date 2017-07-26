@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import * as $ from 'jquery';

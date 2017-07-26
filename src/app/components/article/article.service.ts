@@ -138,7 +138,7 @@ export class ArticleService {
         // Add article to cached articles.
         this.cacheService.clearCache('articles');
 
-        return this.article;
+        return response.json() as Article;
       });
   }
 
