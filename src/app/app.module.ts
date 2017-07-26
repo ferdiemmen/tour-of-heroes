@@ -46,6 +46,7 @@ import { SnippetPagebreakComponent } from './components/snippet/snippet-pagebrea
 import { SnippetHtmlComponent } from './components/snippet/snippet-html/snippet-html.component';
 import { SnippetListComponent } from './components/snippet/snippet-list/snippet-list.component';
 import { SnippetContainerComponent } from './components/snippet/snippet-container/snippet-container.component';
+import { SnippetKieskeurigComponent } from './components/snippet/snippet-kieskeurig/snippet-kieskeurig.component';
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
@@ -97,6 +98,7 @@ import { ConfigService } from './app-config.service';
     SnippetHtmlComponent,
     SnippetListComponent,
     SnippetContainerComponent,
+    SnippetKieskeurigComponent,
     CapitalizePipe
   ],
   providers: [

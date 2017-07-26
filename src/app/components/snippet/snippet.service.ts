@@ -20,6 +20,7 @@ const defaults = {
   pagebreak:          { type: 'pagebreak',        data: { body: '' } },
   html:               { type: 'html',             data: { body: '' } },
   list:               { type: 'list',             data: { site: _rs.siteId, amount: 5, tag: '', categories: [] } },
+  kieskeurig:         { type: 'kieskeurig',       data: { products: [], group: 'tv_led', height: 470 } },
   snippetcontainer:   { type: 'snippetcontainer', data: { subSnippets: [] } },
 }
 
