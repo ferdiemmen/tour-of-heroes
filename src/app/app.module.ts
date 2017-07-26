@@ -25,6 +25,7 @@ import { PasswordResetComponent } from './components/user/password-reset.compone
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { MultiplyPipe } from './pipes/multiply.pipe';
 
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
@@ -46,6 +47,7 @@ import { SnippetPagebreakComponent } from './components/snippet/snippet-pagebrea
 import { SnippetHtmlComponent } from './components/snippet/snippet-html/snippet-html.component';
 import { SnippetListComponent } from './components/snippet/snippet-list/snippet-list.component';
 import { SnippetContainerComponent } from './components/snippet/snippet-container/snippet-container.component';
+import { SnippetReviewComponent } from './components/snippet/snippet-review/snippet-review.component';
 import { SnippetKieskeurigComponent } from './components/snippet/snippet-kieskeurig/snippet-kieskeurig.component';
 
 import { ArticleService } from './components/article/article.service';
@@ -98,8 +100,11 @@ import { ConfigService } from './app-config.service';
     SnippetHtmlComponent,
     SnippetListComponent,
     SnippetContainerComponent,
+    SnippetReviewComponent,
     SnippetKieskeurigComponent,
-    CapitalizePipe
+
+    CapitalizePipe,
+    MultiplyPipe
   ],
   providers: [
     ApiService,

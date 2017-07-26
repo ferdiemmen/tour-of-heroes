@@ -53,6 +53,9 @@ import { SnippetService } from '../snippet/snippet.service';
       <li class="snippet-picker__item" data-type="kieskeurig">
         <i class="fa fa-money" aria-hidden="true" (click)="snippetService.addSnippet('kieskeurig')"></i>
       </li>
+      <li class="snippet-picker__item" data-type="review">
+        <i class="fa fa-star-half-o" aria-hidden="true" (click)="snippetService.addSnippet('review')"></i>
+      </li>
     </ul>
   `
 })

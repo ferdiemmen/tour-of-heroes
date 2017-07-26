@@ -30,6 +30,7 @@ import { SnippetService } from './snippet.service';
           <app-snippet-html *ngSwitchCase="'html'" [snippet]="snippet"></app-snippet-html>
           <app-snippet-list *ngSwitchCase="'list'" [snippet]="snippet"></app-snippet-list>
           <app-snippet-container *ngSwitchCase="'snippetcontainer'" [snippet]="snippet"></app-snippet-container>
+          <app-snippet-review *ngSwitchCase="'review'" [snippet]="snippet"></app-snippet-review>
           <app-snippet-kieskeurig *ngSwitchCase="'kieskeurig'" [snippet]="snippet"></app-snippet-kieskeurig>
         </div>
       </li>

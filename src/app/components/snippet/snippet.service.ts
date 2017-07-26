@@ -21,6 +21,7 @@ const defaults = {
   html:               { type: 'html',             data: { body: '' } },
   list:               { type: 'list',             data: { site: _rs.siteId, amount: 5, tag: '', categories: [] } },
   kieskeurig:         { type: 'kieskeurig',       data: { products: [], group: 'tv_led', height: 470 } },
+  review:             { type: 'review',           data: { productname: '', score: 0, conclusion: '', positives: [], negatives: [] } },
   snippetcontainer:   { type: 'snippetcontainer', data: { subSnippets: [] } },
 }
 

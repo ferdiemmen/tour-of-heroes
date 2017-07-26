@@ -14,7 +14,7 @@ import { Snippet } from '../snippet';
   selector: 'app-snippet-kieskeurig',
   template: `
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
-    <div class="video-embed-container video-embed-container--16x9 snippet snippet__kieskeurig">
+    <div class="snippet snippet__kieskeurig">
       <div class="snippet-edit" *ngIf="edit">
         <ul *ngFor="let product of snippet.data.products;let i = index">
           <li>
@@ -53,7 +53,6 @@ export class SnippetKieskeurigComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer) {
     this.groupControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => this.snippet.data['group'] = value);
 
     this.heightControl.valueChanges
