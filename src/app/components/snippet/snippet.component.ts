@@ -28,6 +28,7 @@ import { SnippetService } from './snippet.service';
           <app-snippet-twitter *ngSwitchCase="'twitter'" [snippet]="snippet"></app-snippet-twitter>
           <app-snippet-twitch *ngSwitchCase="'twitch'" [snippet]="snippet"></app-snippet-twitch>
           <app-snippet-pagebreak *ngSwitchCase="'pagebreak'" [snippet]="snippet"></app-snippet-pagebreak>
+          <app-snippet-html *ngSwitchCase="'html'" [snippet]="snippet"></app-snippet-html>
           <app-snippet-container *ngSwitchCase="'snippetcontainer'" [snippet]="snippet"></app-snippet-container>
         </div>
       </li>

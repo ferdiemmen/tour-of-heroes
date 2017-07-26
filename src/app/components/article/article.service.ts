@@ -39,24 +39,27 @@ export class ArticleService {
 
     if (!id) {
       if (!this.deferredService.get()) {
+
         // Clear previous Article instance on service.
         this.article = new Article();
         this.snippetService.setSnippets([]);
+
+        // Set article defaults.
+        this.setDefaults();
       }
 
-      // Set article defaults.
-      this.setDefaults();
       return Promise.resolve(this.article as Article);
     } else {
+
       // Clear previous Article instance on service.
       this.article = new Article();
       this.snippetService.setSnippets([]);
       this.deferredService.reset();
     }
 
-
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
+
       this.article = this.cacheService.getCache(cacheKey);
       this.snippetService.setSnippets(this.article.snippetsJson);
 
@@ -66,6 +69,7 @@ export class ArticleService {
     return this.apiService
       .get(url)
       .then(response => {
+
         // Set article on this service.
         this.article = response.json() as Article;
         this.snippetService.setSnippets(this.article.snippetsJson);

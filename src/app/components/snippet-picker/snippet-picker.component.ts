@@ -41,6 +41,9 @@ import { SnippetService } from '../snippet/snippet.service';
       <li class="snippet-picker__item" data-type="pagebreak">
         <i class="fa fa-arrow-circle-right" aria-hidden="true" (click)="snippetService.addSnippet('pagebreak')"></i>
       </li>
+      <li class="snippet-picker__item" data-type="html">
+        <i class="fa fa fa-html5" aria-hidden="true" (click)="snippetService.addSnippet('html')"></i>
+      </li>
       <li class="snippet-picker__item" data-type="snippetcontainer">
         <i class="fa fa-object-group" aria-hidden="true" (click)="snippetService.addSnippet('snippetcontainer')"></i>
       </li>
