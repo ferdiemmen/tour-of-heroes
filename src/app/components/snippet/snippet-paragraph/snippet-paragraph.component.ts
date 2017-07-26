@@ -8,7 +8,7 @@ import { Snippet } from '../snippet';
   selector: 'app-snippet-paragraph',
   template: `
     <medium-editor
-      class="snippet snippet__paragraph cms__outline"
+      class="snippet snippet__paragraph"
       [(editorModel)]="snippet.data.body"
       [editorOptions]="{'disableReturn': true, 'toolbar': false}">
     </medium-editor>

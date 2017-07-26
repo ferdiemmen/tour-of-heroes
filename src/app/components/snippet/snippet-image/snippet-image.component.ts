@@ -10,7 +10,7 @@ import { MediaService } from '../../media/media.service';
   selector: 'app-snippet-image',
   styleUrls: ['./snippet-image.component.scss'],
   template: `
-    <div name="media" class="snippet snippet__image cms__outline" (click)="setMedia()">
+    <div name="media" class="snippet snippet__image" (click)="setMedia()">
       <app-media-resized
             [media]="media"
             width="640"></app-media-resized>

@@ -18,7 +18,6 @@ import { Snippet } from '../snippet';
         <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <iframe
-        class="cms__outline"
         width="640"
         height="360"
         [src]="url"

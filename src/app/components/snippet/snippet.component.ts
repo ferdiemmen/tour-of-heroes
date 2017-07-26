@@ -17,7 +17,7 @@ import { SnippetService } from './snippet.service';
       <li class="snippet" *ngFor="let snippet of snippets;let i = index" [id]="i">
         <i class="fa fa-arrows handle" aria-hidden="true"></i>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="removeSnippet(snippet)"></i>
-        <div [ngSwitch]="snippet.type">
+        <div class="cms__outline" [ngSwitch]="snippet.type" [attr.data-type]="snippet.type|capitalize">
           <app-snippet-paragraph *ngSwitchCase="'paragraph'" [snippet]="snippet"></app-snippet-paragraph>
           <app-snippet-header *ngSwitchCase="'header'" [snippet]="snippet"></app-snippet-header>
           <app-snippet-quote *ngSwitchCase="'quote'" [snippet]="snippet"></app-snippet-quote>
@@ -42,6 +42,7 @@ export class SnippetsComponent implements AfterViewInit {
   constructor(
     private _hotkeysService: HotkeysService,
     private _elementRef: ElementRef,
+    private _changeDetectorRef: ChangeDetectorRef,
     private snippetService: SnippetService) {
 
       this._hotkeysService.add(new Hotkey(['ctrl+z', 'command+z'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {

@@ -8,7 +8,7 @@ import { Snippet } from '../snippet';
   selector: 'app-snippet-container',
   styleUrls: ['./snippet-container.component.scss'],
   template: `
-    <div class="snippet snippet__container cms__outline">
+    <div class="snippet snippet__container">
       <app-snippets [snippets]="snippet.data.subSnippets"></app-snippets>
     </div>
   `,

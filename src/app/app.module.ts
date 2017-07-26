@@ -24,6 +24,8 @@ import { AuthenticationComponent } from './components/user/authentication.compon
 import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { PageListComponent } from './components/page-list/page-list.component';
@@ -90,7 +92,8 @@ import { ConfigService } from './app-config.service';
     SnippetTwitterComponent,
     SnippetTwitchComponent,
     SnippetPagebreakComponent,
-    SnippetContainerComponent
+    SnippetContainerComponent,
+    CapitalizePipe
   ],
   providers: [
     ApiService,

@@ -12,17 +12,24 @@
           [crop]="articleService.article.headerCrop"></app-media-resized>
       </div>
 
-      <medium-editor class="article__title" [(editorModel)]="articleService.article.title"
-        [editorOptions]="{'disableReturn': true, 'toolbar': false}">
-        <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
-      </medium-editor>
-      <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
-        [editorOptions]="{'disableReturn': true, 'toolbar': false}">
-      </medium-editor>
+      <div class="cms__outline" data-type="Titel">
+        <medium-editor class="article__title" [(editorModel)]="articleService.article.title"
+          [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+          <!-- [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}" -->
+        </medium-editor>
+      </div>
 
-      <medium-editor class="article__intro" [(editorModel)]="articleService.article.intro"
-        [editorOptions]="{'toolbar': false}">
-      </medium-editor>
+      <div class="cms__outline" data-type="Ondertitel">
+        <medium-editor class="article__subtitle" [(editorModel)]="articleService.article.subtitle"
+          [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+        </medium-editor>
+      </div>
+
+      <div class="cms__outline" data-type="Inleiding">
+        <medium-editor class="article__intro" [(editorModel)]="articleService.article.intro"
+          [editorOptions]="{'toolbar': false}">
+        </medium-editor>
+      </div>
 
       <app-snippets [snippets]="articleService.article.snippetsJson"></app-snippets>
 

@@ -8,7 +8,7 @@ import { Snippet } from '../snippet';
   selector: 'app-snippet-pagebreak',
   template: `
     <medium-editor
-      class="snippet snippet__pagebreak cms__outline"
+      class="snippet snippet__pagebreak"
       [(editorModel)]="snippet.data.body"
       [editorOptions]="{'disableReturn': true, 'toolbar': false}">
     </medium-editor>

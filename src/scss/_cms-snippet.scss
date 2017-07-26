@@ -6,6 +6,26 @@
   &.empty {
     border-top: 1px dashed #ccc;
     border-bottom: 1px dashed #ccc;
+
+    &:hover {
+      border: 1px solid transparent;
+    }
+  }
+}
+
+.snippet {
+  margin-bottom: 30px;
+}
+
+.snippet__container {
+  .snippets {
+    display: flex;
+  }
+
+  .snippet {
+    margin-bottom: 0;
+    flex: 1;
+    max-width: 50%;
   }
 }
 

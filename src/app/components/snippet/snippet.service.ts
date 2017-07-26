@@ -16,9 +16,7 @@ const defaults = {
   twitter:            { type: 'twitter',          data: { body: '51434244341383168' } },
   twitch:             { type: 'twitch',           data: { body: 'officialgamernl' } },
   pagebreak:          { type: 'pagebreak',        data: { body: '' } },
-  snippetcontainer:   { type: 'snippetcontainer', data: { subSnippets: [
-    { type: 'paragraph',        data: { body: 'apenbroek' } }
-  ] } },
+  snippetcontainer:   { type: 'snippetcontainer', data: { subSnippets: [] } },
 }
 
 @Injectable()
