@@ -6,10 +6,6 @@
   &.empty {
     border-top: 1px dashed #ccc;
     border-bottom: 1px dashed #ccc;
-
-    &:hover {
-      border: 1px solid transparent;
-    }
   }
 }
 
@@ -40,4 +36,8 @@
   right: 0;
   bottom: 0;
   z-index: 1;
+
+  &__element {
+    height: 250px;
+  }
 }

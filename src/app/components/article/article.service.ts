@@ -82,12 +82,22 @@ export class ArticleService {
       });
   }
 
-  getArticles(page: number, pages?: boolean, cached?: boolean): Promise<Article[]> {
-    let url = `${this.articlesUrl}/site/${_rs.siteId}/${(pages) ? 'flatpages/' : ''}20/?admin_view=true`;
+  getArticles(page: number, pages?: boolean, cached?: boolean, parameters?: Object): Promise<Article[]> {
+    const amount = (parameters.hasOwnProperty('amount')) ? parameters['amount'] : 20;
+    const tag = (parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
+
+    let url = `${this.articlesUrl}/site/${_rs.siteId}/` +
+              `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/?admin_view=true`;
     const cacheKey = (pages) ? 'pages' : 'articles';
 
     if (page) {
-      url = url += '?page=' + page;
+      url += '&page=' + page;
+    }
+
+    for (const key in parameters) {
+      if (parameters.hasOwnProperty(key)) {
+        url += `&${key}=${parameters[key]}`;
+      }
     }
 
     // Check if a cached version exist and return it.

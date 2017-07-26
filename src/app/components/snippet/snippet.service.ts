@@ -19,7 +19,7 @@ const defaults = {
   twitch:             { type: 'twitch',           data: { body: 'officialgamernl' } },
   pagebreak:          { type: 'pagebreak',        data: { body: '' } },
   html:               { type: 'html',             data: { body: '' } },
-  list:               { type: 'list',             data: { site: _rs.siteId, amount: 5, tag: '', categories: [], slug: '' } },
+  list:               { type: 'list',             data: { site: _rs.siteId, amount: 5, tag: '', categories: [] } },
   snippetcontainer:   { type: 'snippetcontainer', data: { subSnippets: [] } },
 }
 
