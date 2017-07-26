@@ -83,8 +83,8 @@ export class ArticleService {
   }
 
   getArticles(page: number, pages?: boolean, cached?: boolean, parameters?: Object): Promise<Article[]> {
-    const amount = (parameters.hasOwnProperty('amount')) ? parameters['amount'] : 20;
-    const tag = (parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
+    const amount = (parameters && parameters.hasOwnProperty('amount')) ? parameters['amount'] : 20;
+    const tag = (parameters && parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
 
     let url = `${this.articlesUrl}/site/${_rs.siteId}/` +
               `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/?admin_view=true`;
@@ -94,11 +94,16 @@ export class ArticleService {
       url += '&page=' + page;
     }
 
-    for (const key in parameters) {
-      if (parameters.hasOwnProperty(key)) {
-        url += `&${key}=${parameters[key]}`;
+    if (parameters) {
+      for (const key in parameters) {
+        if (parameters.hasOwnProperty(key)) {
+          url += `&${key}=${parameters[key]}`;
+        }
       }
     }
+
+    // Clear previous articles list.
+    this[(pages) ? 'pages' : 'articles'] = [];
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey) && cached) {
