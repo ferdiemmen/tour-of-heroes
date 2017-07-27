@@ -14,39 +14,7 @@ import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'app-snippet-list',
-  template: `
-    <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
-    <div class="snippet snippet__list">
-      <div class="snippet-edit" *ngIf="edit">
-        <input type="number" [value]="snippet.data.amount" [formControl]="amountControl" />
-
-        <div class="snippet-edit__element scrollable--y">
-          <label class="cms-checkbox" *ngFor="let category of categoryService.categories" >
-            <input
-              class="cms-checkbox__element"
-              type="checkbox"
-              [checked]="hasProperty('categories', category)"
-              (click)="toggleProperty('categories', category)">
-            <span class="cms-checkbox__name">{{category.name}}</span>
-          </label>
-        </div>
-
-        <input type="text" [value]="snippet.data.tag" [formControl]="tagControl" />
-
-        <button type="button" (click)="getList()">Aanpassen</button>
-      </div>
-      <ul>
-        <li *ngFor="let article of articles">
-          <app-media-resized
-            [media]="article.media"
-            width="64"
-            height="64"></app-media-resized>
-
-          {{article.title}}
-        </li>
-      </ul>
-    </div>
-  `,
+  templateUrl: './snippet-list.component.html',
   providers: [ArticleService]
 })
 export class SnippetListComponent implements OnInit {

@@ -92,7 +92,8 @@ export class ArticleService {
 
     let url = `${this.articlesUrl}/site/${_rs.siteId}/` +
               `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/?admin_view=true`;
-    const cacheKey = (pages) ? 'pages' : 'articles';
+    let cacheKey = (pages) ? 'pages' : 'articles';
+    cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
 
     if (page) {
       url += '&page=' + page;
@@ -107,11 +108,23 @@ export class ArticleService {
     }
 
     // Clear previous articles list.
-    this[(pages) ? 'pages' : 'articles'] = [];
+    this[(pages) ? 'pages' : 'articles'] = Array(20)
+                                            .fill(new Article({
+                                              id: 0,
+                                              title: '',
+                                              publishDate: '',
+                                              category: [{
+                                                name: ''
+                                              }]
+                                            } as Article))
+                                            .map((x) => x);
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey) && cached) {
-      this[(pages) ? 'pages' : 'articles'] = this.cacheService.getCache(cacheKey) as Article[];
+      const cachedData = this.cacheService.getCache(cacheKey);
+      this[(pages) ? 'pages' : 'articles'] = cachedData.results as Article[];
+      this.paginationService.setupPagination(cachedData.page, cachedData.numPages);
+      return Promise.resolve(cachedData.results as Article[]);
     }
 
     return this.apiService
@@ -127,7 +140,7 @@ export class ArticleService {
 
         // Add articles to cache.
         if (cached) {
-          this.cacheService.setCache(cacheKey, this[(pages) ? 'pages' : 'articles']);
+          this.cacheService.setCache(cacheKey, data);
         }
 
         return this[(pages) ? 'pages' : 'articles'];
@@ -152,6 +165,10 @@ export class ArticleService {
 
   update(): Promise<Article> {
     const url = `${this.articlesUrl}/${this.article.id}/`;
+    const cacheKey =  (this.article.isFlatpage) ?
+                      `pages_${this.paginationService.currentPage}` :
+                      `articles_${this.paginationService.currentPage}`;
+
     return this.apiService
       .post(url, this.article)
       .then(response => {
@@ -160,7 +177,7 @@ export class ArticleService {
 
         // Update article in cached articles.
         this.cacheService
-          .updateObjectInCacheArray('articles', this.article);
+          .updateObjectInCacheArray(cacheKey, this.article);
         this.cacheService
           .updateObject(`article_${this.article.id}`, this.article);
 

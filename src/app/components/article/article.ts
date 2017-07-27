@@ -21,6 +21,7 @@ export class Article {
   seoScore: number;
   published: boolean;
   isPartner: boolean;
+  isFlatpage: boolean;
   showComments: boolean;
   featured: boolean;
   RATable: Feed[];
@@ -28,19 +29,21 @@ export class Article {
   snippetsJson: Snippet[];
   headerCrop: string;
 
-  constructor() {
+  constructor(article?: object) {
+    this.id = (article) ? article['id'] : 1337;
     this.author = null;
-    this.title = '';
+    this.title = (article) ? article['title'] : '';
     this.subtitle = '';
     this.intro = '';
     this.media = null;
     this.flatpageSlug = '';
-    this.publishDate = moment().format();
+    this.publishDate = (article) ? article['publishDate'] : moment().format();
     this.expiryDate = '';
-    this.category = [];
+    this.category = (article) ? article['category'] : [];
     this.seoScore = 0;
     this.published = false;
     this.isPartner = false;
+    this.isFlatpage = false;
     this.showComments = false;
     this.featured = false;
     this.RATable = [];

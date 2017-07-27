@@ -2,7 +2,7 @@
 <table cellspacing="0" cellpadding="0">
   <thead>
     <tr>
-      <th>Id</th>
+      <!-- th>Id</th -->
       <th>Titel</th>
       <th>Publiceer datum</th>
       <th>Depubliceer datum</th>
@@ -12,9 +12,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let article of articleService.articles; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
-      <td>
+      <!-- td>
         {{article.id}}
-      </td>
+      </td -->
       <td>
         <a [routerLink]="['/cms/article/edit', article.id]">
           {{article.title}}
