@@ -5,26 +5,25 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { Article } from '../article/article';
-import { ArticleListComponent } from '../article-list/article-list.component';
 import { ArticleService } from '../article/article.service';
+
 
 @Component({
   selector: 'app-article-list',
   templateUrl: './page-list.component.html',
-  styleUrls: ['../article-list/article-list.component.scss']
+  styleUrls: ['../article-list/article-list.component.scss'],
+  providers: [ArticleService]
 })
-export class PageListComponent extends ArticleListComponent implements OnInit {
+export class PageListComponent implements OnInit {
 
   constructor(
-    articleService: ArticleService,
-    route: ActivatedRoute
-  ) {
-     super(articleService, route);
-  }
+    private _route: ActivatedRoute,
+    public articleService: ArticleService
+  ) { }
 
   ngOnInit(): void {
 
-    this.route
+    this._route
       .queryParams
       .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true, true))
       .subscribe();

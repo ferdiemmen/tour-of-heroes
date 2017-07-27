@@ -23,6 +23,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthenticationComponent } from './components/user/authentication.component';
 import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { MultiplyPipe } from './pipes/multiply.pipe';
@@ -59,6 +60,7 @@ import { FeedService } from './components/feed/feed.service';
 import { SiteService } from './components/site/site.service';
 import { UserService } from './components/user/user.service';
 import { SnippetService } from './components/snippet/snippet.service';
+import { PaginationService } from './components/pagination/pagination.service';
 import { ConfigService } from './app-config.service';
 
 @NgModule({
@@ -85,6 +87,7 @@ import { ConfigService } from './app-config.service';
     MediaListComponent,
     MediaResizedComponent,
     DashboardComponent,
+    PaginationComponent,
     SnippetsComponent,
     SnippetPickerComponent,
     SnippetImageComponent,
@@ -119,6 +122,7 @@ import { ConfigService } from './app-config.service';
     UserService,
     ConfigService,
     SnippetService,
+    PaginationService,
     AuthGuard,
     {
       provide: LOCALE_ID,

@@ -7,10 +7,12 @@ import 'rxjs/add/operator/switchMap';
 import { Article } from '../article/article';
 import { ArticleService } from '../article/article.service';
 
+
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
-  styleUrls: ['./article-list.component.scss']
+  styleUrls: ['./article-list.component.scss'],
+  providers: [ArticleService]
 })
 export class ArticleListComponent implements OnInit {
 

@@ -13,6 +13,7 @@ import { Feed } from '../feed/feed';
 import { FeedService } from '../feed/feed.service';
 import { SiteService } from '../site/site.service';
 import { SnippetService } from '../snippet/snippet.service';
+import { PaginationService } from '../pagination/pagination.service';
 
 declare var _rs: any;
 
@@ -21,6 +22,7 @@ export class ArticleService {
   public article: Article = new Article();
   public articles: Article[] = [];
   public pages: Article[] = [];
+  public paginationService: PaginationService;
 
   private articlesUrl = 'modules/articles'; // URL to web api
 
@@ -32,7 +34,9 @@ export class ArticleService {
     public siteService: SiteService,
     private snippetService: SnippetService,
     private apiService: ApiService,
-    private cacheService: CacheService) { }
+    private cacheService: CacheService) {
+      this.paginationService = new PaginationService();
+    }
 
   getArticle(id: number): Promise<Article> {
     const url = `${this.articlesUrl}/${id}/`;
@@ -113,9 +117,13 @@ export class ArticleService {
     return this.apiService
       .get(url)
       .then(response => {
+        const data = response.json();
+
+        // Setup the pagination service.
+        this.paginationService.setupPagination(data.page, data.numPages);
 
         // Set articles on this service.
-        this[(pages) ? 'pages' : 'articles'] = response.json().results as Article[];
+        this[(pages) ? 'pages' : 'articles'] = data.results as Article[];
 
         // Add articles to cache.
         if (cached) {

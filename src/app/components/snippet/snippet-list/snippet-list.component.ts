@@ -47,6 +47,7 @@ import 'rxjs/add/operator/debounceTime';
       </ul>
     </div>
   `,
+  providers: [ArticleService]
 })
 export class SnippetListComponent implements OnInit {
   edit: boolean = false;

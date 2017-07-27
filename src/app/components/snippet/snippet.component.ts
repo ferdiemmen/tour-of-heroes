@@ -12,7 +12,7 @@ import { SnippetService } from './snippet.service';
 @Component({
   selector: 'app-snippets',
   template: `
-    <ul class="snippets" [ngClass]="{'empty' : !snippets.length}">
+    <ul class="snippets" [ngClass]="{'empty' : !snippets }">
       <li class="snippet" *ngFor="let snippet of snippets;let i = index" [id]="i">
         <div class="cms__outline" [ngSwitch]="snippet.type" [attr.data-type]="snippet.type|capitalize">
           <i class="fa fa-arrows handle" aria-hidden="true"></i>
@@ -49,17 +49,17 @@ export class SnippetsComponent implements AfterViewInit {
     private snippetService: SnippetService) {
 
       this._hotkeysService.add(new Hotkey(['ctrl+z', 'command+z'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
-      if (!this.trashbin.length) { return event; }
+        if (!this.trashbin.length) { return event; }
 
-      // Put snippet back to snippets array.
-      const obj = this.trashbin[this.trashbin.length - 1]
-      this.snippets.splice(obj['index'], 0, obj['snippet']);
+        // Put snippet back to snippets array.
+        const obj = this.trashbin[this.trashbin.length - 1]
+        this.snippets.splice(obj['index'], 0, obj['snippet']);
 
-      // Remove snippet from trashbin.
-      this.trashbin.splice(this.trashbin.indexOf(obj), 1);
+        // Remove snippet from trashbin.
+        this.trashbin.splice(this.trashbin.indexOf(obj), 1);
 
-      event.returnValue = false; // Prevent bubbling
-      return event;
+        event.returnValue = false; // Prevent bubbling
+        return event;
     }));
   }
 

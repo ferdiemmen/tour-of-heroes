@@ -1,26 +1,27 @@
 # Authentication
-- Login
+✓ Login
 - Password reset
 
-- Snippet create
-- Snippet delete
-- Snippet update
-- Snippet move
-- Snippet drag and drop
+✓ Snippet create
+✓ Snippet delete
+✓ Snippet update
+✓ Snippet move
+✓ Snippet drag and drop
 
-- Snippet paragraph
+✓ Snippet paragraph
 ✓ Snippet header
 ✓ Snippet image
 ✓ Snippet youtube
 ✓ Snippet instagram
-- Snippet twitter
-- Snippet kieskeurig
+✓ Snippet twitter
+✓ Snippet kieskeurig
 
+- Mediabrowser
 - Media upload
 - Media update
 - Media remove
-- Mediabrowser
+
 - Productbrowser
 
-- Pagination
+✓ Pagination
 
