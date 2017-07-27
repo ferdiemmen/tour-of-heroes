@@ -23,7 +23,7 @@ export class MediaListComponent implements OnInit {
 
     this.route
       .queryParams
-      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects(params['type'], params['page']))
+      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects((params['type']) ? params['type'] : 'images', params['page']))
       .subscribe();
   }
 }

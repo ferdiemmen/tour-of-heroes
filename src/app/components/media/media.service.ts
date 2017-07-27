@@ -81,7 +81,7 @@ export class MediaService {
   }
 
   pickMedia(): Promise<Media> {
-    this.router.navigate(['/cms/media-list', {queryParams: {type: 'images'}}]);
+    this.router.navigate(['/cms/media-list']);
     return this.deferredService.set();
   }
 
