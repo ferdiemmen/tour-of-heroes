@@ -30,7 +30,7 @@ import { UserService } from '../user/user.service';
         <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
       </a>
 
-      <a class="cms-toolbar__link" [routerLink]="['/cms/media-list', {type: 'images'}]">
+      <a class="cms-toolbar__link" [routerLink]="['/cms/media-list']" [queryParams]="{ type: 'images' }">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
       </a>
 

@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
@@ -10,19 +10,20 @@ import { MediaService } from './media.service';
 @Component({
   selector: 'app-media-list',
   templateUrl: './media-list.component.html',
-  // styleUrls: ['./media-list.component.scss']
+  styleUrls: ['./media-list.component.scss']
 })
 export class MediaListComponent implements OnInit {
 
   constructor(
     public mediaService: MediaService,
+    private _elementRef: ElementRef,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
     this.route
-      .paramMap
-      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects(params.get('type')))
+      .queryParams
+      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects(params['type'], params['page']))
       .subscribe();
   }
 }

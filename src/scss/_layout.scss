@@ -14,7 +14,8 @@ app-root {
 }
 
 app-article,
-app-article-list {
+app-article-list,
+app-media-list {
   flex: 1;
 }
 
@@ -23,6 +24,7 @@ app-article {
   background: #f1f1f1;
 }
 
-app-article-list {
+app-article-list,
+app-media-list {
   padding: 10px;
 }

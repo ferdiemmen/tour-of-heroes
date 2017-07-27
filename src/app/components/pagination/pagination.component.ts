@@ -18,7 +18,7 @@ import { PaginationService } from './pagination.service';
         <li *ngFor="let page of service.pages">
           <a  class="pagination__item pagination__link"
               [routerLink]="[route]"
-              [queryParams]="{ page: page }"
+              [queryParams]="getQueryParameters(page)"
               *ngIf="page !== service.currentPage">{{page}}</a>
           <span class="pagination__item active" *ngIf="page === service.currentPage">{{page}}</span>
         </li>
@@ -29,8 +29,13 @@ import { PaginationService } from './pagination.service';
 export class PaginationComponent {
 
   @Input('route') route: string;
+  @Input('routeParams') routeParams: Object = {};
   @Input('service') service: PaginationService;
 
   constructor() { }
 
+  getQueryParameters(page: number): Object {
+    const queryParams: Object = Object.assign({}, this.routeParams, { page: page });
+    return queryParams;
+  }
 }

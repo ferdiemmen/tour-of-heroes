@@ -6,7 +6,7 @@ import { Media } from './media';
 import { ApiService } from '../../api.service';
 import { DeferredService } from '../deferred/deferred.service';
 import { CacheService } from '../../cache.service';
-
+import { PaginationService } from '../pagination/pagination.service';
 
 @Injectable()
 export class MediaService {
@@ -17,10 +17,13 @@ export class MediaService {
 
   constructor(
     public deferredService: DeferredService,
+    public paginationService: PaginationService,
     private apiService: ApiService,
     private router: Router,
     private location: Location,
-    private cacheService: CacheService) { }
+    private cacheService: CacheService) {
+      this.paginationService = new PaginationService();
+    }
 
   getMedia(id: number): Promise<Media> {
     const url = `${this.mediaUrl}${id}/`;
@@ -29,22 +32,36 @@ export class MediaService {
       .then(response => this.media = response.json() as Media);
   }
 
-  getMediaObjects(type: string): Promise<Media[]> {
-    const url = `${this.mediaUrl}${type}/?sort=true&details=true`;
-    const cacheKey = 'mediaobjects';
+  getMediaObjects(type: string, page?: number): Promise<Media[]> {
+    let url = `${this.mediaUrl}${type}/?sort=true&details=true`;
+    const cacheKey = (page) ? `mediaobjects_${page}` : 'mediaobjects_1';
+
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
-      return Promise.resolve(this.cacheService.getCache(cacheKey));
+      const cachedData = this.cacheService.getCache(cacheKey);
+      this.mediaObjects = cachedData.results;
+      this.paginationService.setupPagination(cachedData.page, cachedData.numPages);
+      return Promise.resolve(cachedData.results);
+    }
+
+    if (page) {
+      url += '&page=' + page;
     }
 
     return this.apiService
       .get(url)
       .then(response => {
-        this.mediaObjects = this.wrapFilesInMedia(response.json().results) as Media[];
+        const data = response.json();
+        data.results = this.wrapFilesInMedia(data.results) as Media[];
 
-        this.cacheService.setCache(cacheKey, this.mediaObjects);
-        return this.mediaObjects;
+        // Set cache for media objects.
+        this.cacheService.setCache(cacheKey, data);
+
+        this.paginationService.setupPagination(data.page, data.numPages);
+
+        this.mediaObjects = data.results;
+        return data.results;
       });
   }
 
@@ -64,7 +81,7 @@ export class MediaService {
   }
 
   pickMedia(): Promise<Media> {
-    this.router.navigate(['/cms/media-list', {type: 'images'}]);
+    this.router.navigate(['/cms/media-list', {queryParams: {type: 'images'}}]);
     return this.deferredService.set();
   }
 

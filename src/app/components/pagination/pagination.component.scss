@@ -1,48 +1,13 @@
 
-@import '../../../scss/_settings';
 @import '../../../scss/_mixins';
 
 .pagination {
-  width: 100%;
-  background: #EEE;
-  border: 1px solid #ccc;
-  padding: 5px;
-  box-sizing: border-box;
-  margin-top: 5px;
-  border-radius: 3px;
-
   ul {
     @extend %list-reset;
     display: flex;
   }
 
   li {
-    border: 1px solid #FFF;
     margin-right: 5px;
-  }
-
-  &__item {
-    border: 1px solid #BDBDBD;
-    font-size: .7em;
-    font-weight: bold;
-    padding: 5px 10px;
-    box-sizing: border-box;
-    border-radius: 2px;
-    display: block;
-
-    &.active {
-      background: #e0e0e0;
-      color: #333;
-    }
-  }
-
-  &__link {
-    border: 1px solid #BDBDBD;
-    color: $cms-highlight;
-
-    &:hover {
-      background: #e0e0e0;
-      color: #333;
-    }
   }
 }

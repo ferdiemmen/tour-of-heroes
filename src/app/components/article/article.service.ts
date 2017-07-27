@@ -17,6 +17,10 @@ import { PaginationService } from '../pagination/pagination.service';
 
 declare var _rs: any;
 
+const config = {
+  paginationAmount: 35
+}
+
 @Injectable()
 export class ArticleService {
   public article: Article = new Article();
@@ -87,7 +91,7 @@ export class ArticleService {
   }
 
   getArticles(page: number, pages?: boolean, cached?: boolean, parameters?: Object): Promise<Article[]> {
-    const amount = (parameters && parameters.hasOwnProperty('amount')) ? parameters['amount'] : 20;
+    const amount = (parameters && parameters.hasOwnProperty('amount')) ? parameters['amount'] : config.paginationAmount;
     const tag = (parameters && parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
 
     let url = `${this.articlesUrl}/site/${_rs.siteId}/` +
@@ -95,21 +99,8 @@ export class ArticleService {
     let cacheKey = (pages) ? 'pages' : 'articles';
     cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
 
-    if (page) {
-      url += '&page=' + page;
-    }
-
-    if (parameters) {
-      for (const key in parameters) {
-        if (parameters.hasOwnProperty(key)) {
-          url += `&${key}=${parameters[key]}`;
-        }
-      }
-    }
-
-    // Clear previous articles list.
-    this[(pages) ? 'pages' : 'articles'] = Array(20)
-                                            .fill(new Article({
+    // Clear previous articles list and set dummy data for loading.
+    this[(pages) ? 'pages' : 'articles'] = Array(config.paginationAmount).fill(new Article({
                                               id: 0,
                                               title: '',
                                               publishDate: '',
@@ -125,6 +116,18 @@ export class ArticleService {
       this[(pages) ? 'pages' : 'articles'] = cachedData.results as Article[];
       this.paginationService.setupPagination(cachedData.page, cachedData.numPages);
       return Promise.resolve(cachedData.results as Article[]);
+    }
+
+    if (page) {
+      url += '&page=' + page;
+    }
+
+    if (parameters) {
+      for (const key in parameters) {
+        if (parameters.hasOwnProperty(key)) {
+          url += `&${key}=${parameters[key]}`;
+        }
+      }
     }
 
     return this.apiService

@@ -1,4 +1,5 @@
 
+@import '../../../scss/_settings';
 
 table {
   width: 100%;
@@ -27,10 +28,23 @@ td {
 
 a {
   font-weight: bold;
+  color: $cms-highlight;
 }
 
 tr.even {
   td {
     background: #f4f4f4;
   }
+}
+
+.cms-header,
+.cms-footer {
+  width: 100%;
+  background: #EEE;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  border-radius: 3px;
+  display: flex;
 }

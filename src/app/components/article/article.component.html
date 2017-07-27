@@ -1,6 +1,6 @@
 
 <div class="cms-columns cms-columns--column">
-  <div class="cms-header">header</div>
+  <div class="cms-header cms-header--fill">header</div>
   <div class="cms-columns__column scrollable--y">
     <div class="cms-preview cms-preview--article article">
 
@@ -36,7 +36,7 @@
       <pre>{{articleService.article.snippetsJson|json}}</pre>
     </div>
   </div>
-  <div class="cms-footer">
+  <div class="cms-footer cms-footer--fill">
     <app-snippet-picker [snippets]="articleService.article.snippetsJson"></app-snippet-picker>
   </div>
 </div>

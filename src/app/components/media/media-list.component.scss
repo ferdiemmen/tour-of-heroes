@@ -1,0 +1,36 @@
+
+@import '../../../scss/settings';
+
+.media-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100vw;
+
+  &__item {
+    width: 20%;
+    padding: 0 5px 5px 0;
+  }
+
+  &__info {
+    color: #fff;
+    font-size: .7em;
+    font-weight: bold;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    padding: 10px 20px;
+    background: $cms-background;
+  }
+}
+
+.cms-header,
+.cms-footer {
+  width: 100%;
+  background: #EEE;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  border-radius: 3px;
+  display: flex;
+}

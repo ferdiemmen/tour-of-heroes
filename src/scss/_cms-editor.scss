@@ -9,7 +9,10 @@
 
 .cms-header,
 .cms-footer {
-  background: $cms-background;
+
+  &--fill {
+    background: $cms-background;
+  }
 }
 
 .cms-editor-actions {

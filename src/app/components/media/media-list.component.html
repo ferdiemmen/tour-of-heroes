@@ -1,10 +1,14 @@
 
-<table cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" (click)="mediaService.selectedMedia(media)">
-      <td>
-        <app-media-resized [media]="media" [width]="200"></app-media-resized>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="cms-columns cms-columns--column">
+  <div class="cms-columns__column scrollable--y">
+    <div class="media-list">
+      <div class="media-list__item" *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even" [ngClass]="{ odd: odd, even: even }" (click)="mediaService.selectedMedia(media)">
+        <app-media-resized [media]="media" [width]="640"></app-media-resized>
+        <div class="media-list__info" *ngIf="media.file.mediaName">{{media.file.mediaName}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="cms-footer">
+    <app-pagination [route]="'/cms/media-list'" [routeParams]="{ type: 'images' }" [service]="mediaService.paginationService"></app-pagination>
+  </div>
+</div>

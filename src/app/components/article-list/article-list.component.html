@@ -1,39 +1,44 @@
 
-<table cellspacing="0" cellpadding="0">
-  <thead>
-    <tr>
-      <!-- th>Id</th -->
-      <th>Titel</th>
-      <th>Publiceer datum</th>
-      <th>Depubliceer datum</th>
-      <th>Categorie</th>
-      <th>Partner?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let article of articleService.articles; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
-      <!-- td>
-        {{article.id}}
-      </td -->
-      <td>
-        <a [routerLink]="['/cms/article/edit', article.id]">
-          {{article.title}}
-        </a>
-      </td>
-      <td>
-        {{article.publishDate|date:'dd MMMM y H:mm'}}
-      </td>
-      <td>
-        {{article.expiryDate|date:'dd MMMM y H:mm'}}
-      </td>
-      <td *ngIf="article.category[0]">
-        {{article.category[0].name}}
-      </td>
-      <td>
-        {{article.isPartner}}
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<app-pagination [route]="'/cms/article-list'" [service]="articleService.paginationService"></app-pagination>
+<div class="cms-columns cms-columns--column">
+  <div class="cms-columns__column scrollable--y">
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <!-- th>Id</th -->
+          <th>Titel</th>
+          <th>Publiceer datum</th>
+          <th>Depubliceer datum</th>
+          <th>Categorie</th>
+          <th>Partner?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of articleService.articles; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+          <!-- td>
+            {{article.id}}
+          </td -->
+          <td>
+            <a [routerLink]="['/cms/article/edit', article.id]">
+              {{article.title}}
+            </a>
+          </td>
+          <td>
+            {{article.publishDate|date:'dd MMMM y H:mm'}}
+          </td>
+          <td>
+            {{article.expiryDate|date:'dd MMMM y H:mm'}}
+          </td>
+          <td *ngIf="article.category[0]">
+            {{article.category[0].name}}
+          </td>
+          <td>
+            {{article.isPartner}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cms-footer">
+    <app-pagination [route]="'/cms/article-list'" [service]="articleService.paginationService"></app-pagination>
+  </div>
+</div>

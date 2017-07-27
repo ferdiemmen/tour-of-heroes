@@ -1,39 +1,40 @@
 
-<table cellspacing="0" cellpadding="0">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Titel</th>
-      <th>Slug</th>
-      <th>Publiceer datum</th>
-      <th>Depubliceer datum</th>
-      <th>Partner?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let page of articleService.pages; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
-      <td>
-        {{page.id}}
-      </td>
-      <td>
-        <a [routerLink]="['/cms/article/edit', page.id]">
-          {{page.title}}
-        </a>
-      </td>
-      <td>
-        {{page.flatpageSlug}}
-      </td>
-      <td>
-        {{page.publishDate|date:'dd MMMM y H:mm'}}
-      </td>
-      <td>
-        {{page.expiryDate|date:'dd MMMM y H:mm'}}
-      </td>
-      <td>
-        {{page.isPartner}}
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<app-pagination [route]="'/cms/page-list'" [service]="articleService.paginationService"></app-pagination>
+<div class="cms-columns cms-columns--column">
+  <div class="cms-columns__column scrollable--y">
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th>Titel</th>
+          <th>Slug</th>
+          <th>Publiceer datum</th>
+          <th>Depubliceer datum</th>
+          <th>Partner?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let page of articleService.pages; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+          <td>
+            <a [routerLink]="['/cms/article/edit', page.id]">
+              {{page.title}}
+            </a>
+          </td>
+          <td>
+            {{page.flatpageSlug}}
+          </td>
+          <td>
+            {{page.publishDate|date:'dd MMMM y H:mm'}}
+          </td>
+          <td>
+            {{page.expiryDate|date:'dd MMMM y H:mm'}}
+          </td>
+          <td>
+            {{page.isPartner}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cms-footer">
+    <app-pagination [route]="'/cms/page-list'" [service]="articleService.paginationService"></app-pagination>
+  </div>
+</div>

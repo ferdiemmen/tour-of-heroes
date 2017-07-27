@@ -1,0 +1,32 @@
+
+.pagination {
+
+  li {
+    border: 1px solid #FFF;
+  }
+
+  &__item {
+    border: 1px solid #BDBDBD;
+    font-size: .7em;
+    font-weight: bold;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    display: block;
+
+    &.active {
+      background: #e0e0e0;
+      color: #333;
+    }
+  }
+
+  &__link {
+    border: 1px solid #BDBDBD;
+    color: $cms-highlight;
+
+    &:hover {
+      background: #e0e0e0;
+      color: #333;
+    }
+  }
+}

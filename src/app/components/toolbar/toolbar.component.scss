@@ -53,6 +53,7 @@ $cms-toolbar-background:          $cms-background !default;
     top: 0;
     left: $cms-toolbar-width;
     display: none;
+    z-index: 1;
 
     // .cms-toolbar .dropdown__item
     &__item {
