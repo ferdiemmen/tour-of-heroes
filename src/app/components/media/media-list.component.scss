@@ -6,9 +6,10 @@
   flex-direction: column;
   flex-wrap: wrap;
   height: 100vw;
+  padding: 5px;
 
   &__item {
-    width: 20%;
+    width: calc(20% - 4px);
     padding: 0 5px 5px 0;
   }
 
@@ -26,11 +27,7 @@
 .cms-header,
 .cms-footer {
   width: 100%;
-  background: #EEE;
-  border: 1px solid #ccc;
-  padding: 5px;
+  padding: 15px 10px;
   box-sizing: border-box;
-  margin-top: 5px;
-  border-radius: 3px;
   display: flex;
 }

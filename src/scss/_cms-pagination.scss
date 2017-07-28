@@ -2,31 +2,32 @@
 .pagination {
 
   li {
-    border: 1px solid #FFF;
   }
 
   &__item {
-    border: 1px solid #BDBDBD;
     font-size: .7em;
     font-weight: bold;
     padding: 5px 10px;
     box-sizing: border-box;
+    border: 1px solid $cms-inactive;
     border-radius: 2px;
     display: block;
+    color: #fff;
 
     &.active {
-      background: #e0e0e0;
-      color: #333;
+      border: 1px solid $cms-highlight;
+      background: $cms-highlight;
+      color: #fff;
     }
   }
 
   &__link {
-    border: 1px solid #BDBDBD;
     color: $cms-highlight;
 
     &:hover {
-      background: #e0e0e0;
-      color: #333;
+      border: 1px solid $cms-highlight;
+      background: $cms-highlight;
+      color: #fff;
     }
   }
 }
