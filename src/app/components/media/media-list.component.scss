@@ -6,11 +6,10 @@
   flex-direction: column;
   flex-wrap: wrap;
   height: 100vw;
-  padding: 5px;
 
   &__item {
-    width: calc(20% - 4px);
-    padding: 0 5px 5px 0;
+    width: 20%;
+    min-width: 20%;
   }
 
   &__info {
@@ -30,4 +29,11 @@
   padding: 15px 10px;
   box-sizing: border-box;
   display: flex;
+}
+
+.cms-header {
+  .cms__button {
+    margin-left: auto;
+    width: 200px;
+  }
 }

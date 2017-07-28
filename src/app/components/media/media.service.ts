@@ -2,18 +2,24 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { Media } from './media';
 import { ApiService } from '../../api.service';
 import { DeferredService } from '../deferred/deferred.service';
 import { CacheService } from '../../cache.service';
 import { PaginationService } from '../pagination/pagination.service';
 
+declare var _rs: any;
+
+const config = {
+  mediaUrl: 'modules/media/'
+};
+
 @Injectable()
 export class MediaService {
   public media: Media;
   public mediaObjects: Media[];
-
-  private mediaUrl = 'modules/media/'; // URL to web api
+  private mediaUrl = config.mediaUrl; // URL to web api
 
   constructor(
     public deferredService: DeferredService,
@@ -68,7 +74,7 @@ export class MediaService {
   getResizedImage(media: Media, width: number, height: number, crop: string): string {
     if (!media.file) { return ''; }
 
-    let url = `https://localapi.reshift.nl:8001/${this.mediaUrl}show_image/${media.file.id}/?width=${width}&crop=${crop}`;
+    let url = `${_rs.apiUrl}/${this.mediaUrl}show_image/${media.file.id}/?width=${width}&crop=${crop}`;
     if (height) { url += `&height=${height}`};
     return url;
   }
@@ -83,6 +89,14 @@ export class MediaService {
   pickMedia(): Promise<Media> {
     this.router.navigate(['/cms/media-list']);
     return this.deferredService.set();
+  }
+
+  upload(data): void {
+    const url = `${_rs.apiUrl}/${config.mediaUrl}image/`;
+    this.apiService.upload(url, data)
+      .done(response => {
+        this.mediaObjects.unshift(this.wrapFilesInMedia([response])[0] as Media)
+      });
   }
 
   /**

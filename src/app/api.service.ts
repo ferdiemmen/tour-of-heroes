@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { ConfigService } from './app-config.service';
 
-const apiUrl = 'https://localapi.reshift.nl:8001/';
+declare var _rs: any;
 
 @Injectable()
 export class ApiService {
@@ -30,8 +30,18 @@ export class ApiService {
     return this._apiCall('PUT', url, body);
   }
 
+  upload(url: string, data: any): any {
+    data.url = url;
+    data.headers = this._getHeaders(true, true);
+    data.xhrFields = {
+      withCredentials: true
+    };
+
+    return data.submit();
+  }
+
   private _getApiUrl(url: string): string {
-    return [apiUrl, url].join('');
+    return [_rs.apiUrl, url].join('/');
   }
 
   private _apiCall(method: string, url: string, body?: any): Promise<any> {
@@ -52,11 +62,13 @@ export class ApiService {
       });
   }
 
-  private _getHeaders(): Headers {
-     return new Headers({
+  private _getHeaders(json?: boolean, file?: boolean): any {
+    const headers = {
       'X-CSRFTOKEN': this.configService.getProperty('csrftoken'),
-      'Content-Type': 'application/json',
+      'Content-Type': (file) ? undefined : 'application/json',
       'X-RESHIFT-SITE-ID': 2
-    });
+    };
+    if (json) { return headers; }
+    return new Headers(headers);
   }
 }
