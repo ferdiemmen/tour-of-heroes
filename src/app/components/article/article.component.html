@@ -6,6 +6,8 @@
 
       <ul>
         <li><button (click)="articleService.article.headerCrop = 'top'">Top</button></li>
+        <li><button (click)="articleService.article.headerCrop = 'center'">Center</button></li>
+        <li><button (click)="articleService.article.headerCrop = 'bottom'">Bottom</button></li>
       </ul>
       <div class="article__media cms__outline" (click)="setHeaderMedia()" data-type="Hoofd beeld">
         <app-media-resized
@@ -36,7 +38,7 @@
 
       <app-snippets [snippets]="articleService.article.snippetsJson"></app-snippets>
 
-      <pre>{{articleService.article.snippetsJson|json}}</pre>
+      <pre>{{articleService.article|json}}</pre>
     </div>
   </div>
   <div class="cms-footer cms-footer--fill">

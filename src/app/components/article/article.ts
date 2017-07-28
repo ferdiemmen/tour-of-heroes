@@ -30,7 +30,6 @@ export class Article {
   headerCrop: string;
 
   constructor(article?: object) {
-    this.id = (article) ? article['id'] : 1337;
     this.author = null;
     this.title = (article) ? article['title'] : '';
     this.subtitle = '';

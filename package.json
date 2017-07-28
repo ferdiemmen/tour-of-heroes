@@ -24,6 +24,7 @@
     "angular-in-memory-web-api": "^0.3.2",
     "angular2-hotkeys": "^2.0.1",
     "angular2-medium-editor": "git+ssh://git@github.com/ferdiemmen/angular2-medium-editor.git",
+    "blazy": "^1.8.2",
     "blueimp-file-upload": "^9.18.0",
     "core-js": "^2.4.1",
     "font-awesome-sass": "^4.7.0",

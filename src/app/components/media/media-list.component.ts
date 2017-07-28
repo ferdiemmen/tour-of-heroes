@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import * as $ from 'jquery';
 import 'jqueryui';
 import 'blueimp-file-upload/js/jquery.fileupload';
+
 import 'rxjs/add/operator/switchMap';
 
 import { Media } from './media';
