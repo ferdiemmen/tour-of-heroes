@@ -8,8 +8,12 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-search',
+  styleUrls: ['./search.component.scss'],
   template: `
-    <input type="text" [value]="query" [formControl]="searchControl" placeholder="Zoeken&hellip;" />
+    <div class="search">
+      <input type="text" [value]="query" [formControl]="searchControl" placeholder="Zoeken&hellip;" />
+      <button><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
   `,
 })
 export class SearchComponent implements OnInit {
