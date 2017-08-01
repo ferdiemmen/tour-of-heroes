@@ -39,13 +39,13 @@ export class MediaService {
       .then(response => this.media = response.json() as Media);
   }
 
-  getMediaObjects(type: string, page?: number, q?: string): Promise<Media[]> {
+  getMediaObjects(type: string, page?: number, query?: string): Promise<Media[]> {
     let url = `${this.mediaUrl}${type}/?sort=true&details=true`;
     let cacheKey = (page) ? `mediaobjects_${page}` : 'mediaobjects_1';
 
-    if (q) {
-      url = `${config.mediaSearchUrl}/?q=${q}`;
-      cacheKey = `${cacheKey}_${q}`;
+    if (query) {
+      url = `${config.mediaSearchUrl}/?q=${query}`;
+      cacheKey = `${cacheKey}_${query}`;
     }
 
     // Check if a cached version exist and return it.

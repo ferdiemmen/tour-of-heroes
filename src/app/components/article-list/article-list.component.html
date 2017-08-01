@@ -1,7 +1,7 @@
 
 <div class="cms-columns cms-columns--column">
   <div class="cms-header">
-    header
+    <app-search [type]="'articles'" (searched)="redirectToSearch($event)"></app-search>
   </div>
   <div class="cms-columns__column scrollable--y">
     <table cellspacing="0" cellpadding="0">
@@ -9,6 +9,8 @@
         <tr>
           <!-- th>Id</th -->
           <th>Titel</th>
+          <th>Slug</th>
+          <th>Auteur</th>
           <th>Publiceer datum</th>
           <th>Depubliceer datum</th>
           <th>Categorie</th>
@@ -24,6 +26,12 @@
             <a [routerLink]="['/cms/article/edit', article.id]">
               {{article.title}}
             </a>
+          </td>
+          <td>
+            {{article.slug}}
+          </td>
+          <td *ngIf="article.author">
+            {{article.author.firstName}} {{article.author.lastName}} <span *ngIf="article.author.username">({{article.author.username}})</span>
           </td>
           <td>
             {{article.publishDate|date:'dd MMMM y H:mm'}}
@@ -43,6 +51,6 @@
   </div>
 
   <div class="cms-footer">
-    <app-pagination [route]="'/cms/article-list'" [service]="articleService.paginationService"></app-pagination>
+    <app-pagination [route]="'/cms/article-list'" [routeParams]="{ 'q': query }" [service]="articleService.paginationService"></app-pagination>
   </div>
 </div>

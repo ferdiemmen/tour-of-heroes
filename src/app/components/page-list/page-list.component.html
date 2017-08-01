@@ -1,5 +1,8 @@
 
 <div class="cms-columns cms-columns--column">
+  <div class="cms-header">
+    <app-search [type]="'articles'" (searched)="redirectToSearch($event)"></app-search>
+  </div>
   <div class="cms-columns__column scrollable--y">
     <table cellspacing="0" cellpadding="0">
       <thead>

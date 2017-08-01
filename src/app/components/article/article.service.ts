@@ -29,6 +29,8 @@ export class ArticleService {
   public paginationService: PaginationService;
 
   private articlesUrl = 'modules/articles'; // URL to web api
+  private articlesSearchUrl = 'modules/search/articles'; // URL to search web api
+  private pagesSearchUrl = 'modules/search/pages'; // URL to search web api
 
   constructor(
     public categoryService: CategoryService,
@@ -90,7 +92,7 @@ export class ArticleService {
       });
   }
 
-  getArticles(page: number, pages?: boolean, cached?: boolean, parameters?: Object): Promise<Article[]> {
+  getArticles(page: number, pages?: boolean, cached?: boolean, parameters?: Object, query?: string): Promise<Article[]> {
     const amount = (parameters && parameters.hasOwnProperty('amount')) ? parameters['amount'] : config.paginationAmount;
     const tag = (parameters && parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
 
@@ -99,14 +101,38 @@ export class ArticleService {
     let cacheKey = (pages) ? 'pages' : 'articles';
     cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
 
+    if (query) {
+      if (pages) {
+        url = `${this.pagesSearchUrl}/?admin_view=true&q=${query}`;
+      } else {
+        url = `${this.articlesSearchUrl}/?admin_view=true&q=${query}`;
+      }
+      cacheKey = `${cacheKey}_${query}`;
+    }
+
     // Clear previous articles list and set dummy data for loading.
     this[(pages) ? 'pages' : 'articles'] = Array(config.paginationAmount).fill(new Article({
                                               id: 0,
                                               title: '',
+                                              subtitle: '',
+                                              intro: '',
+                                              slug: '',
+                                              flatpageSlug: '',
+                                              author: null,
+                                              media: null,
+                                              headerCrop: 'center',
+                                              seoScore: 0,
+                                              published: false,
+                                              featured: false,
+                                              isPartner: false,
+                                              isFlatpage: false,
+                                              showComments: false,
                                               publishDate: '',
-                                              category: [{
-                                                name: ''
-                                              }]
+                                              expiryDate: '',
+                                              category: [],
+                                              RATable: [],
+                                              snippetsJson: [],
+                                              site: []
                                             } as Article))
                                             .map((x) => x);
 

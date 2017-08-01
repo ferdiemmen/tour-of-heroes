@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -15,17 +15,23 @@ import { ArticleService } from '../article/article.service';
   providers: [ArticleService]
 })
 export class PageListComponent implements OnInit {
+  query: string;
 
   constructor(
+    public articleService: ArticleService,
     private _route: ActivatedRoute,
-    public articleService: ArticleService
-  ) { }
+    private _router: Router) { }
+
+  redirectToSearch(query: string) {
+    this.query = query;
+    this._router.navigate(['/cms/page-list/'], { queryParams: { q: query } });
+  }
 
   ngOnInit(): void {
 
     this._route
       .queryParams
-      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true, true))
+      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true, true, null, params['q']))
       .subscribe();
   }
 }
