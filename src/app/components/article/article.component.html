@@ -1,7 +1,7 @@
 
 <div class="cms-columns cms-columns--column">
   <div class="cms-header">
-    <a [href]="articleService.article.frontendUrls[configService.config.siteId] + '?draft=' + articleService.article.uuid" class="cms__button">
+    <a *ngIf="articleService.article.uuid" [href]="articleService.article.frontendUrls[configService.config.siteId] + '?draft=' + articleService.article.uuid" class="cms__button">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
   </div>

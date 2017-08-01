@@ -4,10 +4,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Media } from './media';
 import { MediaService } from './media.service';
 
+declare var Blazy: any;
+
 @Component({
   selector: 'app-media-resized',
   template: `
-    <img class="b-lazy" data-src="{{url}}" />
+    <img class="b-lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url}}" [ngClass]="{noimage : !url}" />
   `,
   styleUrls: ['./media-resized.component.scss']
 })
@@ -24,6 +26,9 @@ export class MediaResizedComponent implements OnInit {
   ngOnInit(): void {
     if (!this._media) { return; }
     this._setUrl();
+
+    // Initialize
+    const bLazy = new Blazy();
   }
 
   @Input('media') set media(value: Media) {
