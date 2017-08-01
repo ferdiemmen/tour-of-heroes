@@ -60,7 +60,7 @@ export class SnippetsComponent implements AfterViewInit {
 
         event.returnValue = false; // Prevent bubbling
         return event;
-    }));
+      }));
   }
 
   removeSnippet(snippet: Snippet): void {

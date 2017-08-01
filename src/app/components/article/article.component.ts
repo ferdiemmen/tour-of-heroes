@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 import * as $ from 'jquery';
 import 'jqueryui';
 
+import { ConfigService } from './../../app-config.service';
 import { Article } from './article';
 import { ArticleService } from './article.service';
 import { Media } from '../media/media';
@@ -18,12 +19,15 @@ import { CategoryService } from '../category/category.service';
 import { FeedService } from '../feed/feed.service';
 import { SiteService } from '../site/site.service';
 
+declare var _rs: any;
+
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
+  public siteId: number = _rs.siteId;
   public tabIndex: number;
 
   constructor(
@@ -33,6 +37,7 @@ export class ArticleComponent implements OnInit {
     public authorService: AuthorService,
     public feedService: FeedService,
     public siteService: SiteService,
+    public configService: ConfigService,
     private router: Router,
     private route: ActivatedRoute) {
 
@@ -78,9 +83,7 @@ export class ArticleComponent implements OnInit {
     this.siteService.getSites();
 
     this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        return this.articleService.getArticle(+params.get('id'));
-      })
+      .switchMap((params: ParamMap) => this.articleService.getArticle(+params.get('id')))
       .subscribe();
   }
 }

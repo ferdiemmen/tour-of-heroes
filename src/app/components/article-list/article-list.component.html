@@ -3,7 +3,7 @@
   <div class="cms-header">
     <app-search [type]="'articles'" (searched)="redirectToSearch($event)"></app-search>
 
-    <a routerLink="/cms/article/create" class="cms__button active" >
+    <a routerLink="/cms/article/create" class="cms__button" >
       <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
   </div>
@@ -11,7 +11,7 @@
 
     <div class="cms-loading" *ngIf="!articleService.articles.length">
       <div class="cms-loading__content">
-        De artikelen worden opgehaald. <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+        Artikelen worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
       </div>
     </div>
 

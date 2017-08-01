@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
 import * as $ from 'jquery';
 
@@ -28,11 +29,19 @@ export class MediaService {
   constructor(
     public deferredService: DeferredService,
     public paginationService: PaginationService,
+    private _hotkeysService: HotkeysService,
     private apiService: ApiService,
     private router: Router,
     private location: Location,
     private cacheService: CacheService) {
       this.paginationService = new PaginationService();
+
+      this._hotkeysService.add(new Hotkey(['esc'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
+        this.cancel();
+
+        event.returnValue = false; // Prevent bubbling
+        return event;
+      }));
     }
 
   getMedia(id: number): Promise<Media> {
@@ -90,12 +99,31 @@ export class MediaService {
   selectedMedia(media: Media): void {
     this.edit = true;
 
-    this.mediaObjects.map(m => m['active'] = false);
-    media['active'] = true;
+    if (!window.event['shiftKey']) {
+      if (media['active']) {
+        media['active'] = false;
+        this.cancel();
+      } else {
+        this.mediaObjects.map(m => m['active'] = false);
+        media['active'] = true;
+        this.getMedia(media.file['mediaId']);
+      }
+    } else {
+      if (media['active']) {
+        media['active'] = false;
+        if (!this.mediaObjects.filter(m => { if (m['active']) { return true; } }).length) {
+          this.cancel();
+        }
+      } else {
+        media['active'] = true;
+        this.getMedia(media.file['mediaId']);
+      }
+    }
 
-    this.getMedia(media.file['mediaId']);
     if (!this.deferredService.get()) { return; }
+    this.cancel();
     this.deferredService.resolve(media);
+    this.deferredService = new DeferredService();
     this.location.back();
   }
 
@@ -113,12 +141,25 @@ export class MediaService {
   }
 
   save(): void {
-    const url = `${config.mediaUrl}${this.media.id}/`;
-    const media = $.extend(true, {}, this.media);
-    this.apiService.put(url, media)
-      .then(response => {
-        console.log(response);
-      });
+
+    this.mediaObjects.map(m => {
+      if (!m['active']) { return; }
+
+      const media = $.extend(true, {}, m, this.media);
+      media.id = m.file.mediaId;
+      const url = `${config.mediaUrl}${media.id}/`;
+
+      this.apiService.put(url, media)
+        .then(response => {
+          this.cancel();
+        });
+    });
+  }
+
+  cancel(): void {
+    this.edit = false;
+    this.media = null;
+    this.mediaObjects.map(m => m['active'] = false);
   }
 
   /**

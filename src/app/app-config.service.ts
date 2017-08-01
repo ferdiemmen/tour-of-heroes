@@ -1,12 +1,17 @@
 
 import { Injectable } from '@angular/core';
 
+import * as $ from 'jquery';
+
+declare var _rs: any;
+
+
 @Injectable()
 export class ConfigService {
   private config: Object;
 
   constructor() {
-    this.config = {};
+    this.config = $.extend(true, {}, _rs);
   }
 
   setProperty(key: any, value: any): void {

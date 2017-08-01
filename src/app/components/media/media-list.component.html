@@ -10,17 +10,21 @@
   </div>
   <div class="cms-columns__column">
     <div class="media-list-container scrollable--y">
-      <div class="media-list">
+      <div class="media-list" [ngClass]="{edit : mediaService.edit}">
         <div class="media-list__item"
              *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even"
-             [ngClass]="{ odd: odd, even: even, active: media.active }"
+             [ngClass]="{ active: media.active }"
              (click)="mediaService.selectedMedia(media)">
           <app-media-resized [media]="media" [width]="640"></app-media-resized>
-          <div class="media-list__info" *ngIf="media.file.mediaName">{{media.file.mediaName}}</div>
         </div>
       </div>
     </div>
-    <div class="media-editor cms-editor" [ngClass]="{active: mediaService.edit && mediaService.media}">
+    <div class="media-editor cms-editor">
+
+      <div class="cms-tabs__content" *ngIf="!mediaService.media">
+        Selecteer &eacute;&eacute;n of meerdere afbeeldingen.
+      </div>
+
       <div class="cms-tabs__content" *ngIf="mediaService.media">
         <label class="cms__label">Naam</label>
         <input class="cms__input"
@@ -51,8 +55,8 @@
               [(ngModel)]="mediaService.media.description" />
       </div>
 
-      <div class="cms-editor-actions">
-        <button class="cms__button active" (click)="mediaService.edit = false">Annuleren</button>
+      <div class="cms-editor-actions" *ngIf="mediaService.media">
+        <button class="cms__button active" (click)="mediaService.cancel()">Annuleren</button>
         <button class="cms__button active" (click)="mediaService.save()">Opslaan</button>
       </div>
     </div>

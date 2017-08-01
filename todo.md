@@ -29,6 +29,8 @@
 - Media remove
 
 - Productbrowser
+- Product search
+- Product update
 
 - Gridbrowser
 - Grid create

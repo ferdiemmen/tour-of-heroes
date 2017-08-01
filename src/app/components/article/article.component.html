@@ -1,6 +1,10 @@
 
 <div class="cms-columns cms-columns--column">
-  <div class="cms-header cms-header--fill">header</div>
+  <div class="cms-header">
+    <a [href]="articleService.article.frontendUrls[configService.config.siteId] + '?draft=' + articleService.article.uuid" class="cms__button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+  </div>
   <div class="cms-columns__column scrollable--y">
     <div class="cms-preview cms-preview--article article">
 

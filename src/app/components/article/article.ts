@@ -27,6 +27,7 @@ export class Article {
   RATable: Feed[];
   site: Site[];
   uuid: string;
+  frontendUrls: object;
   snippetsJson: Snippet[];
   headerCrop: string;
 
@@ -45,6 +46,7 @@ export class Article {
     this.isPartner = false;
     this.isFlatpage = false;
     this.showComments = false;
+    this.frontendUrls = (article) ? article['frontendUrls'] : {};
     this.featured = false;
     this.RATable = [];
     this.site = [];
