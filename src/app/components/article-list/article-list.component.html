@@ -2,9 +2,20 @@
 <div class="cms-columns cms-columns--column">
   <div class="cms-header">
     <app-search [type]="'articles'" (searched)="redirectToSearch($event)"></app-search>
+
+    <a routerLink="/cms/article/create" class="cms__button active" >
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
   </div>
   <div class="cms-columns__column scrollable--y">
-    <table cellspacing="0" cellpadding="0">
+
+    <div class="cms-loading" *ngIf="!articleService.articles.length">
+      <div class="cms-loading__content">
+        De artikelen worden opgehaald. <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <table cellspacing="0" cellpadding="0" *ngIf="articleService.articles.length">
       <thead>
         <tr>
           <!-- th>Id</th -->

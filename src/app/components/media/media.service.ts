@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
+import * as $ from 'jquery';
+
 import { Media } from './media';
 import { ApiService } from '../../api.service';
 import { DeferredService } from '../deferred/deferred.service';
@@ -20,6 +22,7 @@ const config = {
 export class MediaService {
   public media: Media;
   public mediaObjects: Media[];
+  public edit: boolean = false;
   private mediaUrl = config.mediaUrl; // URL to web api
 
   constructor(
@@ -85,8 +88,13 @@ export class MediaService {
   }
 
   selectedMedia(media: Media): void {
+    this.edit = true;
+
+    this.mediaObjects.map(m => m['active'] = false);
+    media['active'] = true;
+
+    this.getMedia(media.file['mediaId']);
     if (!this.deferredService.get()) { return; }
-    this.media = media;
     this.deferredService.resolve(media);
     this.location.back();
   }
@@ -101,6 +109,15 @@ export class MediaService {
     this.apiService.upload(url, data)
       .done(response => {
         this.mediaObjects.unshift(this.wrapFilesInMedia([response])[0] as Media)
+      });
+  }
+
+  save(): void {
+    const url = `${config.mediaUrl}${this.media.id}/`;
+    const media = $.extend(true, {}, this.media);
+    this.apiService.put(url, media)
+      .then(response => {
+        console.log(response);
       });
   }
 

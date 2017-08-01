@@ -4,17 +4,19 @@
   <div class="cms-columns__column scrollable--y">
     <div class="cms-preview cms-preview--article article">
 
-      <div class="article__media cms__outline" (click)="setHeaderMedia()" data-type="Hoofd beeld">
+      <div class="article__media">
         <ul *ngIf="articleService.article.media">
           <li><button (click)="articleService.article.headerCrop = 'top'">Top</button></li>
           <li><button (click)="articleService.article.headerCrop = 'center'">Center</button></li>
           <li><button (click)="articleService.article.headerCrop = 'bottom'">Bottom</button></li>
         </ul>
-        <app-media-resized
-          [media]="articleService.article.media"
-          width="640"
-          height="360"
-          [(crop)]="articleService.article.headerCrop"></app-media-resized>
+        <div class="cms__outline" (click)="setHeaderMedia()" data-type="Hoofd beeld">
+          <app-media-resized
+            [media]="articleService.article.media"
+            width="640"
+            height="360"
+            [(crop)]="articleService.article.headerCrop"></app-media-resized>
+        </div>
       </div>
 
       <div class="cms__outline" data-type="Titel">
@@ -153,7 +155,6 @@
     </div>
 
     <div class="cms-editor-actions">
-      <button class="cms__button">Terug</button>
       <button class="cms__button active" (click)="save()">Opslaan</button>
       <button class="cms__button active" (click)="save(true)">Opslaan en opnieuw bewerken</button>
     </div>

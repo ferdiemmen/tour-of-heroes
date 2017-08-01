@@ -1,7 +1,7 @@
 
 .cms__button {
   background: none;
-  color: #fff;
+  color: #aaa;
   text-align: center;
   border: 1px solid $cms-inactive;
   padding: 5px 0;
@@ -13,11 +13,11 @@
 
   &.active {
     border-color: $cms-highlight;
-    color: #fff;
   }
 
   &:hover {
     border-color: $cms-highlight;
+    color: #fff;
   }
 
   &:focus {
@@ -27,7 +27,6 @@
   &--icon {
     i {
       position: absolute;
-      color: lighten($cms-background, 30);
 
       &.fa-chevron-right,
       &.fa-chevron-left {

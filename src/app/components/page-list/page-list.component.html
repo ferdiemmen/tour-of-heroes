@@ -4,7 +4,14 @@
     <app-search [type]="'articles'" (searched)="redirectToSearch($event)"></app-search>
   </div>
   <div class="cms-columns__column scrollable--y">
-    <table cellspacing="0" cellpadding="0">
+
+    <div class="cms-loading" *ngIf="!articleService.pages.length">
+      <div class="cms-loading__content">
+        De pagina's worden opgehaald. <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <table cellspacing="0" cellpadding="0" *ngIf="articleService.pages.length">
       <thead>
         <tr>
           <th>Titel</th>
@@ -21,8 +28,8 @@
               {{page.title}}
             </a>
           </td>
-          <td>
-            {{page.flatpageSlug}}
+          <td *ngIf="page.flatpageSlug">
+            /{{page.flatpageSlug}}/
           </td>
           <td>
             {{page.publishDate|date:'dd MMMM y H:mm'}}

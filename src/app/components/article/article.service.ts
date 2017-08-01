@@ -110,31 +110,8 @@ export class ArticleService {
       cacheKey = `${cacheKey}_${query}`;
     }
 
-    // Clear previous articles list and set dummy data for loading.
-    this[(pages) ? 'pages' : 'articles'] = Array(config.paginationAmount).fill(new Article({
-                                              id: 0,
-                                              title: '',
-                                              subtitle: '',
-                                              intro: '',
-                                              slug: '',
-                                              flatpageSlug: '',
-                                              author: null,
-                                              media: null,
-                                              headerCrop: 'center',
-                                              seoScore: 0,
-                                              published: false,
-                                              featured: false,
-                                              isPartner: false,
-                                              isFlatpage: false,
-                                              showComments: false,
-                                              publishDate: '',
-                                              expiryDate: '',
-                                              category: [],
-                                              RATable: [],
-                                              snippetsJson: [],
-                                              site: []
-                                            } as Article))
-                                            .map((x) => x);
+    // Clear previous articles list.
+    this[(pages) ? 'pages' : 'articles'] = []
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey) && cached) {
@@ -223,13 +200,13 @@ export class ArticleService {
         // A new article doesn't have a author by default. After we got
         // all the authors we set it to the site's default author.
         this.article[property] = this.authorService.authors
-                                                  .find(a => a.slug === _rs.defaultAuthor); // @TODO: Get from site's default.
+                                                  .find(a => a.slug === _rs.defaultAuthor);
         break;
       case 'category':
         // A new article doesn't have a category by default. After we got
         // all the categories we set it to the site's default category.
         this.article[property][0] = this.categoryService.categories
-                                                  .find(c => c.slug === _rs.defaultCategory); // @TODO: Get from site's default.
+                                                  .find(c => c.slug === _rs.defaultCategory);
         break;
       case 'RATable':
         // A new article doesn't have feeds by default. After we got

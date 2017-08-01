@@ -8,11 +8,52 @@
       <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
     </label>
   </div>
-  <div class="cms-columns__column scrollable--y">
-    <div class="media-list">
-      <div class="media-list__item" *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even" [ngClass]="{ odd: odd, even: even }" (click)="mediaService.selectedMedia(media)">
-        <app-media-resized [media]="media" [width]="640"></app-media-resized>
-        <div class="media-list__info" *ngIf="media.file.mediaName">{{media.file.mediaName}}</div>
+  <div class="cms-columns__column">
+    <div class="media-list-container scrollable--y">
+      <div class="media-list">
+        <div class="media-list__item"
+             *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even"
+             [ngClass]="{ odd: odd, even: even, active: media.active }"
+             (click)="mediaService.selectedMedia(media)">
+          <app-media-resized [media]="media" [width]="640"></app-media-resized>
+          <div class="media-list__info" *ngIf="media.file.mediaName">{{media.file.mediaName}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="media-editor cms-editor" [ngClass]="{active: mediaService.edit && mediaService.media}">
+      <div class="cms-tabs__content" *ngIf="mediaService.media">
+        <label class="cms__label">Naam</label>
+        <input class="cms__input"
+              [(ngModel)]="mediaService.media.name" />
+
+        <label class="cms__label">Tags</label>
+        <input class="cms__input"
+              [(ngModel)]="mediaService.media.tags" />
+
+        <label class="cms__label">Bron</label>
+        <input class="cms__input"
+              [(ngModel)]="mediaService.media.source" />
+
+        <label class="cms__label">Bron (url)</label>
+        <input class="cms__input"
+              [(ngModel)]="mediaService.media.sourceLink" />
+
+        <label class="cms__label">Copyright</label>
+        <input class="cms__input"
+              [(ngModel)]="mediaService.media.copyright" />
+
+        <label class="cms__label">Alternatieve tekst</label>
+        <input class="cms__input"
+              [(ngModel)]="mediaService.media.altText" />
+
+        <label class="cms__label">Omschrijving</label>
+        <input class="cms__input"
+              [(ngModel)]="mediaService.media.description" />
+      </div>
+
+      <div class="cms-editor-actions">
+        <button class="cms__button active" (click)="mediaService.edit = false">Annuleren</button>
+        <button class="cms__button active" (click)="mediaService.save()">Opslaan</button>
       </div>
     </div>
   </div>

@@ -26,6 +26,7 @@ export class Article {
   featured: boolean;
   RATable: Feed[];
   site: Site[];
+  uuid: string;
   snippetsJson: Snippet[];
   headerCrop: string;
 
@@ -48,6 +49,7 @@ export class Article {
     this.RATable = [];
     this.site = [];
     this.snippetsJson = [];
+    this.uuid = '';
     this.headerCrop = 'center';
   }
 }

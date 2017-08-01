@@ -11,33 +11,33 @@ table {
   border-bottom: 0;
   border-right: 0;
   border-radius: 3px;
-}
 
-td, th {
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-  padding: 10px;
-  color: rgb(68, 68, 68);
-  border-bottom: 1px solid rgb(224, 224, 224);
-  border-right: 1px solid rgb(224, 224, 224);
-  text-align: left;
-  background: #fff;
-}
-
-td {
-  &:last-child {
-    border-radius: 0 0 3px 0;
+  a {
+    font-weight: bold;
+    color: $cms-highlight;
   }
-}
 
-a {
-  font-weight: bold;
-  color: $cms-highlight;
-}
+  td, th {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 10px;
+    color: rgb(68, 68, 68);
+    border-bottom: 1px solid rgb(224, 224, 224);
+    border-right: 1px solid rgb(224, 224, 224);
+    text-align: left;
+    background: #fff;
+  }
 
-tr.even {
   td {
-    background: #f4f4f4;
+    &:last-child {
+      border-radius: 0 0 3px 0;
+    }
+  }
+
+  tr.even {
+    td {
+      background: #f4f4f4;
+    }
   }
 }
 
@@ -47,4 +47,11 @@ tr.even {
   padding: 15px 10px;
   box-sizing: border-box;
   display: flex;
+}
+
+.cms-header {
+  .cms__button {
+    margin-left: auto;
+    width: 30px;
+  }
 }
