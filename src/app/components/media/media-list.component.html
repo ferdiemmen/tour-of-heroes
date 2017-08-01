@@ -1,11 +1,13 @@
 
 <div class="cms-columns cms-columns--column">
   <div class="cms-header">
+    <app-search [type]="'media'" (searched)="redirectToSearch($event)"></app-search>
+
     <label for="fileupload" class="cms__button cms__button--icon active" >
       <input id="fileupload" type="file" name="image" multiple hidden />
       <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
     </label>
-s  </div>
+  </div>
   <div class="cms-columns__column scrollable--y">
     <div class="media-list">
       <div class="media-list__item" *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even" [ngClass]="{ odd: odd, even: even }" (click)="mediaService.selectedMedia(media)">
@@ -15,6 +17,6 @@ s  </div>
     </div>
   </div>
   <div class="cms-footer">
-    <app-pagination [route]="'/cms/media-list'" [routeParams]="{ type: 'images' }" [service]="mediaService.paginationService"></app-pagination>
+    <app-pagination [route]="'/cms/media-list'" [routeParams]="{ type: 'images', 'q': query }" [service]="mediaService.paginationService"></app-pagination>
   </div>
 </div>

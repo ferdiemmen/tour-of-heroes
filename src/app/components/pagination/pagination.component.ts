@@ -35,6 +35,12 @@ export class PaginationComponent {
   constructor() { }
 
   getQueryParameters(page: number): Object {
+    for (const key in this.routeParams) {
+      if (this.routeParams.hasOwnProperty(key)) {
+        if (!this.routeParams[key]) { delete this.routeParams[key]; }
+      }
+    }
+
     const queryParams: Object = Object.assign({}, this.routeParams, { page: page });
     return queryParams;
   }

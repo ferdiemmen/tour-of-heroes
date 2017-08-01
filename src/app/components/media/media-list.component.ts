@@ -1,6 +1,6 @@
 
 import { Component, Input, ElementRef, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import * as $ from 'jquery';
 import 'jqueryui';
@@ -17,17 +17,24 @@ import { MediaService } from './media.service';
   styleUrls: ['./media-list.component.scss'],
 })
 export class MediaListComponent implements OnInit, AfterViewInit {
+  query: string;
 
   constructor(
     public mediaService: MediaService,
     private _elementRef: ElementRef,
+    private _router: Router,
     private route: ActivatedRoute) { }
+
+  redirectToSearch(query: string) {
+    this.query = query;
+    this._router.navigate(['/cms/media-list/'], { queryParams: { type: 'images', q: query } });
+  }
 
   ngOnInit(): void {
 
     this.route
       .queryParams
-      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects((params['type']) ? params['type'] : 'images', params['page']))
+      .switchMap((params: ParamMap) => this.mediaService.getMediaObjects((params['type']) ? params['type'] : 'images', params['page'], params['q']))
       .subscribe();
   }
 

@@ -12,7 +12,8 @@ import { PaginationService } from '../pagination/pagination.service';
 declare var _rs: any;
 
 const config = {
-  mediaUrl: 'modules/media/'
+  mediaUrl: 'modules/media/',
+  mediaSearchUrl: 'modules/search/images/'
 };
 
 @Injectable()
@@ -38,10 +39,14 @@ export class MediaService {
       .then(response => this.media = response.json() as Media);
   }
 
-  getMediaObjects(type: string, page?: number): Promise<Media[]> {
+  getMediaObjects(type: string, page?: number, q?: string): Promise<Media[]> {
     let url = `${this.mediaUrl}${type}/?sort=true&details=true`;
-    const cacheKey = (page) ? `mediaobjects_${page}` : 'mediaobjects_1';
+    let cacheKey = (page) ? `mediaobjects_${page}` : 'mediaobjects_1';
 
+    if (q) {
+      url = `${config.mediaSearchUrl}/?q=${q}`;
+      cacheKey = `${cacheKey}_${q}`;
+    }
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
