@@ -1,7 +1,7 @@
 <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
 <div class="snippet snippet__list">
   <div class="snippet-edit" *ngIf="edit">
-    <input type="number" [value]="snippet.data.amount" [formControl]="amountControl" />
+    <input type="number" [value]="snippet.data['amount']" [formControl]="amountControl" />
 
     <div class="snippet-edit__element scrollable--y">
       <label class="cms-checkbox" *ngFor="let category of categoryService.categories" >
@@ -14,7 +14,7 @@
       </label>
     </div>
 
-    <input type="text" [value]="snippet.data.tag" [formControl]="tagControl" />
+    <input type="text" [value]="snippet.data['tag']" [formControl]="tagControl" />
 
     <button type="button" (click)="getList()">Aanpassen</button>
   </div>

@@ -3,13 +3,13 @@
 <div class="snippet snippet__review">
   <div class="snippet-edit" *ngIf="edit">
 
-    <input type="text" [value]="snippet.data.productname" [formControl]="productnameControl" />
-    <input type="number" [value]="snippet.data.score" [formControl]="scoreControl" />
-    <textarea [value]="snippet.data.conclusion" [formControl]="conclusionControl" ></textarea>
+    <input type="text" [value]="snippet.data['productname']" [formControl]="productnameControl" />
+    <input type="number" [value]="snippet.data['score']" [formControl]="scoreControl" />
+    <textarea [value]="snippet.data['conclusion']" [formControl]="conclusionControl" ></textarea>
 
-    <ul *ngFor="let positive of snippet.data.positives;let i = index">
+    <ul *ngFor="let positive of snippet.data['positives'];let i = index">
       <li>
-        <input type="text" [(ngModel)]="snippet.data.positives[i].text">
+        <input type="text" [(ngModel)]="snippet.data['positives'][i].text">
         <button (click)="removePositive(i)">
           <i class="fa fa-minus-square-o" aria-hidden="true"></i>
         </button>
@@ -19,9 +19,9 @@
       <i class="fa fa-plus-square-o" aria-hidden="true"></i>
     </button>
 
-    <ul *ngFor="let negative of snippet.data.negatives;let i = index">
+    <ul *ngFor="let negative of snippet.data['negatives'];let i = index">
       <li>
-        <input type="text" [(ngModel)]="snippet.data.negatives[i].text">
+        <input type="text" [(ngModel)]="snippet.data['negatives'][i].text">
         <button (click)="removeNegative(i)">
           <i class="fa fa-minus-square-o" aria-hidden="true"></i>
         </button>
@@ -42,26 +42,26 @@
           <span>
             <div>Score</div>
             <span>
-              <span>{{snippet.data.score|multiply:10}}
+              <span>{{snippet.data['score']|multiply:10}}
               </span>
             </span>
           </span>
           <div>
-            <ul *ngIf="snippet.data.positives">
+            <ul *ngIf="snippet.data['positives']">
               <li>Pluspunten</li>
-              <li *ngFor="let positive of snippet.data.positives">{{positive.text}}</li>
+              <li *ngFor="let positive of snippet.data['positives']">{{positive.text}}</li>
             </ul>
 
-            <ul *ngIf="snippet.data.negatives">
+            <ul *ngIf="snippet.data['negatives']">
               <li>Minpunten</li>
-              <li *ngFor="let negative of snippet.data.negatives">{{negative.text}}</li>
+              <li *ngFor="let negative of snippet.data['negatives']">{{negative.text}}</li>
             </ul>
           </div>
         </td>
 
         <td>
-          <h2>{{snippet.data.productname}}</h2>
-          <div [innerHtml]="snippet.data.conclusion"></div>
+          <h2>{{snippet.data['productname']}}</h2>
+          <div [innerHtml]="snippet.data['conclusion']"></div>
         </td>
       </tr>
     </tbody>

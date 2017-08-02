@@ -10,7 +10,7 @@ import { Snippet } from '../snippet';
     <textarea
       class="snippet snippet__html"
       rows="20"
-      [(ngModel)]="snippet.data.body"></textarea>
+      [(ngModel)]="snippet.data['body']"></textarea>
   `,
 })
 export class SnippetHtmlComponent {

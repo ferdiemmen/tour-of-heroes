@@ -14,7 +14,7 @@ import { Snippet } from '../snippet';
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
     <div class="video-embed-container video-embed-container--16x9 snippet snippet__twitch">
       <div class="snippet-edit" *ngIf="edit">
-        <input [value]="snippet.data.body" [formControl]="urlControl" />
+        <input [value]="snippet.data['body']" [formControl]="urlControl" />
         <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <iframe
@@ -28,6 +28,7 @@ import { Snippet } from '../snippet';
   `,
 })
 export class SnippetTwitchComponent implements OnInit {
+  edit: boolean = false;
   urlControl: FormControl = new FormControl();
   url: SafeResourceUrl;
 

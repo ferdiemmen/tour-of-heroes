@@ -20,7 +20,7 @@ declare var instgrm: any;
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
     <div class="snippet snippet__instagram">
       <div class="snippet-edit" *ngIf="edit">
-        <input [value]="snippet.data.body" [formControl]="urlControl" />
+        <input [value]="snippet.data['body']" [formControl]="urlControl" />
         <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <div class="instagram-media"></div>
@@ -28,6 +28,7 @@ declare var instgrm: any;
   `,
 })
 export class SnippetInstagramComponent implements OnInit {
+  edit: boolean = false;
   urlControl: FormControl = new FormControl();
 
   @Input('snippet') snippet: Snippet;

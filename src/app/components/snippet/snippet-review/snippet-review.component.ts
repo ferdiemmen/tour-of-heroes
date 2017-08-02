@@ -13,6 +13,7 @@ import { Snippet } from '../snippet';
   templateUrl: './snippet-review.component.html'
 })
 export class SnippetReviewComponent {
+  edit: boolean = false;
   productnameControl: FormControl = new FormControl();
   scoreControl: FormControl = new FormControl();
   conclusionControl: FormControl = new FormControl();

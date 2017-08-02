@@ -9,7 +9,7 @@ import { Snippet } from '../snippet';
   styleUrls: ['./snippet-container.component.scss'],
   template: `
     <div class="snippet snippet__container">
-      <app-snippets [snippets]="snippet.data.subSnippets"></app-snippets>
+      <app-snippets [snippets]="snippet.data['subSnippets']"></app-snippets>
     </div>
   `,
 })

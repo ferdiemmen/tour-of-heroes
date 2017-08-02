@@ -16,9 +16,9 @@ import { Snippet } from '../snippet';
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
     <div class="snippet snippet__kieskeurig">
       <div class="snippet-edit" *ngIf="edit">
-        <ul *ngFor="let product of snippet.data.products;let i = index">
+        <ul *ngFor="let product of snippet.data['products'];let i = index">
           <li>
-            <input type="text" [(ngModel)]="snippet.data.products[i].id">
+            <input type="text" [(ngModel)]="snippet.data['products'][i].id">
             <button (click)="removeProduct(i)">
               <i class="fa fa-minus-square-o" aria-hidden="true"></i>
             </button>
@@ -28,14 +28,14 @@ import { Snippet } from '../snippet';
           <i class="fa fa-plus-square-o" aria-hidden="true"></i>
         </button>
 
-        <input [value]="snippet.data.group" [formControl]="groupControl" />
-        <input [value]="snippet.data.height" [formControl]="heightControl" />
+        <input [value]="snippet.data['group']" [formControl]="groupControl" />
+        <input [value]="snippet.data['height']" [formControl]="heightControl" />
 
         <button type="button" (click)="updateUrl()">Aanpassen</button>
       </div>
       <iframe
         width="640"
-        [height]="snippet.data.height"
+        [height]="snippet.data['height']"
         [src]="url"
         frameborder="0"
         allowfullscreen>

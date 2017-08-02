@@ -8,7 +8,7 @@ declare var _rs: any;
 
 @Injectable()
 export class ConfigService {
-  private config: Object;
+  public config: Object;
 
   constructor() {
     this.config = $.extend(true, {}, _rs);

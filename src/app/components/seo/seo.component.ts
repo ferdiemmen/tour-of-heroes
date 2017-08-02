@@ -2,8 +2,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import 'rxjs/add/operator/debounceTime';
-
 import { ArticleService } from '../article/article.service';
 
 declare var _rs: any;
@@ -27,49 +25,42 @@ export class SeoComponent {
 
   constructor() {
     this.seoKeywordControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => {
         this.service.article.seoKeyword = value;
         this.check();
       });
 
     this.titleTagControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => {
         this.service.article.titleTag = value;
         this.check();
       });
 
     this.descriptionControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => {
         this.service.article.description = value;
         this.check();
       });
 
     this.tagsControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => {
         this.service.article.tags = value;
         this.check();
       });
 
     this.sourceControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => {
         this.service.article.source = value;
         this.check();
       });
 
     this.sourceUrlControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => {
         this.service.article.sourceUrl = value;
         this.check();
       });
 
     this.canonicalControl.valueChanges
-      .debounceTime(1000)
       .subscribe(value => {
         this.service.article.canonical = value;
         this.check();

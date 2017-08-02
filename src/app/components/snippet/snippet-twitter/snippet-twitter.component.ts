@@ -17,7 +17,7 @@ declare var twttr: any;
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
     <div class="snippet snippet__twitter">
       <div class="snippet-edit" *ngIf="edit">
-        <input [value]="snippet.data.body" [formControl]="tweetControl" />
+        <input [value]="snippet.data['body']" [formControl]="tweetControl" />
         <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <div class="twitter-media"></div>
@@ -25,6 +25,7 @@ declare var twttr: any;
   `,
 })
 export class SnippetTwitterComponent implements OnInit {
+  edit: boolean = false;
   tweetControl: FormControl = new FormControl();
 
   @Input('snippet') snippet: Snippet;

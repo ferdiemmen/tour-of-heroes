@@ -14,13 +14,13 @@ import { Snippet } from '../snippet';
     <i class="fa fa-cog" aria-hidden="true" (click)="edit = !edit"></i>
     <div class="video-embed-container video-embed-container--16x9 snippet snippet__iframe">
       <div class="snippet-edit" *ngIf="edit">
-        <input [value]="snippet.data.body" [formControl]="urlControl" />
-        <input [value]="snippet.data.height" [formControl]="heightControl" />
+        <input [value]="snippet.data['body']" [formControl]="urlControl" />
+        <input [value]="snippet.data['height']" [formControl]="heightControl" />
         <button type="button" (click)="edit = !edit">Aanpassen</button>
       </div>
       <iframe
         width="640"
-        [height]="snippet.data.height"
+        [height]="snippet.data['height']"
         [src]="url"
         frameborder="0"
         allowfullscreen>
@@ -29,6 +29,7 @@ import { Snippet } from '../snippet';
   `,
 })
 export class SnippetIframeComponent implements OnInit {
+  edit: boolean = false;
   urlControl: FormControl = new FormControl();
   heightControl: FormControl = new FormControl();
   url: SafeResourceUrl;

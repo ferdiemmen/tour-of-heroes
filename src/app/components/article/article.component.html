@@ -1,7 +1,7 @@
 
 <div class="cms-columns cms-columns--column">
   <div class="cms-header">
-    <a *ngIf="articleService.article.uuid" [href]="articleService.article.frontendUrls[configService.config.siteId] + '?draft=' + articleService.article.uuid" class="cms__button">
+    <a *ngIf="articleService.article.uuid" [href]="articleService.article.frontendUrls[configService.config['siteId']] + '?draft=' + articleService.article.uuid" class="cms__button">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
   </div>
@@ -98,22 +98,22 @@
           <label class="cms__label">Publiceer datum</label>
           <input class="cms__input"
                 [ngModel]="articleService.article.publishDate|date:'dd MM y H:mm'"
-                [locale]="'nl'"
-                [mode]="'dropdown'"
-                [theme]="'#222628'"
-                [autoClose]="true"
-                [(dateTimePicker)]="articleService.article.publishDate" readonly />
+                [attr.locale]="'nl'"
+                [attr.mode]="'dropdown'"
+                [attr.theme]="'#222628'"
+                [attr.autoClose]="true"
+                [(attr.dateTimePicker)]="articleService.article.publishDate" readonly />
         </div>
 
         <div class="cms-group__item">
           <label class="cms__label">Depubliceer datum</label>
           <input class="cms__input"
                 [ngModel]="articleService.article.expiryDate|date:'dd MM y H:mm'"
-                [locale]="'nl'"
-                [mode]="'dropdown'"
-                [theme]="'#222628'"
-                [autoClose]="true"
-                [(dateTimePicker)]="articleService.article.expiryDate" readonly />
+                [attr.locale]="'nl'"
+                [attr.mode]="'dropdown'"
+                [attr.theme]="'#222628'"
+                [attr.autoClose]="true"
+                [(attr.dateTimePicker)]="articleService.article.expiryDate" readonly />
         </div>
       </div>
 

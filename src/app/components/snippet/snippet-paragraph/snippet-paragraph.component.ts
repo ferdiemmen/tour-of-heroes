@@ -9,8 +9,8 @@ import { Snippet } from '../snippet';
   template: `
     <medium-editor
       class="snippet snippet__paragraph"
-      [(editorModel)]="snippet.data.body"
-      [editorOptions]="{'disableReturn': true, 'toolbar': false}">
+      [(editorModel)]="snippet.data['body']"
+      [editorOptions]="{'disableReturn': true, 'toolbar': {'buttons': ['bold', 'italic', 'underline', 'anchor', 'unorderedlist']}}">
     </medium-editor>
   `,
 })

@@ -7,7 +7,12 @@ import { MediaService } from './media.service';
 @Component({
   selector: 'app-media-resized',
   template: `
-    <img class="b-lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url}}" [ngClass]="{noimage : !url}" />
+    <img class="b-lazy"
+         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+         data-src="{{url}}"
+         [attr.width]="width"
+         [attr.height]="height"
+         [ngClass]="{noimage : !url}" />
   `,
   styleUrls: ['./media-resized.component.scss']
 })
