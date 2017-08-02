@@ -22,7 +22,7 @@ const config = {
 @Injectable()
 export class MediaService {
   public media: Media;
-  public mediaObjects: Media[];
+  public mediaObjects: Media[] = [];
   public edit: boolean = false;
   private mediaUrl = config.mediaUrl; // URL to web api
 

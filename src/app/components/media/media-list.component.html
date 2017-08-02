@@ -10,7 +10,14 @@
   </div>
   <div class="cms-columns__column">
     <div class="media-list-container scrollable--y">
-      <div class="media-list" [ngClass]="{edit : mediaService.edit}">
+
+      <div class="cms-loading" *ngIf="!mediaService.mediaObjects.length">
+        <div class="cms-loading__content">
+          Media word opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="media-list" [ngClass]="{edit : mediaService.edit}" *ngIf="mediaService.mediaObjects.length">
         <div class="media-list__item"
              *ngFor="let media of mediaService.mediaObjects; let odd=odd; let even=even"
              [ngClass]="{ active: media.active }"

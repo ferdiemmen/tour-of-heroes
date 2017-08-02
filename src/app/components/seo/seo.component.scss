@@ -12,6 +12,7 @@
 
   &__alerts {
     padding: 10px;
+    padding-bottom: 0;
     background: darken($cms-background, 10);
     margin-top: 10px;
   }
@@ -25,7 +26,7 @@
     display: table-cell;
     vertical-align: middle;
     color: #fff;
-    margin: 0 0 10px;
+    padding-bottom: 10px;
   }
 
   &__link {
