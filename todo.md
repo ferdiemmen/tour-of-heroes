@@ -1,11 +1,13 @@
 ✓ Login
 - Password reset
 
-- SEO tab
-- SEO score
+✓ SEO tab
+✓ SEO score
 - SEO calculation
 
 - Site specific styling
+
+- Styling header image crop settings
 
 ✓ Snippet create
 ✓ Snippet delete

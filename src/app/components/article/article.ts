@@ -25,10 +25,18 @@ export class Article {
   showComments: boolean;
   featured: boolean;
   RATable: Feed[];
+  titleTag: string;
+  description: string;
+  seoKeyword: string;
+  tags: string;
+  source: string;
+  sourceUrl: string;
+  canonical: string;
   site: Site[];
   uuid: string;
   frontendUrls: object;
   snippetsJson: Snippet[];
+  snippetsMediaObjects: Media[];
   headerCrop: string;
 
   constructor(article?: object) {
@@ -49,8 +57,16 @@ export class Article {
     this.frontendUrls = (article) ? article['frontendUrls'] : {};
     this.featured = false;
     this.RATable = [];
+    this.titleTag = '';
+    this.description = '';
+    this.seoKeyword = '';
+    this.tags = '';
+    this.source = '';
+    this.sourceUrl = '';
+    this.canonical = '';
     this.site = [];
     this.snippetsJson = [];
+    this.snippetsMediaObjects = [];
     this.uuid = '';
     this.headerCrop = 'center';
   }

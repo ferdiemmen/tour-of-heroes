@@ -1,0 +1,39 @@
+<div class="cms-seo">
+  <h3 class="cms-seo__title">SEO <span>score: {{service.article.seoScore}}%</span></h3>
+  <form no-validate name="metaForm" class="cms__form">
+    <label class="cms__label">Focus-trefwoord</label>
+    <small class="cms__description">Waarop moet dit artikel gevonden worden?</small>
+    <input type="text" class="cms__input" name="seoKeyword" [formControl]="seoKeywordControl" />
+
+    <label class="cms__label">Titel <span *ngIf="service.article.titleTag">({{service.article.titleTag.length}} / 55)</span></label>
+    <small class="cms__description">Word gebruikt als de "title" tag.</small>
+    <input class="cms__input" type="text" [(ngModel)]="service.article.titleTag" name="titleTag" />
+
+    <label class="cms__label">Omschrijving</label>
+    <small class="cms__description" *ngIf="service.article.description">({{service.article.description.length}} / 100)</small>
+    <textarea class="cms__textarea" [(ngModel)]="service.article.description" name="description" [ngClass]="{'invalid': service.article.description.length > 100}"></textarea>
+
+    <label class="cms__label">Trefwoorden (keywords)</label>
+    <span class="cms__description">Een door komma's gescheiden lijst van woorden.</span>
+    <input class="cms__input" type="text" [(ngModel)]="service.article.tags" name="tags" />
+
+    <label class="cms__label">Nieuws bron</label>
+    <input class="cms__input" type="text" [(ngModel)]="service.article.source" placeholder="vb. Google" name="source" />
+
+    <label class="cms__label">Nieuws bron url</label>
+    <small class="cms__description">vb. https://www.google.com</small>
+    <input class="cms__input" type="text" [(ngModel)]="service.article.sourceUrl" pattern="^https?:\/\/.+" name="sourceUrl" />
+
+    <label class="cms__label">Canonical</label>
+    <small class="cms__description">vb. http://google.com</small>
+    <input class="cms__input" type="text" [(ngModel)]="service.article.canonical" pattern="^https?:\/\/.+" name="canonical" />
+  </form>
+
+  <ul class="cms-seo__alerts" *ngIf="service.article.seoScore !== 100">
+    <li *ngFor="let alert of alerts" [ngSwitch]="alert.valid" class="cms-seo__alert">
+      <div class="cms-seo__content" *ngIf="alert.visible && !alert.valid">
+        <span *ngSwitchCase="false"><i class="cms-seo__icon cms-seo__icon--invalid"></i> <span [innerHtml]="alert.alertInvalid"></span></span>
+      </div>
+    </li>
+  </ul>
+</div>

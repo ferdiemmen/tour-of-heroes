@@ -31,7 +31,8 @@
         "../node_modules/jqueryui/jquery-ui.min.js",
         "../node_modules/blazy/blazy.min.js",
         "js/instagram/embeds.js",
-        "js/twitter/widgets.js"
+        "js/twitter/widgets.js",
+        "js/seo-check/seo-check.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

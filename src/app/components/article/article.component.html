@@ -81,6 +81,10 @@
       </select>
     </div>
 
+    <div class="cms-tabs__content" *ngIf="tabIndex === 2">
+      <app-seo [service]="articleService"></app-seo>
+    </div>
+
     <div class="cms-tabs__content" *ngIf="tabIndex === 3">
 
       <label class="cms__label">Status</label>

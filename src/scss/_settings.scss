@@ -6,5 +6,7 @@ $cms-highlight:                         #2196F3 !default;
 $cms-alert:                             #B71C1C !default;
 $cms-toolbar-background:                $cms-background !default;
 $cms-inactive:                          lighten($cms-background, 10) !default;
+$cms-valid:                             #7ad03a !default;
+$cms-invalid:                           #B71C1C !default;
 
 $cms-preview--article-width:            640px !default;

@@ -31,8 +31,15 @@ input, textarea {
   font-size: .7em;
   cursor: text;
 
+  &:focus,
   &:hover {
+    outline: none;
     border: 1px solid $cms-highlight;
+  }
+
+  &.invalid,
+  &.ng-invalid {
+    border: 1px solid $cms-invalid;
   }
 }
 
