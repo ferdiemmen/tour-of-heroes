@@ -37,7 +37,7 @@ export class MediaService {
       this.paginationService = new PaginationService();
 
       this._hotkeysService.add(new Hotkey(['esc'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
-        this.cancel();
+        this.reset();
 
         event.returnValue = false; // Prevent bubbling
         return event;
@@ -102,7 +102,7 @@ export class MediaService {
     if (!window.event['shiftKey'] && !window.event['ctrlKey'] && !window.event['metaKey']) {
       if (media['active']) {
         media['active'] = false;
-        this.cancel();
+        this.reset();
       } else {
         this.mediaObjects.map(m => m['active'] = false);
         media['active'] = true;
@@ -112,7 +112,7 @@ export class MediaService {
       if (media['active']) {
         media['active'] = false;
         if (!this.mediaObjects.filter(m => { if (m['active']) { return true; } }).length) {
-          this.cancel();
+          this.reset();
         }
       } else {
         media['active'] = true;
@@ -121,7 +121,7 @@ export class MediaService {
     }
 
     if (!this.deferredService.get()) { return; }
-    this.cancel();
+    this.reset();
     this.deferredService.resolve(media);
     this.deferredService = new DeferredService();
     this.location.back();
@@ -151,12 +151,25 @@ export class MediaService {
 
       this.apiService.put(url, media)
         .then(response => {
-          this.cancel();
+          this.reset();
         });
     });
   }
 
-  cancel(): void {
+  remove(): void {
+    const id = this.media.id;
+    const url = `${config.mediaUrl}${id}/`;
+
+    // Remove media from mediaObjects.
+    this.mediaObjects = this.mediaObjects.filter(m => m.file.mediaId !== this.media.id);
+
+    this.apiService.destroy(url)
+      .then(response => {
+        this.reset();
+      });
+  }
+
+  reset(): void {
     this.edit = false;
     this.media = null;
     this.mediaObjects.map(m => m['active'] = false);

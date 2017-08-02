@@ -56,7 +56,8 @@
       </div>
 
       <div class="cms-editor-actions" *ngIf="mediaService.media">
-        <button class="cms__button active" (click)="mediaService.cancel()">Annuleren</button>
+        <button class="cms__button cms__button--remove" *ngIf="!mediaService.media.isUsed" (click)="mediaService.remove()">Verwijderen</button>
+        <button class="cms__button active" (click)="mediaService.reset()">Annuleren</button>
         <button class="cms__button active" (click)="mediaService.save()">Opslaan</button>
       </div>
     </div>

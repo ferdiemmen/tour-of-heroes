@@ -25,8 +25,8 @@
 
 ✓ Mediabrowser
 ✓ Media upload
-- Media update
-- Media remove
+✓ Media update
+✓ Media remove
 
 - Productbrowser
 - Product search

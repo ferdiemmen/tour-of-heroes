@@ -30,6 +30,10 @@ export class ApiService {
     return this._apiCall('PUT', url, body);
   }
 
+  destroy(url: string): Promise<any> {
+    return this._apiCall('DELETE', url);
+  }
+
   upload(url: string, data: any): any {
     data.url = url;
     data.headers = this._getHeaders(true, true);

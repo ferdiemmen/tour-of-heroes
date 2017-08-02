@@ -24,6 +24,12 @@
     outline: none;
   }
 
+  &--remove {
+    &:hover {
+      border-color: $cms-alert;
+    }
+  }
+
   &--icon {
     i {
       position: absolute;
