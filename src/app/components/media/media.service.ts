@@ -99,7 +99,7 @@ export class MediaService {
   selectedMedia(media: Media): void {
     this.edit = true;
 
-    if (!window.event['shiftKey']) {
+    if (!window.event['shiftKey'] && !window.event['ctrlKey'] && !window.event['metaKey']) {
       if (media['active']) {
         media['active'] = false;
         this.cancel();

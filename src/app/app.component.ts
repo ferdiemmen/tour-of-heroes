@@ -1,6 +1,5 @@
 
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 
 
 @Component({
@@ -9,9 +8,6 @@ import { Location } from '@angular/common';
 })
 export class AppComponent {
 
-  constructor(private location: Location) { }
+  constructor() { }
 
-  goBack(): void {
-    this.location.back();
-  }
 }
