@@ -92,29 +92,11 @@
         <span *ngIf="!articleService.article.published"><i class="fa fa-clock-o" aria-hidden="true"></i> Concept</span>
       </button>
 
-      <div class="cms-group">
-        <div class="cms-group__item">
-          <label class="cms__label">Publiceer datum</label>
-          <input class="cms__input"
-                [ngModel]="articleService.article.publishDate|date:'dd MM y H:mm'"
-                [attr.locale]="'nl'"
-                [attr.mode]="'dropdown'"
-                [attr.theme]="'#222628'"
-                [attr.autoClose]="true"
-                [(attr.dateTimePicker)]="articleService.article.publishDate" readonly />
-        </div>
+      <label class="cms__label">Publiceer datum</label>
+      <input [(ngModel)]="articleService.article.publishDate" ngui-datetime-picker date-format="DD-MM-YYYY hh:mm" />
 
-        <div class="cms-group__item">
-          <label class="cms__label">Depubliceer datum</label>
-          <input class="cms__input"
-                [ngModel]="articleService.article.expiryDate|date:'dd MM y H:mm'"
-                [attr.locale]="'nl'"
-                [attr.mode]="'dropdown'"
-                [attr.theme]="'#222628'"
-                [attr.autoClose]="true"
-                [(attr.dateTimePicker)]="articleService.article.expiryDate" readonly />
-        </div>
-      </div>
+      <label class="cms__label">Depubliceer datum</label>
+      <input [(ngModel)]="articleService.article.expiryDate" ngui-datetime-picker date-format="DD-MM-YYYY hh:mm" />
 
       <hr class="cms__hr">
 

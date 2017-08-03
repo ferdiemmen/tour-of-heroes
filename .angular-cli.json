@@ -30,6 +30,8 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/jqueryui/jquery-ui.min.js",
         "../node_modules/blazy/blazy.min.js",
+        "../node_modules/moment/min/moment.min.js",
+        "../node_modules/moment/locale/nl.js",
         "js/instagram/embeds.js",
         "js/twitter/widgets.js",
         "js/seo-check/seo-check.js"
