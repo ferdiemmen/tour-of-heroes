@@ -25,6 +25,7 @@
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
+    margin-bottom: 1px;
   }
 
   &.edit {
@@ -36,7 +37,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0,0,0,.4);
+        background: rgba(0,0,0,.6);
         content: '';
         display: block;
       }
@@ -52,7 +53,7 @@
 .cms-header,
 .cms-footer {
   width: 100%;
-  padding: 15px 10px;
+  padding: 15px;
   box-sizing: border-box;
   display: flex;
 }
@@ -60,7 +61,7 @@
 .cms-header {
   .cms__button {
     margin-left: auto;
-    width: 200px;
+    width: 250px;
   }
 }
 
@@ -75,5 +76,9 @@
     color: #aaa;
     text-align: center;
     font-size: .9em;
+
+    &--unselected {
+      padding-top: 200%;
+    }
   }
 }
