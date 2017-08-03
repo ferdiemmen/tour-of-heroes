@@ -27,6 +27,7 @@ declare var _rs: any;
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
+  public mediaEdit: boolean = false;
   public siteId: number = _rs.siteId;
   public tabIndex: number;
 
@@ -69,6 +70,10 @@ export class ArticleComponent implements OnInit {
       .then(res => {
         this.articleService.updateProperty('media', res);
       });
+  }
+
+  headerAlignChanged(position: string): void {
+    this.articleService.article.headerCrop = position;
   }
 
   objectById(item1: any, item2: any) {

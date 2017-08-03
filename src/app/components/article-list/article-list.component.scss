@@ -1,16 +1,11 @@
 
 @import '../../../scss/_settings';
 
-.cms-columns__column {
-  padding: 10px;
-}
-
 table {
   width: 100%;
   border: 1px solid rgb(224, 224, 224);
   border-bottom: 0;
   border-right: 0;
-  border-radius: 3px;
 
   a {
     font-weight: bold;
@@ -29,8 +24,15 @@ table {
   }
 
   td {
+
     &:last-child {
       border-radius: 0 0 3px 0;
+    }
+  }
+
+  tr:hover {
+    td {
+      background: lighten($cms-highlight, 30);
     }
   }
 
@@ -58,7 +60,7 @@ table {
     margin: 15px 20px 10px;
   }
 
-  .cms__button {
+  .cms-button {
     margin-left: auto;
     width: auto;
     border: none;
@@ -66,6 +68,7 @@ table {
     border-radius: 0;
     font-size: 1.5em;
     color: #fff;
+    background: $cms-highlight;
 
     &:hover {
       background: $cms-inactive;

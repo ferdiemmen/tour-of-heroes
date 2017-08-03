@@ -34,7 +34,7 @@ import { UserService } from '../user/user.service';
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
       </a>
 
-      <a class="cms-toolbar__link last" (click)="userService.logout()" *ngIf="userService.user">
+      <a class="cms-toolbar__link last" (click)="userService.logout()" *ngIf="userService.authenticated">
         <i class="fa fa-sign-out" aria-hidden="true"></i>
       </a>
     </div>

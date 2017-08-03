@@ -7,18 +7,17 @@ import { MediaService } from './media.service';
 @Component({
   selector: 'app-media-resized',
   template: `
-    <img class="b-lazy"
-         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
          data-src="{{url}}"
          [attr.width]="width"
          [attr.height]="height"
-         [ngClass]="{noimage : !url}" />
+         [ngClass]="{'noimage' : url === 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='}" />
   `,
   styleUrls: ['./media-resized.component.scss']
 })
 export class MediaResizedComponent implements OnInit {
-  public url: string;
-  private _media: Media;
+  public url: string = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  public _media: Media;
   private _crop: string;
 
   @Input('width') width: number;

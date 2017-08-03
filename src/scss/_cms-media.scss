@@ -1,0 +1,68 @@
+
+@import '../scss/settings';
+@import '../scss/extends';
+
+.cms-media__align {
+  @extend %list-reset;
+  background: $cms-background;
+  display: flex;
+  padding-top: 2px;
+  justify-content: center;
+
+  li {
+    display: border-box;
+    margin-top: 1px;
+
+    svg {
+      cursor: pointer;
+      border: 1px solid $cms-background;
+      padding: 4px 10px 6px;
+    }
+
+    &:hover,
+    &.active {
+      svg {
+        border: 1px solid $cms-highlight;
+      }
+    }
+  }
+
+  button {
+    border: none;
+    background: none;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+  svg {
+    path {
+      fill: #9F9F9F;
+    }
+  }
+
+  &--top {
+    svg {
+      path:first-child {
+        fill: $cms-highlight;
+      }
+    }
+  }
+  &--center {
+    margin: 0 20px;
+    svg {
+      path:nth-child(2) {
+        fill: $cms-highlight;
+      }
+    }
+  }
+  &--bottom {
+    svg {
+      path:last-child {
+        fill: $cms-highlight;
+      }
+    }
+  }
+}

@@ -54,14 +54,13 @@ $cms-toolbar-background:          $cms-background !default;
     left: $cms-toolbar-width;
     display: none;
     z-index: 1;
+    font-size: .9em;
 
-    // .cms-toolbar .dropdown__item
     &__item {
       background: $cms-toolbar-background;
 
-      // .cms-toolbar .dropdown__item .cms-toolbar__link
       .cms-toolbar__link {
-        padding: 1.2em 1em;
+        padding: 1.4em 1em;
       }
     }
   }

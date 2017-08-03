@@ -9,6 +9,7 @@ import { ApiService } from '../../api.service';
 
 @Injectable()
 export class UserService {
+  public authenticated: boolean = false;
   private user: User;
   private userUrl = 'accounts/'; // URL to web api
 
@@ -31,6 +32,7 @@ export class UserService {
           return false;
         } else {
           this.user = response.json() as User;
+          this.authenticated = true;
           this._configService.setProperty('csrftoken', this.user.csrftoken);
           return true;
         }

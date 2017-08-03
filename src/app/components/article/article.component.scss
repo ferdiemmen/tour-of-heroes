@@ -6,6 +6,14 @@
   &__media {
     width: 640px;
     height: 360px;
+    position: relative;
+
+    .cms-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
   }
 
   &__title {

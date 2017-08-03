@@ -11,8 +11,8 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./search.component.scss'],
   template: `
     <div class="search">
+      <i class="fa fa-search" aria-hidden="true"></i>
       <input type="text" [value]="query" [formControl]="searchControl" placeholder="Zoeken&hellip;" />
-      <button><i class="fa fa-search" aria-hidden="true"></i></button>
     </div>
   `,
 })

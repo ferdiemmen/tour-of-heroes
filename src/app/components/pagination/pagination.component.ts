@@ -8,7 +8,7 @@ import { PaginationService } from './pagination.service';
   selector: 'app-pagination',
   styleUrls: ['./pagination.component.scss'],
   template: `
-    <div class="pagination">
+    <div class="pagination" *ngIf="service.pages.length > 1">
       <ul>
         <li>
           <span class="pagination__item">

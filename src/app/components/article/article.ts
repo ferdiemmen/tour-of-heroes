@@ -9,6 +9,7 @@ import { Site } from '../site/site';
 
 export class Article {
   id: number;
+  slug: string;
   author: User;
   title: string;
   subtitle: string;
@@ -42,6 +43,7 @@ export class Article {
   constructor(article?: object) {
     this.author = null;
     this.title = (article) ? article['title'] : '';
+    this.slug = '';
     this.subtitle = '';
     this.intro = '';
     this.media = null;

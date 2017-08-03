@@ -34,6 +34,7 @@ import { SearchComponent } from './components/search/search.component';
 import { PageListComponent } from './components/page-list/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 import { MediaResizedComponent } from './components/media/media-resized.component';
+import { MediaAlignComponent } from './components/media/media-align.component';
 import { SeoComponent } from './components/seo/seo.component';
 import { SnippetsComponent } from './components/snippet/snippet.component';
 import { SnippetPickerComponent } from './components/snippet-picker/snippet-picker.component';
@@ -89,6 +90,7 @@ import { ConfigService } from './app-config.service';
     PageListComponent,
     MediaListComponent,
     MediaResizedComponent,
+    MediaAlignComponent,
     DashboardComponent,
     PaginationComponent,
     SeoComponent,
