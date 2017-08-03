@@ -8,11 +8,25 @@
     height: 360px;
     position: relative;
 
+    &:hover {
+      .cms-button {
+        i {
+          color: #fff;
+        }
+      }
+    }
+
     .cms-button {
       position: absolute;
       top: 0;
       right: 0;
       z-index: 1;
+      width: 32px;
+      height: 32px;
+
+      i {
+        text-shadow: 1px 1px #666;
+      }
     }
   }
 
