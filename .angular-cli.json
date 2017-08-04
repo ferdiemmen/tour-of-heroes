@@ -23,6 +23,7 @@
         "../node_modules/medium-editor/dist/css/themes/default.min.css",
         "../node_modules/jqueryui/jquery-ui.min.css",
         "../node_modules/jqueryui/jquery-ui.theme.min.css",
+        "../node_modules/ng-pick-datetime/styles/picker.min.css",
         "scss/styles.scss"
       ],
       "scripts": [

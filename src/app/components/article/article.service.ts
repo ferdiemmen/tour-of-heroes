@@ -1,6 +1,8 @@
 
 import { Injectable } from '@angular/core';
 
+import * as moment from 'moment';
+
 import { Article } from './article';
 import { ApiService } from '../../api.service';
 import { CacheService } from '../../cache.service';
@@ -229,6 +231,11 @@ export class ArticleService {
       default:
         break;
     }
+  }
+
+  updateDateTime(property: string, value: any) {
+    const date = moment(value).format();
+    this.updateProperty(property, date);
   }
 
   updateProperty(property: string, value: any) {

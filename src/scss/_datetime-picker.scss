@@ -1,0 +1,44 @@
+
+@import './settings';
+
+@media only screen and (min-width: 768px) {
+  .owl-moment-picker.owl-picker-dropdown {
+    width: 250px;
+  }
+}
+
+.owl-moment-picker {
+  font-family: Montserrat;
+  border-radius: 0;
+  color: #fff;
+  background: darken($cms-background, 10);
+}
+
+.owl-moment-picker.owl-picker-dropdown {
+  border: none;
+}
+
+.owl-moment-picker-header {
+  background: $cms-highlight;
+  border-radius: 0;
+}
+
+.owl-moment-picker-banner {
+  background: none;
+}
+
+.owl-moment-picker .owl-control-nav .nav-prev:before {
+  border-right: .75em solid #FFF;
+}
+.owl-moment-picker .owl-control-nav .nav-next:before {
+  border-left: .75em solid #FFF;
+}
+
+.owl-moment-picker .owl-svg-icon {
+  background-color: darken($cms-background, 10);
+  fill: $cms-highlight;
+}
+
+.owl-date-panel-day .day-show .day-today {
+  background: $cms-inactive;
+}

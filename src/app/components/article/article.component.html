@@ -93,10 +93,22 @@
       </button>
 
       <label class="cms__label">Publiceer datum</label>
-      <input [(ngModel)]="articleService.article.publishDate" ngui-datetime-picker date-format="DD-MM-YYYY hh:mm" />
+      <input class="cms__input"
+             dateTimePicker
+             (onChange)="articleService.updateDateTime('publishDate', $event)"
+             [value]="articleService.article.publishDate | date:'dd MM y H:mm'"
+             [locale]="'nl'"
+             [viewFormat]= "'DD MM YYYY HH:mm'"
+             [mode]="'dropdown'" readonly>
 
       <label class="cms__label">Depubliceer datum</label>
-      <input [(ngModel)]="articleService.article.expiryDate" ngui-datetime-picker date-format="DD-MM-YYYY hh:mm" />
+      <input class="cms__input"
+             dateTimePicker
+             (onChange)="articleService.updateDateTime('expiryDate', $event)"
+             [value]="articleService.article.expiryDate | date:'dd MM y H:mm'"
+             [locale]="'nl'"
+             [viewFormat]= "'DD MM YYYY HH:mm'"
+             [mode]="'dropdown'" readonly>
 
       <hr class="cms__hr">
 

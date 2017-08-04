@@ -14,8 +14,8 @@ moment.locale('nl');
 
 // Imports from third party components
 import { MediumEditorDirective } from 'angular2-medium-editor/medium-editor.directive';
+import { DateTimePickerModule } from 'ng-pick-datetime';
 import { HotkeyModule } from 'angular2-hotkeys';
-import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -76,7 +76,7 @@ import { ConfigService } from './app-config.service';
     HttpModule,
     JsonpModule,
     ReactiveFormsModule,
-    NguiDatetimePickerModule,
+    DateTimePickerModule,
     // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
     HotkeyModule.forRoot()
