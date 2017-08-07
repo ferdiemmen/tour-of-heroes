@@ -11,7 +11,7 @@ import { ArticleService } from '../article/article.service';
 @Component({
   selector: 'app-article-list',
   templateUrl: './page-list.component.html',
-  styleUrls: ['../article-list/article-list.component.scss'],
+  styleUrls: ['../article/article-list.component.scss'],
   providers: [ArticleService]
 })
 export class PageListComponent implements OnInit {

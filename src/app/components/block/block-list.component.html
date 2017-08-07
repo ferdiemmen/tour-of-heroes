@@ -1,0 +1,57 @@
+
+<div class="cms-columns cms-columns--column">
+  <div class="cms-header">
+    <a routerLink="/cms/block/create" class="cms-button" >
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="cms-columns__column scrollable--y">
+
+    <div class="cms-loading" *ngIf="!areaService.areas.length">
+      <div class="cms-loading__content">
+        Blokken worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <table cellspacing="0" cellpadding="0" *ngIf="areaService.areas.length">
+      <tbody *ngFor="let area of areaService.areas; let first=first">
+        <tr class="table-head" *ngIf="first">
+          <th>Status</th>
+          <th>Titel</th>
+          <th>
+            Aangemaakt
+          </th>
+          <th>
+            Aangepast
+          </th>
+          <th>
+            Gepubliceerd
+          </th>
+          <th>
+            Gewicht
+          </th>
+        </tr>
+        <tr>
+          <th class="group__name" colspan="10">{{area.name}}</th>
+        </tr>
+        <tr class="blockbrowser__item" *ngFor="let block of area.blocks; let odd=odd; let even=even;">
+          <td>
+            <i class="fa fa-check-circle" aria-hidden="true" *ngIf="block.published && block.publishDate"></i>
+            <i class="fa fa-clock-o" aria-hidden="true" *ngIf="!block.published || !block.publishDate"></i>
+          </td>
+          <td><a [routerLink]="['/cms/block/edit', block.id]">{{block.title}}</a></td>
+          <td>{{block.createdAt|date:"dd-MM-yyyy HH:mm"}}</td>
+          <td>{{block.updatedAt|date:"dd-MM-yyyy HH:mm"}}</td>
+          <td>{{block.publishDate|date:"dd-MM-yyyy HH:mm"}}</td>
+          <td>
+            {{block.weight}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- div class="cms-footer">
+    <app-pagination [route]="'/cms/block-list'" [routeParams]="{ 'q': query }" [service]="areaService.paginationService"></app-pagination>
+  </div -->
+</div>

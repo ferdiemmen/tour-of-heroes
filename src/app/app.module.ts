@@ -32,10 +32,11 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { MultiplyPipe } from './pipes/multiply.pipe';
 
 import { ArticleComponent } from './components/article/article.component';
-import { ArticleListComponent } from './components/article-list/article-list.component';
+import { ArticleListComponent } from './components/article/article-list.component';
 import { BlockComponent } from './components/block/block.component';
+import { BlockListComponent } from './components/block/block-list.component';
 import { SearchComponent } from './components/search/search.component';
-import { PageListComponent } from './components/page-list/page-list.component';
+import { PageListComponent } from './components/page/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 import { MediaResizedComponent } from './components/media/media-resized.component';
 import { MediaAlignComponent } from './components/media/media-align.component';
@@ -93,6 +94,7 @@ import { ConfigService } from './app-config.service';
     ArticleComponent,
     ArticleListComponent,
     BlockComponent,
+    BlockListComponent,
     SearchComponent,
     PageListComponent,
     MediaListComponent,

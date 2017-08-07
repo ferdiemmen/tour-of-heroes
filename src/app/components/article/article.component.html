@@ -41,7 +41,7 @@
         </medium-editor>
       </div>
 
-      <app-snippets [snippets]="articleService.article.snippetsJson"></app-snippets>
+      <app-snippets [snippets]="articleService.article.snippetsJson" [snippetService]="articleService.snippetService"></app-snippets>
 
       <pre>{{articleService.article|json}}</pre>
     </div>

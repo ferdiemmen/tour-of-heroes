@@ -1,11 +1,12 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 
 import * as moment from 'moment';
 
 import { Article } from './article';
 import { ApiService } from '../../api.service';
 import { CacheService } from '../../cache.service';
+import { ConfigService } from '../../app-config.service';
 import { User } from '../user/user';
 import { AuthorService } from '../author/author.service';
 import { Category } from '../category/category';
@@ -41,9 +42,10 @@ export class ArticleService {
     public feedService: FeedService,
     public siteService: SiteService,
     public snippetService: SnippetService,
+    private _ngZone: NgZone,
     private apiService: ApiService,
     private cacheService: CacheService) {
-      this.snippetService = new SnippetService();
+      this.snippetService = new SnippetService(this._ngZone);
       this.paginationService = new PaginationService();
     }
 

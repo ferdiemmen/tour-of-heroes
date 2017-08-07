@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit } from '@angular/core';
 
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import * as $ from 'jquery';
@@ -41,12 +41,11 @@ export class SnippetsComponent implements AfterViewInit {
   trashbin: Object[] = [];
 
   @Input('snippets') snippets: Snippet[];
+  @Input('snippetService') snippetService: SnippetService;
 
   constructor(
     private _hotkeysService: HotkeysService,
-    private _elementRef: ElementRef,
-    private _changeDetectorRef: ChangeDetectorRef,
-    private snippetService: SnippetService) {
+    private _elementRef: ElementRef) {
 
       this._hotkeysService.add(new Hotkey(['ctrl+z', 'command+z'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
         if (!this.trashbin.length) { return event; }

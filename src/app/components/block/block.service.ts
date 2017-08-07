@@ -1,9 +1,7 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 
 import * as moment from 'moment';
-
-import { ApplicationRef } from '@angular/core';
 
 import { Block } from './block';
 import { ApiService } from '../../api.service';
@@ -32,8 +30,9 @@ export class BlockService {
     public areaService: AreaService,
     public snippetService: SnippetService,
     private apiService: ApiService,
+    private _ngZone: NgZone,
     private cacheService: CacheService) {
-      this.snippetService = new SnippetService();
+      this.snippetService = new SnippetService(this._ngZone);
       this.paginationService = new PaginationService();
     }
 
@@ -115,20 +114,18 @@ export class BlockService {
       })
   }
 
-  updateDateTime(property: string, value: any) {
+  updateDateTime(property: string, value: any): void {
     const date = moment(value).format();
     this.updateProperty(property, date);
   }
 
-  updateProperty(property: string, value: any) {
+  updateProperty(property: string, value: any): void {
     this.block[property] = value;
     this.cacheService.updateObject(`block_${this.block.id}`, this.block);
   }
 
-  hasProperty(property, value) {
-    if (!this.block[property]) {
-      return false;
-    }
+  hasProperty(property, value): boolean {
+    if (!this.block[property]) { return false; }
 
     return this.block[property].some(o => {
       if (o.id === value.id) {

@@ -36,6 +36,11 @@ export class BlockComponent implements OnInit {
       });
   }
 
+  objectById(item1: any, item2: any) {
+    if (!item1 || !item2) { return };
+    return item1.id === item2.id;
+  }
+
   ngOnInit() {
     this.areaService.get();
 

@@ -2,7 +2,7 @@
 <div class="cms-columns cms-columns--column">
   <div class="cms-columns__column scrollable--y">
     <div class="cms-preview cms-preview--block block">
-      <app-snippets [snippets]="blockService.block.snippetsJson"></app-snippets>
+      <app-snippets [snippets]="blockService.block.snippetsJson" [snippetService]="blockService.snippetService"></app-snippets>
 
       <pre>{{blockService.block|json}}</pre>
     </div>
@@ -65,11 +65,11 @@
       <hr class="cms__hr">
 
       <label class="cms__label">Area</label>
-      <label class="cms-checkbox" *ngFor="let area of areaService.areas" >
-        <input class="cms-checkbox__element" type="checkbox" [checked]="blockService.hasProperty('area', area)" (click)="blockService.toggleProperty('area', area)">
-        <span class="cms-checkbox__name">{{area.name}}</span>
-      </label>
-
+      <select class="cms__select" name="category" [compareWith]="objectById" [(ngModel)]="blockService.block.area">
+        <option *ngFor="let area of areaService.areas" [ngValue]="area">
+          {{ area.name }}
+        </option>
+      </select>
     </div>
 
     <div class="cms-editor-actions">

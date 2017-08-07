@@ -1,5 +1,5 @@
 
-import { Injectable, ApplicationRef } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import * as $ from 'jquery';
 
 import { Snippet } from './snippet';
@@ -29,7 +29,7 @@ const defaults = {
 export class SnippetService {
   public snippets: Snippet[] = [];
 
-  constructor(private chRef: ApplicationRef) { }
+  constructor(private _ngZone: NgZone) { }
 
   /**
    * Add a snippet to the snippets list.
@@ -59,7 +59,8 @@ export class SnippetService {
       }
     }
 
-    this.chRef.tick();
+    // Initiate digest. Refreshing angular.
+    this._ngZone.run(() => {});
   }
 
   /**

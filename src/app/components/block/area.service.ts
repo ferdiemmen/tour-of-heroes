@@ -7,7 +7,7 @@ declare var _rs: any;
 
 @Injectable()
 export class AreaService {
-  public areas: Area[];
+  public areas: Area[] = [];
   private _areaUrl = `modules/blocks/areas/site/${_rs.siteId}/?admin_view=true`;
 
   constructor(private _apiService: ApiService) { }

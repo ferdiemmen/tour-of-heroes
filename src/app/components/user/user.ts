@@ -4,4 +4,6 @@ export class User {
   username: string;
   slug: string;
   csrftoken: string;
+  firstName: string;
+  lastName: string;
 }

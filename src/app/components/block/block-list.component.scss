@@ -1,0 +1,77 @@
+
+@import '../../../scss/_settings';
+
+table {
+  width: 100%;
+  border: 1px solid rgb(224, 224, 224);
+  border-bottom: 0;
+  border-right: 0;
+
+  a {
+    font-weight: bold;
+    color: $cms-highlight;
+  }
+
+  td, th {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 10px;
+    color: rgb(68, 68, 68);
+    border-bottom: 1px solid rgb(224, 224, 224);
+    border-right: 1px solid rgb(224, 224, 224);
+    text-align: left;
+    background: #fff;
+  }
+
+  td {
+
+    &:last-child {
+      border-radius: 0 0 3px 0;
+    }
+  }
+
+  tr:hover {
+    td {
+      background: lighten($cms-highlight, 30);
+    }
+  }
+
+  tr.even {
+    td {
+      background: #f4f4f4;
+    }
+  }
+}
+
+.cms-header,
+.cms-footer {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.cms-footer {
+  padding: 16px;
+}
+
+.cms-header {
+
+  app-search {
+    margin: 15px 20px 10px;
+  }
+
+  .cms-button {
+    margin-left: auto;
+    width: auto;
+    border: none;
+    padding: 16px 22px;
+    border-radius: 0;
+    font-size: 1.5em;
+    color: #fff;
+    background: $cms-highlight;
+
+    &:hover {
+      background: $cms-inactive;
+    }
+  }
+}
