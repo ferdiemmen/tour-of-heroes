@@ -1,0 +1,80 @@
+
+<div class="cms-columns cms-columns--column">
+  <div class="cms-columns__column scrollable--y">
+    <div class="cms-preview cms-preview--block block">
+      <app-snippets [snippets]="blockService.block.snippetsJson"></app-snippets>
+
+      <pre>{{blockService.block|json}}</pre>
+    </div>
+  </div>
+  <div class="cms-footer cms-footer--fill">
+    <app-snippet-picker [snippets]="blockService.block.snippetsJson" [snippetService]="blockService.snippetService"></app-snippet-picker>
+  </div>
+</div>
+
+<div class="cms-advanced">
+  <pre>{{blockService.block|json}}</pre>
+</div>
+
+<div class="cms-editor">
+  <div id="cms-tabs">
+    <div class="cms-tabs__content">
+      <label class="cms__label">Titel tonen?</label>
+      <button class="cms-button cms-button--icon" [ngClass]="{'active': blockService.block.showTitle}" (click)="blockService.block.showTitle = !blockService.block.showTitle">
+        <span *ngIf="blockService.block.showTitle"><i class="fa fa-check-circle" aria-hidden="true"></i> Ja</span>
+        <span *ngIf="!blockService.block.showTitle"><i class="fa fa-clock-o" aria-hidden="true"></i> Nee</span>
+      </button>
+
+      <label class="cms__label">Status</label>
+      <button class="cms-button cms-button--icon" [ngClass]="{'active': blockService.block.published}" (click)="blockService.block.published = !blockService.block.published">
+        <span *ngIf="blockService.block.published"><i class="fa fa-check-circle" aria-hidden="true"></i> Gepubliceerd</span>
+        <span *ngIf="!blockService.block.published"><i class="fa fa-clock-o" aria-hidden="true"></i> Concept</span>
+      </button>
+
+      <label class="cms__label">Publiceer datum</label>
+      <input class="cms__input"
+              dateTimePicker
+              (onChange)="blockService.updateDateTime('publishDate', $event)"
+              [value]="blockService.block.publishDate | date:'dd MM y H:mm'"
+              [locale]="'nl'"
+              [viewFormat]="'DD MM YYYY HH:mm'"
+              [mode]="'dropdown'" readonly>
+
+      <label class="cms__label">Depubliceer datum</label>
+      <input class="cms__input"
+              dateTimePicker
+              (onChange)="blockService.updateDateTime('expiryDate', $event)"
+              [value]="blockService.block.expiryDate | date:'dd MM y H:mm'"
+              [locale]="'nl'"
+              [viewFormat]="'DD MM YYYY HH:mm'"
+              [mode]="'dropdown'" readonly>
+
+      <hr class="cms__hr">
+
+      <label class="cms__label">Tags</label>
+      <span class="cms__description">
+        Een door komma's gescheiden lijst van woorden.<br><br>
+        <strong>[tag]</strong> Het blok is te zien op een artikel met deze tag.<br><br>
+        <strong>preset:all</strong> Het blok is te zien op alle pagina's.<br><br>
+        <strong>preset:frontpage</strong> Het blok is alleen te zien op de voorpagina.<br><br>
+        <strong>preset:article-detail</strong> Het blok is te zien op alle artikelen.<br><br>
+        <strong>preset:article-detail:[slug]</strong> Het blok is alleen te zien op een artikel met deze slug.
+      </span>
+      <input class="cms__input" type="text" [(ngModel)]="blockService.block.tags" name="tags" />
+
+      <hr class="cms__hr">
+
+      <label class="cms__label">Area</label>
+      <label class="cms-checkbox" *ngFor="let area of areaService.areas" >
+        <input class="cms-checkbox__element" type="checkbox" [checked]="blockService.hasProperty('area', area)" (click)="blockService.toggleProperty('area', area)">
+        <span class="cms-checkbox__name">{{area.name}}</span>
+      </label>
+
+    </div>
+
+    <div class="cms-editor-actions">
+      <button class="cms-button active" (click)="save()">Opslaan</button>
+      <button class="cms-button active" (click)="save(true)">Opslaan en opnieuw bewerken</button>
+    </div>
+  </div>
+</div>

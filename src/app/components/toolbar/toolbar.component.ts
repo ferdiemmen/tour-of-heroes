@@ -19,6 +19,7 @@ import { UserService } from '../user/user.service';
         <ul class="dropdown">
           <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/cms/article/create">Artikel</a></li>
           <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/cms/page/create">Pagina</a></li>
+          <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/cms/block/create">Blok</a></li>
         </ul>
       </div>
 

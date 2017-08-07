@@ -40,9 +40,10 @@ export class ArticleService {
     public deferredService: DeferredService,
     public feedService: FeedService,
     public siteService: SiteService,
-    private snippetService: SnippetService,
+    public snippetService: SnippetService,
     private apiService: ApiService,
     private cacheService: CacheService) {
+      this.snippetService = new SnippetService();
       this.paginationService = new PaginationService();
     }
 

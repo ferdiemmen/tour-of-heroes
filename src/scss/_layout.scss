@@ -15,11 +15,13 @@ app-root {
 
 app-article,
 app-article-list,
+app-block,
 app-media-list {
   flex: 1;
 }
 
-app-article {
+app-article,
+app-block {
   display: flex;
   background: #f1f1f1;
 }

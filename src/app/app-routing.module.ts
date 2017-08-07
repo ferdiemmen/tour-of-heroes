@@ -7,6 +7,7 @@ import { AuthenticationComponent } from './components/user/authentication.compon
 import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { BlockComponent } from './components/block/block.component';
 import { PageListComponent } from './components/page-list/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 
@@ -25,7 +26,9 @@ const routes: Routes = [
           { path: 'article/create', component: ArticleComponent },
           { path: 'article/edit/:id', component: ArticleComponent },
           { path: 'page/create', component: ArticleComponent },
-          { path: 'page/edit/:id', component: ArticleComponent }
+          { path: 'page/edit/:id', component: ArticleComponent },
+          { path: 'block/create', component: BlockComponent },
+          { path: 'block/edit/:id', component: BlockComponent }
         ],
       }
     ]

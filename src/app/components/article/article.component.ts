@@ -55,8 +55,6 @@ export class ArticleComponent implements OnInit {
         if (action === 'create' || cont) {
           link = ['/cms/article/edit', article.id];
           action = 'update';
-          // #TODO: Add notification telling user the article is created.
-          // if (cont) {   };
         } else {
           link = ['/cms/article-list'];
         }

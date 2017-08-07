@@ -33,6 +33,7 @@ import { MultiplyPipe } from './pipes/multiply.pipe';
 
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { BlockComponent } from './components/block/block.component';
 import { SearchComponent } from './components/search/search.component';
 import { PageListComponent } from './components/page-list/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
@@ -59,6 +60,8 @@ import { SnippetKieskeurigComponent } from './components/snippet/snippet-kieskeu
 
 import { ArticleService } from './components/article/article.service';
 import { AuthorService } from './components/author/author.service';
+import { BlockService } from './components/block/block.service';
+import { AreaService } from './components/block/area.service';
 import { CategoryService } from './components/category/category.service';
 import { MediaService } from './components/media/media.service';
 import { DeferredService } from './components/deferred/deferred.service';
@@ -89,6 +92,7 @@ import { ConfigService } from './app-config.service';
     ToolbarComponent,
     ArticleComponent,
     ArticleListComponent,
+    BlockComponent,
     SearchComponent,
     PageListComponent,
     MediaListComponent,
@@ -121,6 +125,8 @@ import { ConfigService } from './app-config.service';
   providers: [
     ApiService,
     ArticleService,
+    BlockService,
+    AreaService,
     CategoryService,
     MediaService,
     DeferredService,

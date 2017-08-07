@@ -7,7 +7,7 @@
 
 - Site specific styling
 
-- Styling header image crop settings
+✓ Styling header image crop settings
 
 ✓ Snippet create
 ✓ Snippet delete
