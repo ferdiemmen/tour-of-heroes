@@ -29,14 +29,14 @@ export class BlockService {
     public deferredService: DeferredService,
     public areaService: AreaService,
     public snippetService: SnippetService,
-    private apiService: ApiService,
+    private _apiService: ApiService,
     private _ngZone: NgZone,
-    private cacheService: CacheService) {
+    private _cacheService: CacheService) {
       this.snippetService = new SnippetService(this._ngZone);
       this.paginationService = new PaginationService();
     }
 
-  getBlock(id: number): Promise<Block> {
+  get(id: number): Promise<Block> {
     const url = `${this.blocksUrl}/${id}/`;
     const cacheKey = `block_${id}`;
 
@@ -60,16 +60,7 @@ export class BlockService {
       this.deferredService.reset();
     }
 
-    // Check if a cached version exist and return it.
-    if (this.cacheService.checkCacheKey(cacheKey)) {
-
-      this.block = this.cacheService.getCache(cacheKey);
-      this.snippetService.setSnippets(this.block.snippetsJson);
-
-      return Promise.resolve(this.block as Block);
-    }
-
-    return this.apiService
+    return this._apiService
       .get(url)
       .then(response => {
 
@@ -78,9 +69,6 @@ export class BlockService {
         this.snippetService.setSnippets(this.block.snippetsJson);
         this._setDefaults();
 
-        // Add response to cache.
-        this.cacheService.setCache(cacheKey, response.json() as Block);
-
         return this.block as Block;
       });
   }
@@ -88,34 +76,21 @@ export class BlockService {
   create(): Promise<Block> {
     const url = `${this.blocksUrl}/`;
 
-    return this.apiService
+    this._cacheService.clearCache('areas');
+
+    return this._apiService
       .put(url, this.block)
-      .then(response => {
-        const cacheKey = `block_${response.json().id}`;
-        this.cacheService.setCache(cacheKey, response.json() as Block);
-
-        // Add block to cached blocks.
-        this.cacheService.clearCache('blocks');
-
-        return response.json() as Block;
-      });
+      .then(response => response.json() as Block);
   }
 
   update(): Promise<Block> {
     const url = `${this.blocksUrl}/${this.block.id}/`;
 
-    return this.apiService
+    this._cacheService.clearCache('areas');
+
+    return this._apiService
       .post(url, this.block)
-      .then(response => {
-
-        this.block = response.json() as Block;
-
-        // Update block in cached blocks.
-        this.cacheService
-          .updateObject(`block_${this.block.id}`, this.block);
-
-        return response;
-      })
+      .then(response => this.block = response.json() as Block);
   }
 
   updateDateTime(property: string, value: any): void {
@@ -125,7 +100,7 @@ export class BlockService {
 
   updateProperty(property: string, value: any): void {
     this.block[property] = value;
-    this.cacheService.updateObject(`block_${this.block.id}`, this.block);
+    this._cacheService.updateObject(`block_${this.block.id}`, this.block);
   }
 
   private _setDefaults(): void {

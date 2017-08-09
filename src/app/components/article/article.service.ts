@@ -184,13 +184,13 @@ export class ArticleService {
       .post(url, this.article)
       .then(response => {
 
-        this.article = response.json() as Article;
-
         // Update article in cached articles.
         this.cacheService
           .updateObjectInCacheArray(cacheKey, this.article);
         this.cacheService
           .updateObject(`article_${this.article.id}`, this.article);
+
+        this.article = response.json() as Article;
 
         // Update article in articles.
         this.articles[this.articles.findIndex(el => el.id === this.article.id)] = this.article;

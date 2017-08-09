@@ -37,10 +37,12 @@ export class CacheService {
   }
 
   clearFromCacheArray(id: any, object: any): void {
+    if (!this.cache.hasOwnProperty(id)) { return; }
     this.cache[id] = this.cache[id].filter(o => o !== object);
   }
 
   clearCache(id: any): void {
+    if (!this.cache.hasOwnProperty(id)) { return; }
     delete this.cache[id];
   }
 }

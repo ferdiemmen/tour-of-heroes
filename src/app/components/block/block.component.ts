@@ -45,7 +45,7 @@ export class BlockComponent implements OnInit {
     this.areaService.get();
 
     this._route.paramMap
-      .switchMap((params: ParamMap) => this.blockService.getBlock(+params.get('id')))
+      .switchMap((params: ParamMap) => this.blockService.get(+params.get('id')))
       .subscribe();
   }
 }
