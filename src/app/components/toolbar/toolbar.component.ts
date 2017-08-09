@@ -23,19 +23,19 @@ import { UserService } from '../user/user.service';
         </ul>
       </div>
 
-      <a class="cms-toolbar__link" routerLink="/cms/article-list">
+      <a class="cms-toolbar__link" routerLink="/cms/article-list" data-tooltip="Artikelen">
         <i class="fa fa-file-text-o" aria-hidden="true"></i>
       </a>
 
-      <a class="cms-toolbar__link" routerLink="/cms/page-list">
+      <a class="cms-toolbar__link" routerLink="/cms/page-list" data-tooltip="Pagina's">
         <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
       </a>
 
-      <a class="cms-toolbar__link" [routerLink]="['/cms/media-list']" [queryParams]="{ type: 'images' }">
+      <a class="cms-toolbar__link" [routerLink]="['/cms/media-list']" [queryParams]="{ type: 'images' }" data-tooltip="Media">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
       </a>
 
-      <a class="cms-toolbar__link" routerLink="/cms/block-list">
+      <a class="cms-toolbar__link" routerLink="/cms/block-list" data-tooltip="Blokken">
         <i class="fa fa-th-list" aria-hidden="true"></i>
       </a>
 

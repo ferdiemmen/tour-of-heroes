@@ -30,15 +30,15 @@ table {
     }
   }
 
-  tr:hover {
-    td {
-      background: lighten($cms-highlight, 30);
-    }
-  }
-
   tr.even {
     td {
       background: #f4f4f4;
+    }
+  }
+
+  tr:hover {
+    td {
+      background: #f3f3f3;
     }
   }
 }
@@ -56,15 +56,11 @@ table {
 
 .cms-header {
 
-  app-search {
-    margin: 15px 20px 10px;
-  }
-
   .cms-button {
     margin-left: auto;
     width: auto;
     border: none;
-    padding: 16px 22px;
+    padding: 14px 22px 15px;
     border-radius: 0;
     font-size: 1.5em;
     color: #fff;

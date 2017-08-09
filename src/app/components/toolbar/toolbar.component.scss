@@ -20,12 +20,40 @@ $cms-toolbar-background:          $cms-background !default;
 
   // .cms-toolbar__link
   &__link {
+    position: relative;
     padding: 1em 0;
     display: block;
     color: #fff;
 
     &:hover {
       background: lighten($cms-toolbar-background, 15);
+
+      &[data-tooltip]:before {
+        content: '';
+        display: block;
+        height: auto;
+        width: auto;
+        border-right: 5px solid $cms-background;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        position: absolute;
+        left: 60px;
+        top: 50%;
+        margin-top: -5px;
+      }
+      &[data-tooltip]:after {
+        font-family: Montserrat;
+        border-radius: 3px;
+        text-transform: uppercase;
+        content: attr(data-tooltip);
+        position: absolute;
+        margin-top: -1em;
+        top: 50%;
+        left: 65px;
+        background: $cms-background;
+        font-size: .8em;
+        padding: .5em 1em;
+      }
     }
 
     &:visited {

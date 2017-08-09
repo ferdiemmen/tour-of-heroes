@@ -30,15 +30,15 @@ table {
     }
   }
 
-  tr:hover {
-    td {
-      background: lighten($cms-highlight, 30);
-    }
-  }
-
   tr.even {
     td {
       background: #f4f4f4;
+    }
+  }
+
+  tr:hover {
+    td {
+      background: #f3f3f3;
     }
   }
 }
