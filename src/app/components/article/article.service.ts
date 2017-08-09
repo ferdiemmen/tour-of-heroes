@@ -61,7 +61,7 @@ export class ArticleService {
         this.snippetService.setSnippets([]);
 
         // Set article defaults.
-        this.setDefaults();
+        this._setDefaults();
       }
 
       return Promise.resolve(this.article as Article);
@@ -199,7 +199,7 @@ export class ArticleService {
       })
   }
 
-  private setDefault(property: string): void {
+  private _setDefault(property: string): void {
     switch (property) {
       case 'author':
         // A new article doesn't have a author by default. After we got
@@ -259,13 +259,13 @@ export class ArticleService {
     });
   }
 
-  setDefaults() {
+  _setDefaults() {
 
     // Get categories, authors and feeds. Set the defaults for this article.
-    this.categoryService.getCategories().then(_ => this.setDefault('category'));
-    this.authorService.getAuthors().then(_ => this.setDefault('author'));
-    this.feedService.getFeeds().then(_ => this.setDefault('RATable'));
-    this.siteService.getSites().then(_ => this.setDefault('site'));
+    this.categoryService.getCategories().then(_ => this._setDefault('category'));
+    this.authorService.getAuthors().then(_ => this._setDefault('author'));
+    this.feedService.getFeeds().then(_ => this._setDefault('RATable'));
+    this.siteService.getSites().then(_ => this._setDefault('site'));
   }
 
   toggleProperty(property: string, obj: object) {

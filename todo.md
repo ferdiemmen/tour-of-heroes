@@ -40,8 +40,8 @@
 - Grid update
 - Grid element drag and drop
 
-- Blockbrowser
-- Block create
+✓ Blockbrowser
+✓ Block create
 - Block delete
 - Block update
 

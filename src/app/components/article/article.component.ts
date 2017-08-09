@@ -80,11 +80,6 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.getCategories();
-    this.authorService.getAuthors();
-    this.feedService.getFeeds();
-    this.siteService.getSites();
-
     this.route.paramMap
       .switchMap((params: ParamMap) => this.articleService.getArticle(+params.get('id')))
       .subscribe();

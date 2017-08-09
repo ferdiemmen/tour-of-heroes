@@ -46,6 +46,9 @@ export class BlockService {
         // Clear previous Block instance on service.
         this.block = new Block();
         this.snippetService.setSnippets([]);
+
+        // Set defaults for block.
+        this._setDefaults();
       }
 
       return Promise.resolve(this.block as Block);
@@ -73,6 +76,7 @@ export class BlockService {
         // Set block on this service.
         this.block = response.json() as Block;
         this.snippetService.setSnippets(this.block.snippetsJson);
+        this._setDefaults();
 
         // Add response to cache.
         this.cacheService.setCache(cacheKey, response.json() as Block);
@@ -122,6 +126,26 @@ export class BlockService {
   updateProperty(property: string, value: any): void {
     this.block[property] = value;
     this.cacheService.updateObject(`block_${this.block.id}`, this.block);
+  }
+
+  private _setDefaults(): void {
+
+    // Get areas. Set the defaults for this block.
+    this.areaService.get().then(_ => this._setDefault('area'));
+  }
+
+  private _setDefault(property: string): void {
+    switch (property) {
+      case 'area':
+        // A new article doesn't have a author by default. After we got
+        // all the authors we set it to the site's default author.
+        const blockArea = this.block.area || 1;
+        this.block[property] = this.areaService.areas
+                                                  .find(a => a.id === blockArea);
+        break;
+      default:
+        break;
+    }
   }
 
   hasProperty(property, value): boolean {
