@@ -118,6 +118,14 @@
             <span *ngIf="!articleService.article.featured"><i class="fa fa-close" aria-hidden="true"></i> Nee</span>
           </button>
         </div>
+
+        <div class="cms-group__item">
+          <label class="cms__label">Te zien in lijsten?</label>
+          <button class="cms-button cms-button--icon" [ngClass]="{'active': articleService.article.isListed}" (click)="articleService.article.isListed = !articleService.article.isListed">
+            <span *ngIf="articleService.article.isListed"><i class="fa fa-check" aria-hidden="true"></i> Ja</span>
+            <span *ngIf="!articleService.article.isListed"><i class="fa fa-close" aria-hidden="true"></i> Nee</span>
+          </button>
+        </div>
       </div>
 
       <div class="cms-group">

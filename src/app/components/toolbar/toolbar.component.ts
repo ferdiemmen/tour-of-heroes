@@ -39,6 +39,10 @@ import { UserService } from '../user/user.service';
         <i class="fa fa-th-list" aria-hidden="true"></i>
       </a>
 
+      <a class="cms-toolbar__link" routerLink="/cms/product-list" data-tooltip="Producten">
+        <i class="fa fa-gamepad" aria-hidden="true"></i>
+      </a>
+
       <a class="cms-toolbar__link last" (click)="userService.logout()" *ngIf="userService.authenticated">
         <i class="fa fa-sign-out" aria-hidden="true"></i>
       </a>

@@ -47,8 +47,8 @@ export class BlockService {
         this.block = new Block();
         this.snippetService.setSnippets([]);
 
-        // Set defaults for block.
-        this._setDefaults();
+        // Get areas. Set the defaults for this block.
+        this.areaService.get().then(_ => this._setDefault('area'));
       }
 
       return Promise.resolve(this.block as Block);
@@ -67,7 +67,9 @@ export class BlockService {
         // Set block on this service.
         this.block = response.json() as Block;
         this.snippetService.setSnippets(this.block.snippetsJson);
-        this._setDefaults();
+
+        // Get areas. Set the defaults for this block.
+        this.areaService.get().then(_ => this._setDefault('area'));
 
         return this.block as Block;
       });
@@ -109,12 +111,6 @@ export class BlockService {
   updateProperty(property: string, value: any): void {
     this.block[property] = value;
     this._cacheService.updateObject(`block_${this.block.id}`, this.block);
-  }
-
-  private _setDefaults(): void {
-
-    // Get areas. Set the defaults for this block.
-    this.areaService.get().then(_ => this._setDefault('area'));
   }
 
   private _setDefault(property: string): void {

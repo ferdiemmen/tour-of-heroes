@@ -1,0 +1,40 @@
+
+<div class="cms-columns cms-columns--column">
+  <div class="cms-header">
+    <app-search [type]="'masters'" (searched)="redirectToSearch($event)"></app-search>
+  </div>
+  <div class="cms-columns__column scrollable--y">
+
+    <div class="cms-loading" *ngIf="!productService.masters.length">
+      <div class="cms-loading__content">
+        Producten worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <div class="cms-loading" *ngIf="!productService.masters.length">
+      <div class="cms-loading__content">
+        <span *ngIf="!productService.masters.length && !productService.loadingService.loading">Ai! Er zijn geen producten gevonden <i class="fa fa-meh-o" aria-hidden="true"></i></span>
+        <span *ngIf="productService.loadingService.loading">Producten worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i></span>
+      </div>
+    </div>
+
+    <table cellspacing="0" cellpadding="0" *ngIf="productService.masters.length">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let master of productService.masters">
+          <td>
+            {{master.masterName}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cms-footer">
+    <app-pagination [route]="'/cms/product-list'" [routeParams]="{ 'q': query }" [service]="productService.paginationService"></app-pagination>
+  </div>
+</div>

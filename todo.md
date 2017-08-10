@@ -30,9 +30,8 @@
 ✓ Media update
 ✓ Media remove
 
-- Productbrowser
+✓ Productbrowser
 - Product search
-- Product update
 
 - Gridbrowser
 - Grid create

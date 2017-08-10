@@ -20,10 +20,11 @@ import { HotkeyModule } from 'angular2-hotkeys';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ApiService } from './api.service';
+import { AuthenticationComponent } from './components/user/authentication.component';
 import { AuthGuard } from './auth-guard.service';
 import { CacheService } from './cache.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AuthenticationComponent } from './components/user/authentication.component';
+import { LoadingService } from './loading.service';
 import { PasswordResetComponent } from './components/user/password-reset.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
@@ -35,12 +36,13 @@ import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article/article-list.component';
 import { BlockComponent } from './components/block/block.component';
 import { BlockListComponent } from './components/block/block-list.component';
-import { SearchComponent } from './components/search/search.component';
-import { PageListComponent } from './components/page/page-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 import { MediaResizedComponent } from './components/media/media-resized.component';
 import { MediaAlignComponent } from './components/media/media-align.component';
+import { PageListComponent } from './components/page/page-list.component';
+import { ProductListComponent } from './components/product/product-list.component';
 import { SeoComponent } from './components/seo/seo.component';
+import { SearchComponent } from './components/search/search.component';
 import { SnippetsComponent } from './components/snippet/snippet.component';
 import { SnippetPickerComponent } from './components/snippet-picker/snippet-picker.component';
 import { SnippetImageComponent } from './components/snippet/snippet-image/snippet-image.component';
@@ -71,37 +73,38 @@ import { SiteService } from './components/site/site.service';
 import { UserService } from './components/user/user.service';
 import { SnippetService } from './components/snippet/snippet.service';
 import { PaginationService } from './components/pagination/pagination.service';
+import { ProductService } from './components/product/product.service';
 import { ConfigService } from './app-config.service';
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     BrowserModule,
+    DateTimePickerModule,
     FormsModule,
     HttpModule,
+    HotkeyModule.forRoot(),
     JsonpModule,
-    ReactiveFormsModule,
-    DateTimePickerModule,
+    ReactiveFormsModule
     // InMemoryWebApiModule.forRoot(InMemoryDataService),
-    AppRoutingModule,
-    HotkeyModule.forRoot()
   ],
   declarations: [
-    MediumEditorDirective,
     AppComponent,
     AuthenticationComponent,
-    PasswordResetComponent,
-    ToolbarComponent,
     ArticleComponent,
     ArticleListComponent,
     BlockComponent,
     BlockListComponent,
-    SearchComponent,
+    DashboardComponent,
     PageListComponent,
+    MediumEditorDirective,
     MediaListComponent,
     MediaResizedComponent,
     MediaAlignComponent,
-    DashboardComponent,
+    PasswordResetComponent,
     PaginationComponent,
+    ProductListComponent,
+    SearchComponent,
     SeoComponent,
     SnippetsComponent,
     SnippetPickerComponent,
@@ -120,19 +123,22 @@ import { ConfigService } from './app-config.service';
     SnippetContainerComponent,
     SnippetReviewComponent,
     SnippetKieskeurigComponent,
+    ToolbarComponent,
 
+    // Pipes
     CapitalizePipe,
     MultiplyPipe
   ],
   providers: [
     ApiService,
+    AreaService,
     ArticleService,
     BlockService,
-    AreaService,
     CategoryService,
     MediaService,
     DeferredService,
     FeedService,
+    LoadingService,
     SiteService,
     AuthorService,
     CacheService,
@@ -140,6 +146,7 @@ import { ConfigService } from './app-config.service';
     ConfigService,
     SnippetService,
     PaginationService,
+    ProductService,
     AuthGuard,
     {
       provide: LOCALE_ID,

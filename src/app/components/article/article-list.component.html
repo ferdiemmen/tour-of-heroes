@@ -11,29 +11,29 @@
 
     <div class="cms-loading" *ngIf="!articleService.articles.length">
       <div class="cms-loading__content">
-        Artikelen worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+        <span *ngIf="!articleService.articles.length && !articleService.loadingService.loading">Ai! Er zijn geen artikelen gevonden <i class="fa fa-meh-o" aria-hidden="true"></i></span>
+        <span *ngIf="articleService.loadingService.loading">Artikelen worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i></span>
       </div>
     </div>
 
     <table cellspacing="0" cellpadding="0" *ngIf="articleService.articles.length">
       <thead>
         <tr>
-          <!-- th>Id</th -->
           <th>Status</th>
-          <th>Partner?</th>
+          <th>Partner</th>
           <th>Titel</th>
           <th>Slug</th>
           <th>Auteur</th>
           <th>Categorie</th>
-          <th>Publiceer datum</th>
-          <th>Depubliceer datum</th>
+          <th>Aangemaakt</th>
+          <th>Aangepast</th>
+          <th>Gepubliceerd</th>
+          <th>Uitgelicht</th>
+          <th>Te zien in lijsten</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let article of articleService.articles; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
-          <!-- td>
-            {{article.id}}
-          </td -->
+        <tr *ngFor="let article of articleService.articles">
           <td>
             <i class="fa fa-check-circle" aria-hidden="true" *ngIf="article.published && article.publishDate"></i>
             <i class="fa fa-clock-o" aria-hidden="true" *ngIf="!article.published || !article.publishDate"></i>
@@ -57,10 +57,21 @@
             {{article.category[0].name}}
           </td>
           <td>
+            {{article.createdAt|date:'dd MMMM y H:mm'}}
+          </td>
+          <td>
+            {{article.updatedAt|date:'dd MMMM y H:mm'}}
+          </td>
+          <td>
             {{article.publishDate|date:'dd MMMM y H:mm'}}
           </td>
           <td>
-            {{article.expiryDate|date:'dd MMMM y H:mm'}}
+            <i class="fa fa-check-circle" *ngIf="article.featured"></i>
+            <i class="fa fa-times-circle" *ngIf="!article.featured"></i>
+          </td>
+          <td>
+            <i class="fa fa-check-circle" *ngIf="article.isListed"></i>
+            <i class="fa fa-times-circle" *ngIf="!article.isListed"></i>
           </td>
         </tr>
       </tbody>

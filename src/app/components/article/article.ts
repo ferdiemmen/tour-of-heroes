@@ -16,6 +16,8 @@ export class Article {
   intro: string;
   media: Media;
   flatpageSlug: string;
+  createdAt: string;
+  updatedAt: string;
   publishDate: string;
   expiryDate: string;
   category: Category[];
@@ -23,6 +25,7 @@ export class Article {
   published: boolean;
   isPartner: boolean;
   isFlatpage: boolean;
+  isListed: boolean;
   showComments: boolean;
   featured: boolean;
   RATable: Feed[];
@@ -48,6 +51,8 @@ export class Article {
     this.intro = '';
     this.media = null;
     this.flatpageSlug = '';
+    this.createdAt = '';
+    this.updatedAt = '';
     this.publishDate = (article) ? article['publishDate'] : moment().format();
     this.expiryDate = '';
     this.category = (article) ? article['category'] : [];
@@ -55,7 +60,8 @@ export class Article {
     this.published = false;
     this.isPartner = false;
     this.isFlatpage = false;
-    this.showComments = false;
+    this.isListed = true;
+    this.showComments = true;
     this.frontendUrls = (article) ? article['frontendUrls'] : {};
     this.featured = false;
     this.RATable = [];

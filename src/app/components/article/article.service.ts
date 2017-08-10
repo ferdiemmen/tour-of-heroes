@@ -17,11 +17,12 @@ import { FeedService } from '../feed/feed.service';
 import { SiteService } from '../site/site.service';
 import { SnippetService } from '../snippet/snippet.service';
 import { PaginationService } from '../pagination/pagination.service';
+import { LoadingService } from '../../loading.service';
 
 declare var _rs: any;
 
 const config = {
-  paginationAmount: 35
+  paginationAmount: 30
 }
 
 @Injectable()
@@ -30,6 +31,7 @@ export class ArticleService {
   public articles: Article[] = [];
   public pages: Article[] = [];
   public paginationService: PaginationService;
+  public loadingService: LoadingService;
 
   private articlesUrl = 'modules/articles'; // URL to web api
   private articlesSearchUrl = 'modules/search/articles'; // URL to search web api
@@ -47,6 +49,7 @@ export class ArticleService {
     private cacheService: CacheService) {
       this.snippetService = new SnippetService(this._ngZone);
       this.paginationService = new PaginationService();
+      this.loadingService = new LoadingService();
     }
 
   getArticle(id: number): Promise<Article> {
@@ -106,6 +109,9 @@ export class ArticleService {
     let cacheKey = (pages) ? 'pages' : 'articles';
     cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
 
+    // Toggle loading service
+    this.loadingService.set(true);
+
     if (query) {
       if (pages) {
         url = `${this.pagesSearchUrl}/?admin_view=true&q=${query}`;
@@ -123,6 +129,10 @@ export class ArticleService {
       const cachedData = this.cacheService.getCache(cacheKey);
       this[(pages) ? 'pages' : 'articles'] = cachedData.results as Article[];
       this.paginationService.setupPagination(cachedData.page, cachedData.numPages);
+
+      // Toggle loading service
+      this.loadingService.set(false);
+
       return Promise.resolve(cachedData.results as Article[]);
     }
 
@@ -153,6 +163,9 @@ export class ArticleService {
         if (cached) {
           this.cacheService.setCache(cacheKey, data);
         }
+
+        // Toggle loading service
+        this.loadingService.set(false);
 
         return this[(pages) ? 'pages' : 'articles'];
       });

@@ -37,7 +37,7 @@
         <tr>
           <th class="group__name" colspan="10">{{area.name}}</th>
         </tr>
-        <tr class="blockbrowser__item" *ngFor="let block of area.blocks; let odd=odd; let even=even" [ngClass]="{ odd: odd, even: even }">
+        <tr class="blockbrowser__item" *ngFor="let block of area.blocks">
           <td>
             <i class="fa fa-check-circle" aria-hidden="true" *ngIf="block.published && block.publishDate"></i>
             <i class="fa fa-clock-o" aria-hidden="true" *ngIf="!block.published || !block.publishDate"></i>

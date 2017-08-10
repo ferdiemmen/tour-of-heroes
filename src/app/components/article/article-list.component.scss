@@ -12,6 +12,14 @@ table {
     color: $cms-highlight;
   }
 
+  .fa-check-circle {
+    color: $cms-valid;
+  }
+
+  .fa-times-circle {
+    color: $cms-invalid;
+  }
+
   td, th {
     font-family: Arial, sans-serif;
     font-size: 11px;
@@ -27,12 +35,6 @@ table {
 
     &:last-child {
       border-radius: 0 0 3px 0;
-    }
-  }
-
-  tr.even {
-    td {
-      background: #f4f4f4;
     }
   }
 
