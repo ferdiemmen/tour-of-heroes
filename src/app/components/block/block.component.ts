@@ -26,7 +26,7 @@ export class BlockComponent implements OnInit {
 
     this.blockService[action]()
       .then(block => {
-        if (action === 'create' || cont) {
+        if (cont) {
           link = ['/cms/block/edit', block.id];
           action = 'update';
         } else {

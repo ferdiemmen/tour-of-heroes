@@ -52,7 +52,7 @@ export class ArticleComponent implements OnInit {
 
     this.articleService[action]()
       .then(article => {
-        if (action === 'create' || cont) {
+        if (cont) {
           link = ['/cms/article/edit', article.id];
           action = 'update';
         } else {
