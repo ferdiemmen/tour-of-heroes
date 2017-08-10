@@ -89,8 +89,7 @@ export class BlockService {
     this._cacheService.clearCache('areas');
 
     return this._apiService
-      .post(url, this.block)
-      .then(response => this.block = response.json() as Block);
+      .post(url, this.block);
   }
 
   remove(): Promise<void> {

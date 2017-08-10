@@ -12,7 +12,7 @@ import { SnippetService } from './snippet.service';
 @Component({
   selector: 'app-snippets',
   template: `
-    <ul class="snippets" [ngClass]="{'empty' : !snippets }">
+    <ul class="snippets" [ngClass]="{'empty' : !snippets }" *ngIf="snippets.length">
       <li class="snippet" *ngFor="let snippet of snippets;let i = index" [id]="i">
         <div class="cms__outline" [ngSwitch]="snippet.type" [attr.data-type]="snippet.type|capitalize">
           <i class="fa fa-arrows handle" aria-hidden="true"></i>
