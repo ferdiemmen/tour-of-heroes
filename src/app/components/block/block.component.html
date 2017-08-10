@@ -80,6 +80,12 @@
     </div>
 
     <div class="cms-editor-actions">
+      <button class="cms-button cms-button--remove" (click)="remove = !remove" *ngIf="!remove">Verwijderen</button>
+      <span class="cms__description" *ngIf="remove"><strong>Weet je het zeker?</strong></span>
+      <div class="cms-group" *ngIf="remove">
+        <button class="cms-group__item cms-button cms-button--cancel" (click)="remove = false">Annuleren</button>
+        <button class="cms-group__item cms-button cms-button--remove" (click)="destroy()" *ngIf="blockService.block.id">Ja</button>
+      </div>
       <button class="cms-button active" (click)="save()">Opslaan</button>
       <button class="cms-button active" (click)="save(true)">Opslaan en opnieuw bewerken</button>
     </div>

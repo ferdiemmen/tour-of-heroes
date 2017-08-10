@@ -93,6 +93,15 @@ export class BlockService {
       .then(response => this.block = response.json() as Block);
   }
 
+  remove(): Promise<void> {
+    const url = `${this.blocksUrl}/${this.block.id}/`;
+
+    this._cacheService.clearCache('areas');
+
+    return this._apiService
+      .destroy(url);
+  }
+
   updateDateTime(property: string, value: any): void {
     const date = moment(value).format();
     this.updateProperty(property, date);

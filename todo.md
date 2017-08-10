@@ -42,8 +42,9 @@
 
 ✓ Blockbrowser
 ✓ Block create
-- Block delete
+✓ Block delete
 - Block update
+- Block move
 
 ✓ Pagination
 

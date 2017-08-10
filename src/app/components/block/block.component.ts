@@ -13,6 +13,7 @@ import { AreaService } from './area.service';
   templateUrl: './block.component.html'
 })
 export class BlockComponent implements OnInit {
+  remove: boolean = false;
 
   constructor(
     public areaService: AreaService,
@@ -34,6 +35,11 @@ export class BlockComponent implements OnInit {
         }
         this._router.navigate(link);
       });
+  }
+
+  destroy(): void {
+    this.blockService.remove()
+      .then(_ => this._router.navigate(['/cms/block-list']));
   }
 
   objectById(item1: any, item2: any) {
