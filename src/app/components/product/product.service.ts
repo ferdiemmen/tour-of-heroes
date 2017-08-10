@@ -20,20 +20,16 @@ export class ProductService {
   }
 
   public getMasters(page: number, query?: string): Promise<Master[]> {
-    let url = this._mastersSearchUrl;
+    const url = this._mastersSearchUrl;
 
-    if (page) {
-      url = `${this._mastersSearchUrl}?page=${page}`;
-    }
-
-    if (query) {
-      url = `${this._mastersSearchUrl}?q=${query}`;
-    }
+    const params = {};
+    if (page) { params['page'] = page; }
+    if (query) { params['query'] = query; }
 
     // Toggle loading service
     this.loadingService.set(true);
 
-    return this._apiService.get(url)
+    return this._apiService.get(url, params)
       .then(response => {
 
         // Toggle loading service

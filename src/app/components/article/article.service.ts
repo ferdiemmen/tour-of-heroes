@@ -103,9 +103,12 @@ export class ArticleService {
   getArticles(page: number, pages?: boolean, cached?: boolean, parameters?: Object, query?: string): Promise<Article[]> {
     const amount = (parameters && parameters.hasOwnProperty('amount')) ? parameters['amount'] : config.paginationAmount;
     const tag = (parameters && parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
+    const params = {
+      admin_view: true
+    };
 
     let url = `${this.articlesUrl}/site/${_rs.siteId}/` +
-              `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/?admin_view=true`;
+              `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/`;
     let cacheKey = (pages) ? 'pages' : 'articles';
     cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
 
@@ -113,12 +116,14 @@ export class ArticleService {
     this.loadingService.set(true);
 
     if (query) {
-      if (pages) {
-        url = `${this.pagesSearchUrl}/?admin_view=true&q=${query}`;
-      } else {
-        url = `${this.articlesSearchUrl}/?admin_view=true&q=${query}`;
-      }
+      params['q'] = query;
       cacheKey = `${cacheKey}_${query}`;
+
+      if (pages) {
+        url = this.pagesSearchUrl;
+      } else {
+        url = this.articlesSearchUrl;
+      }
     }
 
     // Clear previous articles list.
@@ -136,20 +141,10 @@ export class ArticleService {
       return Promise.resolve(cachedData.results as Article[]);
     }
 
-    if (page) {
-      url += '&page=' + page;
-    }
-
-    if (parameters) {
-      for (const key in parameters) {
-        if (parameters.hasOwnProperty(key)) {
-          url += `&${key}=${parameters[key]}`;
-        }
-      }
-    }
+    if (page) { params['page'] = page; }
 
     return this.apiService
-      .get(url)
+      .get(url, params)
       .then(response => {
         const data = response.json();
 
@@ -212,7 +207,50 @@ export class ArticleService {
       })
   }
 
-  private _setDefault(property: string): void {
+  updateDateTime(property: string, value: any) {
+    const date = moment(value).format();
+    this.updateProperty(property, date);
+  }
+
+  updateProperty(property: string, value: any) {
+    this.article[property] = value;
+    this.cacheService.updateObject(`article_${this.article.id}`, this.article);
+  }
+
+  hasProperty(property, value) {
+    if (!this.article[property]) {
+      return false;
+    }
+
+    return this.article[property].some(o => {
+      if (o.id === value.id) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  toggleProperty(property: string, obj: object) {
+    if (!this.article[property]) { this.article[property] = [] }
+
+    // Toggle a property on the article.
+    if (this.article[property].findIndex(el => el.id === obj['id']) !== -1) {
+      this.article[property].splice([this.article[property].findIndex(el => el.id === obj['id'])], 1);
+    } else {
+      this.article[property].push(obj);
+    }
+  }
+
+  private _setDefaults() {
+
+    // Get categories, authors and feeds. Set the defaults for this article.
+    this.categoryService.getCategories().then(_ => this._setDefault('category'));
+    this.authorService.getAuthors().then(_ => this._setDefault('author'));
+    this.feedService.getFeeds().then(_ => this._setDefault('RATable'));
+    this.siteService.getSites().then(_ => this._setDefault('site'));
+  }
+
+    private _setDefault(property: string): void {
     switch (property) {
       case 'author':
         // A new article doesn't have a author by default. After we got
@@ -246,49 +284,6 @@ export class ArticleService {
         break;
       default:
         break;
-    }
-  }
-
-  updateDateTime(property: string, value: any) {
-    const date = moment(value).format();
-    this.updateProperty(property, date);
-  }
-
-  updateProperty(property: string, value: any) {
-    this.article[property] = value;
-    this.cacheService.updateObject(`article_${this.article.id}`, this.article);
-  }
-
-  hasProperty(property, value) {
-    if (!this.article[property]) {
-      return false;
-    }
-
-    return this.article[property].some(o => {
-      if (o.id === value.id) {
-        return true;
-      }
-      return false;
-    });
-  }
-
-  _setDefaults() {
-
-    // Get categories, authors and feeds. Set the defaults for this article.
-    this.categoryService.getCategories().then(_ => this._setDefault('category'));
-    this.authorService.getAuthors().then(_ => this._setDefault('author'));
-    this.feedService.getFeeds().then(_ => this._setDefault('RATable'));
-    this.siteService.getSites().then(_ => this._setDefault('site'));
-  }
-
-  toggleProperty(property: string, obj: object) {
-    if (!this.article[property]) { this.article[property] = [] }
-
-    // Toggle a property on the article.
-    if (this.article[property].findIndex(el => el.id === obj['id']) !== -1) {
-      this.article[property].splice([this.article[property].findIndex(el => el.id === obj['id'])], 1);
-    } else {
-      this.article[property].push(obj);
     }
   }
 }

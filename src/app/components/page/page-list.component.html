@@ -7,7 +7,8 @@
 
     <div class="cms-loading" *ngIf="!articleService.pages.length">
       <div class="cms-loading__content">
-        Pagina's worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
+        <span *ngIf="!articleService.pages.length && !articleService.loadingService.loading">Ai! Er zijn geen pagina's gevonden <i class="fa fa-meh-o" aria-hidden="true"></i></span>
+        <span *ngIf="articleService.loadingService.loading">Pagina's worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i></span>
       </div>
     </div>
 

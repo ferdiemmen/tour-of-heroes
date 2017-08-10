@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Http, Headers, Request, Response, RequestOptions } from '@angular/http';
+import { Http, Headers, Request, Response, RequestOptions, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -18,8 +18,8 @@ export class ApiService {
     private http: Http,
     private configService: ConfigService) { }
 
-  get(url: string): Promise<any> {
-    return this._apiCall('GET', url);
+  get(url: string, params?: object): Promise<any> {
+    return this._apiCall('GET', url, null, params);
   }
 
   post(url: string, body: any): Promise<any> {
@@ -48,11 +48,12 @@ export class ApiService {
     return [_rs.apiUrl, url].join('/');
   }
 
-  private _apiCall(method: string, url: string, body?: any): Promise<any> {
+  private _apiCall(method: string, url: string, body?: any, params?: object): Promise<any> {
     const req = new RequestOptions({
       method: method,
       url: this._getApiUrl(url),
       body: (body) ? JSON.stringify(body) : null,
+      params: params || {},
       headers: this._getHeaders(),
       withCredentials: true
     });

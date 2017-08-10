@@ -31,6 +31,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { MultiplyPipe } from './pipes/multiply.pipe';
+import { GroupByPipe } from './pipes/groupby.pipe';
 
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article/article-list.component';
@@ -127,7 +128,8 @@ import { ConfigService } from './app-config.service';
 
     // Pipes
     CapitalizePipe,
-    MultiplyPipe
+    MultiplyPipe,
+    GroupByPipe
   ],
   providers: [
     ApiService,

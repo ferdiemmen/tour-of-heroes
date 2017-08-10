@@ -53,7 +53,7 @@
           <td *ngIf="article.author">
             {{article.author.firstName}} {{article.author.lastName}} <span *ngIf="article.author.username">({{article.author.username}})</span>
           </td>
-          <td *ngIf="article.category[0]">
+          <td *ngIf="article.category && article.category[0]">
             {{article.category[0].name}}
           </td>
           <td>
