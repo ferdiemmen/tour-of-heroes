@@ -12,7 +12,7 @@ import { SnippetService } from './snippet.service';
 @Component({
   selector: 'app-snippets',
   template: `
-    <ul class="snippets" [ngClass]="{'empty' : !snippets }" *ngIf="snippets.length">
+    <ul class="snippets" [ngClass]="{'empty' : !snippets }">
       <li class="snippet" *ngFor="let snippet of snippets;let i = index" [id]="i">
         <div class="cms__outline" [ngSwitch]="snippet.type" [attr.data-type]="snippet.type|capitalize">
           <i class="fa fa-arrows handle" aria-hidden="true"></i>
@@ -29,7 +29,7 @@ import { SnippetService } from './snippet.service';
           <app-snippet-pagebreak *ngSwitchCase="'pagebreak'" [snippet]="snippet"></app-snippet-pagebreak>
           <app-snippet-html *ngSwitchCase="'html'" [snippet]="snippet"></app-snippet-html>
           <app-snippet-list *ngSwitchCase="'list'" [snippet]="snippet"></app-snippet-list>
-          <app-snippet-container *ngSwitchCase="'snippetcontainer'" [snippet]="snippet"></app-snippet-container>
+          <app-snippet-container *ngSwitchCase="'snippetcontainer'" [snippet]="snippet" [snippetService]="snippetService"></app-snippet-container>
           <app-snippet-review *ngSwitchCase="'review'" [snippet]="snippet"></app-snippet-review>
           <app-snippet-kieskeurig *ngSwitchCase="'kieskeurig'" [snippet]="snippet"></app-snippet-kieskeurig>
         </div>
@@ -75,32 +75,42 @@ export class SnippetsComponent implements AfterViewInit {
     let parentIndex;
     const _self = this;
 
-    $('> ul', this._elementRef.nativeElement).sortable({
-      handle: '.handle',
-      helper: 'original',
-      placeholder: 'ui-state-highlight',
-      forcePlaceholderSize: true,
-      tolerance: 'pointer',
-      start: ( event, ui ) => {
-        previousIndex = ui.item.index();
-      },
-      stop: ( event, ui ) => {
-        if (previousIndex === ui.item.index() || ui.item.index() === -1) { return; }
+    // Check if element existance in the DOM before turning it into a sortable.
+    const elementCheck = setInterval(() => {
 
-        const a = this.snippets[previousIndex];
-        this.snippets.splice(previousIndex, 1);
-        this.snippets.splice(ui.item.index(), 0, a);
-      },
-      receive: function( event, ui ) {
-        if ($(this).closest('.snippet__container')) {
-          parentIndex = $(this).closest('li.snippet').index();
-        }
+      if ($('> ul', this._elementRef.nativeElement).length) {
 
-        const index = $('> ul', _self._elementRef.nativeElement).data('ui-sortable').currentItem.index();
-        _self.snippetService.addSnippet($(ui.item).data('type'), parentIndex, index);
+        // Clear the interval.
+        clearInterval(elementCheck);
 
-        $('.snippets .ui-draggable').remove();
+        $('> ul', this._elementRef.nativeElement).sortable({
+          handle: '.handle',
+          helper: 'original',
+          placeholder: 'ui-state-highlight',
+          forcePlaceholderSize: true,
+          tolerance: 'pointer',
+          start: ( event, ui ) => {
+            previousIndex = ui.item.index();
+          },
+          stop: ( event, ui ) => {
+            if (previousIndex === ui.item.index() || ui.item.index() === -1) { return; }
+
+            const a = this.snippets[previousIndex];
+            this.snippets.splice(previousIndex, 1);
+            this.snippets.splice(ui.item.index(), 0, a);
+          },
+          receive: function( event, ui ) {
+            if ($(this).closest('.snippet__container')) {
+              parentIndex = $(this).closest('li.snippet').index();
+            }
+
+            const index = $('> ul', _self._elementRef.nativeElement).data('ui-sortable').currentItem.index();
+            _self.snippetService.addSnippet($(ui.item).data('type'), parentIndex, index);
+
+            $('.snippets .ui-draggable').remove();
+          }
+        });
       }
-    });
+    }, 100);
   }
 }

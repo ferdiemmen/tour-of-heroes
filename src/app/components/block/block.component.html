@@ -24,11 +24,16 @@
 <div class="cms-editor">
   <div id="cms-tabs">
     <div class="cms-tabs__content">
+      <label class="cms__label">Titel</label>
+      <input class="cms__input" type="text" [(ngModel)]="blockService.block.title" name="title" />
+
       <label class="cms__label">Titel tonen?</label>
       <button class="cms-button cms-button--icon" [ngClass]="{'active': blockService.block.showTitle}" (click)="blockService.block.showTitle = !blockService.block.showTitle">
         <span *ngIf="blockService.block.showTitle"><i class="fa fa-check-circle" aria-hidden="true"></i> Ja</span>
         <span *ngIf="!blockService.block.showTitle"><i class="fa fa-clock-o" aria-hidden="true"></i> Nee</span>
       </button>
+
+      <hr class="cms__hr">
 
       <label class="cms__label">Status</label>
       <button class="cms-button cms-button--icon" [ngClass]="{'active': blockService.block.published}" (click)="blockService.block.published = !blockService.block.published">
