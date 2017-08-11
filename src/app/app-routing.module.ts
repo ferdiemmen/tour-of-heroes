@@ -9,6 +9,8 @@ import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article/article-list.component';
 import { BlockComponent } from './components/block/block.component';
 import { BlockListComponent } from './components/block/block-list.component';
+import { GridComponent } from './components/grid/grid.component';
+import { GridListComponent } from './components/grid/grid-list.component';
 import { PageListComponent } from './components/page/page-list.component';
 import { ProductListComponent } from './components/product/product-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
@@ -32,7 +34,10 @@ const routes: Routes = [
           { path: 'block/create', component: BlockComponent },
           { path: 'block/edit/:id', component: BlockComponent },
           { path: 'block-list', component: BlockListComponent },
-          { path: 'product-list', component: ProductListComponent }
+          { path: 'product-list', component: ProductListComponent },
+          { path: 'grid/create', component: GridComponent },
+          { path: 'grid/edit/:id', component: GridComponent },
+          { path: 'grid-list', component: GridListComponent }
         ],
       }
     ]

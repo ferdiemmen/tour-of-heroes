@@ -7,12 +7,6 @@
 
     <div class="cms-loading" *ngIf="!productService.masters.length">
       <div class="cms-loading__content">
-        Producten worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>
-      </div>
-    </div>
-
-    <div class="cms-loading" *ngIf="!productService.masters.length">
-      <div class="cms-loading__content">
         <span *ngIf="!productService.masters.length && !productService.loadingService.loading">Ai! Er zijn geen producten gevonden <i class="fa fa-meh-o" aria-hidden="true"></i></span>
         <span *ngIf="productService.loadingService.loading">Producten worden opgehaald&hellip; <i class="fa fa-spinner fa-pulse" aria-hidden="true"></i></span>
       </div>

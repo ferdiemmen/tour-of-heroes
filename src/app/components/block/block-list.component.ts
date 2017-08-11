@@ -11,8 +11,7 @@ import { AreaService } from './area.service';
 })
 export class BlockListComponent implements OnInit {
 
-  constructor(
-    public areaService: AreaService) { }
+  constructor(public areaService: AreaService) { }
 
   ngOnInit() {
     this.areaService.get();

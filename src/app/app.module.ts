@@ -37,6 +37,8 @@ import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article/article-list.component';
 import { BlockComponent } from './components/block/block.component';
 import { BlockListComponent } from './components/block/block-list.component';
+import { GridComponent } from './components/grid/grid.component';
+import { GridListComponent } from './components/grid/grid-list.component';
 import { MediaListComponent } from './components/media/media-list.component';
 import { MediaResizedComponent } from './components/media/media-resized.component';
 import { MediaAlignComponent } from './components/media/media-align.component';
@@ -69,6 +71,8 @@ import { AreaService } from './components/block/area.service';
 import { CategoryService } from './components/category/category.service';
 import { MediaService } from './components/media/media.service';
 import { DeferredService } from './components/deferred/deferred.service';
+import { GridService } from './components/grid/grid.service';
+import { GridElementService } from './components/grid/grid-element.service';
 import { FeedService } from './components/feed/feed.service';
 import { SiteService } from './components/site/site.service';
 import { UserService } from './components/user/user.service';
@@ -97,6 +101,8 @@ import { ConfigService } from './app-config.service';
     BlockComponent,
     BlockListComponent,
     DashboardComponent,
+    GridComponent,
+    GridListComponent,
     PageListComponent,
     MediumEditorDirective,
     MediaListComponent,
@@ -137,6 +143,8 @@ import { ConfigService } from './app-config.service';
     ArticleService,
     BlockService,
     CategoryService,
+    GridService,
+    GridElementService,
     MediaService,
     DeferredService,
     FeedService,

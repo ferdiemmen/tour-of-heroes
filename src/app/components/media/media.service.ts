@@ -27,13 +27,13 @@ export class MediaService {
   private mediaUrl = config.mediaUrl; // URL to web api
 
   constructor(
-    public deferredService: DeferredService,
     public paginationService: PaginationService,
     private _hotkeysService: HotkeysService,
-    private apiService: ApiService,
-    private router: Router,
-    private location: Location,
-    private cacheService: CacheService) {
+    private _apiService: ApiService,
+    private _deferredService: DeferredService,
+    private _router: Router,
+    private _location: Location,
+    private _cacheService: CacheService) {
       this.paginationService = new PaginationService();
 
       this._hotkeysService.add(new Hotkey(['esc'], (event: KeyboardEvent, combo: string): ExtendedKeyboardEvent => {
@@ -46,7 +46,7 @@ export class MediaService {
 
   getMedia(id: number): Promise<Media> {
     const url = `${this.mediaUrl}${id}/`;
-    return this.apiService
+    return this._apiService
       .get(url)
       .then(response => this.media = response.json() as Media);
   }
@@ -61,8 +61,8 @@ export class MediaService {
     }
 
     // Check if a cached version exist and return it.
-    if (this.cacheService.checkCacheKey(cacheKey)) {
-      const cachedData = this.cacheService.getCache(cacheKey);
+    if (this._cacheService.checkCacheKey(cacheKey)) {
+      const cachedData = this._cacheService.getCache(cacheKey);
       this.mediaObjects = cachedData.results;
       this.paginationService.setupPagination(cachedData.page, cachedData.numPages);
       return Promise.resolve(cachedData.results);
@@ -72,14 +72,14 @@ export class MediaService {
       url += '&page=' + page;
     }
 
-    return this.apiService
+    return this._apiService
       .get(url)
       .then(response => {
         const data = response.json();
         data.results = this.wrapFilesInMedia(data.results) as Media[];
 
         // Set cache for media objects.
-        this.cacheService.setCache(cacheKey, data);
+        this._cacheService.setCache(cacheKey, data);
 
         this.paginationService.setupPagination(data.page, data.numPages);
 
@@ -120,21 +120,21 @@ export class MediaService {
       }
     }
 
-    if (!this.deferredService.get()) { return; }
+    if (!this._deferredService.get()) { return; }
     this.reset();
-    this.deferredService.resolve(media);
-    this.deferredService = new DeferredService();
-    this.location.back();
+    this._deferredService.resolve(media);
+    this._deferredService = new DeferredService();
+    this._location.back();
   }
 
   pickMedia(): Promise<Media> {
-    this.router.navigate(['/cms/media-list']);
-    return this.deferredService.set();
+    this._router.navigate(['/cms/media-list']);
+    return this._deferredService.set();
   }
 
   upload(data): void {
     const url = `${_rs.apiUrl}/${config.mediaUrl}image/`;
-    this.apiService.upload(url, data)
+    this._apiService.upload(url, data)
       .done(response => {
         this.mediaObjects.unshift(this.wrapFilesInMedia([response])[0] as Media)
       });
@@ -149,7 +149,7 @@ export class MediaService {
       media.id = m.file.mediaId;
       const url = `${config.mediaUrl}${media.id}/`;
 
-      this.apiService.put(url, media)
+      this._apiService.put(url, media)
         .then(response => {
           this.reset();
         });
@@ -163,7 +163,7 @@ export class MediaService {
     // Remove media from mediaObjects.
     this.mediaObjects = this.mediaObjects.filter(m => m.file.mediaId !== this.media.id);
 
-    this.apiService.destroy(url)
+    this._apiService.destroy(url)
       .then(response => {
         this.reset();
       });

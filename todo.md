@@ -31,7 +31,7 @@
 ✓ Media remove
 
 ✓ Productbrowser
-- Product search
+✓ Product search
 
 - Gridbrowser
 - Grid create
@@ -42,7 +42,7 @@
 ✓ Blockbrowser
 ✓ Block create
 ✓ Block delete
-- Block update
+✓ Block update
 - Block move
 
 ✓ Pagination

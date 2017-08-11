@@ -23,7 +23,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
     public mediaService: MediaService,
     private _elementRef: ElementRef,
     private _router: Router,
-    private route: ActivatedRoute) { }
+    private _route: ActivatedRoute) { }
 
   redirectToSearch(query: string) {
     this.query = query;
@@ -32,7 +32,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.route
+    this._route
       .queryParams
       .switchMap((params: ParamMap) => this.mediaService.getMediaObjects((params['type']) ? params['type'] : 'images', params['page'], params['q']))
       .subscribe();

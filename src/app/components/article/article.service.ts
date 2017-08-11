@@ -1,5 +1,7 @@
 
 import { Injectable, NgZone } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import * as moment from 'moment';
 
@@ -30,34 +32,38 @@ export class ArticleService {
   public article: Article = new Article();
   public articles: Article[] = [];
   public pages: Article[] = [];
+  public articleDeferred: DeferredService;
   public paginationService: PaginationService;
   public loadingService: LoadingService;
 
-  private articlesUrl = 'modules/articles'; // URL to web api
-  private articlesSearchUrl = 'modules/search/articles'; // URL to search web api
-  private pagesSearchUrl = 'modules/search/pages'; // URL to search web api
+  private _articlesUrl = 'modules/articles';
+  private _articlesSearchUrl = 'modules/search/articles';
+  private _pagesSearchUrl = 'modules/search/pages';
 
   constructor(
     public categoryService: CategoryService,
     public authorService: AuthorService,
-    public deferredService: DeferredService,
     public feedService: FeedService,
     public siteService: SiteService,
     public snippetService: SnippetService,
     private _ngZone: NgZone,
+    private _router: Router,
+    private _location: Location,
+    private _deferredService: DeferredService,
     private apiService: ApiService,
     private cacheService: CacheService) {
+      this.articleDeferred = new DeferredService();
       this.snippetService = new SnippetService(this._ngZone);
       this.paginationService = new PaginationService();
       this.loadingService = new LoadingService();
     }
 
   getArticle(id: number): Promise<Article> {
-    const url = `${this.articlesUrl}/${id}/`;
+    const url = `${this._articlesUrl}/${id}/`;
     const cacheKey = `article_${id}`;
 
     if (!id) {
-      if (!this.deferredService.get()) {
+      if (!this._deferredService.get()) {
 
         // Clear previous Article instance on service.
         this.article = new Article();
@@ -73,7 +79,7 @@ export class ArticleService {
       // Clear previous Article instance on service.
       this.article = new Article();
       this.snippetService.setSnippets([]);
-      this.deferredService.reset();
+      this._deferredService.reset();
     }
 
     // Check if a cached version exist and return it.
@@ -107,7 +113,7 @@ export class ArticleService {
       admin_view: true
     };
 
-    let url = `${this.articlesUrl}/site/${_rs.siteId}/` +
+    let url = `${this._articlesUrl}/site/${_rs.siteId}/` +
               `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/`;
     let cacheKey = (pages) ? 'pages' : 'articles';
     cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
@@ -120,9 +126,9 @@ export class ArticleService {
       cacheKey = `${cacheKey}_${query}`;
 
       if (pages) {
-        url = this.pagesSearchUrl;
+        url = this._pagesSearchUrl;
       } else {
-        url = this.articlesSearchUrl;
+        url = this._articlesSearchUrl;
       }
     }
 
@@ -167,7 +173,7 @@ export class ArticleService {
   }
 
   create(): Promise<Article> {
-    const url = `${this.articlesUrl}/`;
+    const url = `${this._articlesUrl}/`;
 
     return this.apiService
       .put(url, this.article)
@@ -183,7 +189,7 @@ export class ArticleService {
   }
 
   update(): Promise<Article> {
-    const url = `${this.articlesUrl}/${this.article.id}/`;
+    const url = `${this._articlesUrl}/${this.article.id}/`;
     const cacheKey =  (this.article.isFlatpage) ?
                       `pages_${this.paginationService.currentPage}` :
                       `articles_${this.paginationService.currentPage}`;
@@ -241,7 +247,20 @@ export class ArticleService {
     }
   }
 
-  private _setDefaults() {
+  pickArticle(): Promise<Article> {
+    this._router.navigate(['/cms/article-list/']);
+    return this.articleDeferred.set();
+  }
+
+  selectedArticle(article: Article): void {
+    if (!this.articleDeferred.get()) { return; }
+
+    this.articleDeferred.resolve(article);
+    this.articleDeferred = new DeferredService();
+    this._location.back();
+  }
+
+  private _setDefaults(): void {
 
     // Get categories, authors and feeds. Set the defaults for this article.
     this.categoryService.getCategories().then(_ => this._setDefault('category'));
@@ -250,7 +269,7 @@ export class ArticleService {
     this.siteService.getSites().then(_ => this._setDefault('site'));
   }
 
-    private _setDefault(property: string): void {
+  private _setDefault(property: string): void {
     switch (property) {
       case 'author':
         // A new article doesn't have a author by default. After we got

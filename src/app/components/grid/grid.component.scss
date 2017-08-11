@@ -1,0 +1,55 @@
+
+@import '../../../scss/settings';
+@import '../../../scss/mixins';
+
+ul {
+  @extend %list-reset;
+}
+
+.grid {
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.grid-element {
+  position: absolute;
+
+  &__title {
+    position: absolute;
+  }
+}
+
+.grid-selectable {
+  width: 32px;
+  height: 32px;
+  background: $cms-background;
+  float: left;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    border-right: 1px solid $cms-inactive;
+    border-bottom: 1px solid $cms-inactive;
+  }
+
+  &.ui-selecting {
+    &:before {
+      border: 1px solid $cms-highlight;
+    }
+  }
+}

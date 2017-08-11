@@ -39,8 +39,8 @@ export class ArticleComponent implements OnInit {
     public feedService: FeedService,
     public siteService: SiteService,
     public configService: ConfigService,
-    private router: Router,
-    private route: ActivatedRoute) {
+    private _router: Router,
+    private _route: ActivatedRoute) {
 
       // Set initial tab index.
       this.tabIndex = 1;
@@ -58,8 +58,12 @@ export class ArticleComponent implements OnInit {
         } else {
           link = ['/cms/article-list'];
         }
-        this.router.navigate(link);
+        this._router.navigate(link);
       });
+  }
+
+  cancel(): void {
+    this._router.navigate(['/cms/article-list']);
   }
 
   setHeaderMedia(): void {
@@ -80,7 +84,7 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
+    this._route.paramMap
       .switchMap((params: ParamMap) => this.articleService.getArticle(+params.get('id')))
       .subscribe();
   }

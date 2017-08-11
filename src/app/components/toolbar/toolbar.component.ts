@@ -20,6 +20,7 @@ import { UserService } from '../user/user.service';
           <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/cms/article/create">Artikel</a></li>
           <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/cms/page/create">Pagina</a></li>
           <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/cms/block/create">Blok</a></li>
+          <li class="dropdown__item"><a class="cms-toolbar__link" routerLink="/cms/grid/create">Grid</a></li>
         </ul>
       </div>
 
@@ -41,6 +42,10 @@ import { UserService } from '../user/user.service';
 
       <a class="cms-toolbar__link" routerLink="/cms/product-list" data-tooltip="Producten">
         <i class="fa fa-gamepad" aria-hidden="true"></i>
+      </a>
+
+      <a class="cms-toolbar__link" routerLink="/cms/grid-list" data-tooltip="Grid">
+        <i class="fa fa-th" aria-hidden="true"></i>
       </a>
 
       <a class="cms-toolbar__link last" (click)="userService.logout()" *ngIf="userService.authenticated">

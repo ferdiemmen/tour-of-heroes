@@ -1,0 +1,73 @@
+
+<div class="cms-columns cms-columns--column">
+    <div class="cms-columns__column scrollable--y">
+      <div class="cms-preview cms-preview--grid grid">
+        <ul class="grid-container">
+          <li class="grid-element"
+              *ngFor="let element of gridService.grid.elements"
+              [ngStyle]="{'top': element.styles['top'], 'left': element.styles['left'], 'width': element.styles['width'], 'height': element.styles['height']}">
+
+            <h3 class="grid-element__title">
+              {{element.objectDetails.title}}
+            </h3>
+            <app-media-resized
+              [media]="element.objectDetails.media"
+              [width]="element.styles['width']"
+              [height]="element.styles['height']"></app-media-resized>
+          </li>
+        </ul>
+        <ul class="grid-container selectable">
+          <li class="grid-selectable" *ngFor="let item of selectableRange"></li>
+        </ul>
+      </div>
+
+      <pre>{{gridService.grid|json}}</pre>
+    </div>
+  </div>
+
+  <div class="cms-editor">
+    <div id="cms-tabs">
+      <div class="cms-tabs__content">
+        <label class="cms__label">Titel</label>
+        <input class="cms__input" type="text" [(ngModel)]="gridService.grid.title" name="title" />
+
+        <hr class="cms__hr">
+
+        <label class="cms__label">Status</label>
+        <button class="cms-button cms-button--icon" [ngClass]="{'active': gridService.grid.published}" (click)="gridService.grid.published = !gridService.grid.published">
+          <span *ngIf="gridService.grid.published"><i class="fa fa-check-circle" aria-hidden="true"></i> Gepubliceerd</span>
+          <span *ngIf="!gridService.grid.published"><i class="fa fa-clock-o" aria-hidden="true"></i> Concept</span>
+        </button>
+
+        <label class="cms__label">Publiceer datum</label>
+        <input class="cms__input"
+                dateTimePicker
+                (onChange)="gridService.updateDateTime('publishDate', $event)"
+                [value]="gridService.grid.publishDate | date:'dd MM y H:mm'"
+                [locale]="'nl'"
+                [viewFormat]="'DD MM YYYY HH:mm'"
+                [mode]="'dropdown'" readonly>
+
+        <label class="cms__label">Depubliceer datum</label>
+        <input class="cms__input"
+                dateTimePicker
+                (onChange)="gridService.updateDateTime('expiryDate', $event)"
+                [value]="gridService.grid.expiryDate | date:'dd MM y H:mm'"
+                [locale]="'nl'"
+                [viewFormat]="'DD MM YYYY HH:mm'"
+                [mode]="'dropdown'" readonly>
+
+      </div>
+
+      <div class="cms-editor-actions">
+        <button class="cms-button cms-button--remove" (click)="remove = !remove" *ngIf="!remove">Verwijderen</button>
+        <span class="cms__description" *ngIf="remove"><strong>Weet je het zeker?</strong></span>
+        <div class="cms-group" *ngIf="remove">
+          <button class="cms-group__item cms-button cms-button--cancel" (click)="remove = false">Annuleren</button>
+          <button class="cms-group__item cms-button cms-button--remove" (click)="destroy()" *ngIf="gridService.grid.id">Ja</button>
+        </div>
+        <button class="cms-button active" (click)="save()">Opslaan</button>
+        <button class="cms-button active" (click)="save(true)">Opslaan en opnieuw bewerken</button>
+      </div>
+    </div>
+  </div>

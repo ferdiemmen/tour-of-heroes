@@ -1,0 +1,75 @@
+
+@import '../../../scss/_settings';
+
+table {
+  width: 100%;
+  border: 1px solid rgb(224, 224, 224);
+  border-bottom: 0;
+  border-right: 0;
+
+  a {
+    font-weight: bold;
+    color: $cms-highlight;
+  }
+
+  .fa-check-circle {
+    color: $cms-valid;
+  }
+
+  .fa-times-circle {
+    color: #aaa;
+  }
+
+  td, th {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 10px;
+    color: rgb(68, 68, 68);
+    border-bottom: 1px solid rgb(224, 224, 224);
+    border-right: 1px solid rgb(224, 224, 224);
+    text-align: left;
+    background: #fff;
+  }
+
+  td {
+
+    &:last-child {
+      border-radius: 0 0 3px 0;
+    }
+  }
+
+  tr:hover {
+    td {
+      background: #f3f3f3;
+    }
+  }
+}
+
+.cms-header,
+.cms-footer {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.cms-footer {
+  padding: 16px;
+}
+
+.cms-header {
+
+  .cms-button {
+    margin-left: auto;
+    width: auto;
+    border: none;
+    padding: 14px 22px 15px;
+    border-radius: 0;
+    font-size: 1.5em;
+    color: #fff;
+    background: $cms-highlight;
+
+    &:hover {
+      background: $cms-inactive;
+    }
+  }
+}

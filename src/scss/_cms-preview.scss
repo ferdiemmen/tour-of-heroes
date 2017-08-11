@@ -5,6 +5,8 @@
 $cms-preview--article-width:           640px !default;
 $cms-preview--page-width:              970px !default;
 $cms-preview--block-width:             300px !default;
+$cms-preview--grid-width:              960px !default;
+$cms-preview--grid-height:             480px !default;
 
 .cms-preview {
   background: #fff;
@@ -21,5 +23,12 @@ $cms-preview--block-width:             300px !default;
 
   &--block {
     width: $cms-preview--block-width;
+  }
+
+  &--grid {
+    width: $cms-preview--grid-width;
+    max-width: $cms-preview--grid-width;
+    min-width: $cms-preview--grid-width;
+    height: $cms-preview--grid-height;
   }
 }
