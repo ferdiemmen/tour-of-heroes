@@ -248,7 +248,17 @@ export class ArticleService {
   }
 
   pickArticle(): Promise<Article> {
-    this._router.navigate(['/cms/article-list/']);
+    // this._router.navigate(['/cms/article-list/']);
+    if (this._router.navigated === false) {
+      // Case when route was not used yet
+      this._router.navigateByUrl('/cms/article-list/');
+    } else {
+      // Case when route was used once or more
+      this._router.navigateByUrl('/cms)
+        .then(() => {
+          this._router.navigateByUrl('/cms/article-list/');
+        });
+    }
     return this.articleDeferred.set();
   }
 
