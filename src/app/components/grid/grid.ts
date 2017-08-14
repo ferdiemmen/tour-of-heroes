@@ -15,9 +15,9 @@ export class Grid {
   constructor(grid?: object) {
     this.active = false;
     this.published = false;
+    this.elements = [];
 
     if (grid) {
-      this.elements = [];
       grid['elements'].forEach(element => {
         this.elements.push(new GridElement(element));
       });

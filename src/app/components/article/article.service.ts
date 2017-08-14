@@ -32,7 +32,6 @@ export class ArticleService {
   public article: Article = new Article();
   public articles: Article[] = [];
   public pages: Article[] = [];
-  public articleDeferred: DeferredService;
   public paginationService: PaginationService;
   public loadingService: LoadingService;
 
@@ -52,7 +51,6 @@ export class ArticleService {
     private _deferredService: DeferredService,
     private apiService: ApiService,
     private cacheService: CacheService) {
-      this.articleDeferred = new DeferredService();
       this.snippetService = new SnippetService(this._ngZone);
       this.paginationService = new PaginationService();
       this.loadingService = new LoadingService();
@@ -62,15 +60,15 @@ export class ArticleService {
     const url = `${this._articlesUrl}/${id}/`;
     const cacheKey = `article_${id}`;
 
+    // Set article defaults.
+    this._setDefaults();
+
     if (!id) {
       if (!this._deferredService.get()) {
 
         // Clear previous Article instance on service.
         this.article = new Article();
         this.snippetService.setSnippets([]);
-
-        // Set article defaults.
-        this._setDefaults();
       }
 
       return Promise.resolve(this.article as Article);
@@ -248,15 +246,17 @@ export class ArticleService {
   }
 
   pickArticle(): Promise<Article> {
-    this._router.navigate(['/cms/article-list/']);
-    return this.articleDeferred.set();
+    return this._ngZone.run(() => {
+      this._router.navigate(['/cms/article-list/'], {queryParams: {selecting: true}})
+      return this._deferredService.set();
+    });
   }
 
   selectedArticle(article: Article): void {
-    if (!this.articleDeferred.get()) { return; }
+    if (!this._deferredService.get()) { return; }
 
-    this.articleDeferred.resolve(article);
-    this.articleDeferred = new DeferredService();
+    this._deferredService.resolve(article);
+    this._deferredService = new DeferredService();
     this._location.back();
   }
 

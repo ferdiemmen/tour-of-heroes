@@ -15,15 +15,21 @@ export class GridElementService {
   public create(coordinates) {
     this._articleService.pickArticle()
       .then(article => {
-
         const element = this._constructElement(article, coordinates);
-        // this._gridService.addElement
+        this._gridService.addElement(element);
       });
   }
 
   private _constructElement(object: any, coordinates: Array<any>): GridElement {
-    console.log(object, coordinates);
-    return new GridElement();
+
+    object.objectDetails = {
+      title: object.title,
+      subtitle: object.subtitle,
+      category: object.category[0],
+      media: object.media
+    };
+
+    return new GridElement(object, coordinates);
   }
 
 }

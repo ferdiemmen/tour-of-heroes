@@ -75,11 +75,12 @@ export class GridComponent implements OnInit, AfterViewInit {
                 c['left'] = position.left;
                 coordinates.push(c);
               }
+            }).promise().done(() => {
+
+              _self._gridElementService.create(coordinates);
+              $('.grid-selectable', _self._elementRef.nativeElement).removeClass('ui-selected');
             });
 
-            _self._gridElementService.create(coordinates);
-
-            $('.grid-selectable', _self._elementRef.nativeElement).removeClass('ui-selected');
           }
         });
       }

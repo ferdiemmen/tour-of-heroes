@@ -5,8 +5,10 @@ import * as moment from 'moment';
 
 import { ApiService } from '../../api.service';
 import { LoadingService } from '../../loading.service';
+import { DeferredService } from '../deferred/deferred.service';
 import { PaginationService } from '../pagination/pagination.service';
 import { Grid } from './grid';
+import { GridElement } from './grid-element';
 
 declare var _rs: any;
 
@@ -19,17 +21,21 @@ export class GridService {
 
   private _gridUrl: string = `modules/featured_grids/`;
 
-  constructor(private _apiService: ApiService) {
-    this.paginationService = new PaginationService();
-    this.loadingService = new LoadingService();
+  constructor(
+    private _apiService: ApiService,
+    private _deferredService: DeferredService) {
+      this.paginationService = new PaginationService();
+      this.loadingService = new LoadingService();
   }
 
   get(id: number): Promise<Grid> {
     const url: string = `${this._gridUrl}${id}/`;
 
     if (!id) {
-      // Clear previous Grid instance on service.
-      this.grid = new Grid();
+      if (!this._deferredService.get()) {
+        // Clear previous Grid instance on service.
+        this.grid = new Grid();
+      }
 
       return Promise.resolve(this.grid);
     } else {
@@ -59,6 +65,10 @@ export class GridService {
 
         return this.grids = response.json().results as Grid[]
       });
+  }
+
+  addElement(element: GridElement) {
+    this.grid.elements.push(element);
   }
 
   remove(): Promise<void> {

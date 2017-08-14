@@ -2,14 +2,19 @@
 <div class="cms-columns cms-columns--column">
     <div class="cms-columns__column scrollable--y">
       <div class="cms-preview cms-preview--grid grid">
-        <ul class="grid-container">
+        <ul class="grid-container grid-container-content">
           <li class="grid-element"
               *ngFor="let element of gridService.grid.elements"
-              [ngStyle]="{'top': element.styles['top'], 'left': element.styles['left'], 'width': element.styles['width'], 'height': element.styles['height']}">
+              [ngStyle]="{'top': element.styles['top'], 'left': element.styles['left'], 'width': element.styles['widthPX'], 'height': element.styles['heightPX']}">
 
-            <h3 class="grid-element__title">
-              {{element.objectDetails.title}}
-            </h3>
+            <div class="grid-element-content">
+              <h3 class="grid-element__title">
+                {{element.objectDetails.title}}
+              </h3>
+              <span class="grid-element__subtitle">
+                {{element.objectDetails.subtitle}}
+              </span>
+            </div>
             <app-media-resized
               [media]="element.objectDetails.media"
               [width]="element.styles['width']"

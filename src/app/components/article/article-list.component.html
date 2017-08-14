@@ -42,10 +42,10 @@
             <i class="fa fa-times-circle" *ngIf="!article.isPartner"></i>
           </td>
           <td>
-            <a [routerLink]="['/cms/article/edit', article.id]" *ngIf="!articleService.articleDeferred.get()">
+            <a [routerLink]="['/cms/article/edit', article.id]" *ngIf="!selecting">
               {{article.title}}
             </a>
-            <a (click)="articleService.selectedArticle(article)" *ngIf="articleService.articleDeferred.get()">
+            <a (click)="articleService.selectedArticle(article)" *ngIf="selecting">
               {{article.title}}
             </a>
           </td>
