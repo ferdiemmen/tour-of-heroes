@@ -53,8 +53,12 @@ export class SnippetListComponent implements OnInit {
       });
     }
 
+    const options = {
+      parameters: parameters,
+    }
+
     // Make API call to get the articles.
-    this._articleService.getArticles(null, null, false, parameters)
+    this._articleService.getArticles(options)
       .then(response => this.articles = response);
 
     this.edit = false;

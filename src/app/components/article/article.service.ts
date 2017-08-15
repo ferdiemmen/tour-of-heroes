@@ -51,6 +51,7 @@ export class ArticleService {
     private _deferredService: DeferredService,
     private apiService: ApiService,
     private cacheService: CacheService) {
+
       this.snippetService = new SnippetService(this._ngZone);
       this.paginationService = new PaginationService();
       this.loadingService = new LoadingService();
@@ -91,27 +92,27 @@ export class ArticleService {
       });
   }
 
-  getArticles(page: number, pages?: boolean, parameters?: Object, query?: string): Promise<Article[]> {
-    const amount = (parameters && parameters.hasOwnProperty('amount')) ? parameters['amount'] : config.paginationAmount;
-    const tag = (parameters && parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
+  getArticles(options): Promise<Article[]> {
+    const amount = (options.parameters) ? options.parameters.amount : config.paginationAmount;
+    const tag = (options.parameters) ? options.parameters.amount : null;
     const params = {
       admin_view: true
     };
 
     let url = `${this._articlesUrl}/site/${_rs.siteId}/` +
-              `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/`;
+              `${(options.pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/`;
 
-    let cacheKey = (pages) ? 'pages' : 'articles';
-    cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
+    let cacheKey = (options.pages) ? 'pages' : 'articles';
+    cacheKey = (options.page) ? `${cacheKey}_${options.page}` : `${cacheKey}_1`;
 
     // Toggle loading service
     this.loadingService.set(true);
 
-    if (query) {
-      params['q'] = query;
-      cacheKey = `${cacheKey}_${query}`;
+    if (options.query) {
+      params['q'] = options.query;
+      cacheKey = `${cacheKey}_${options.query}`;
 
-      if (pages) {
+      if (options.pages) {
         url = this._pagesSearchUrl;
       } else {
         url = this._articlesSearchUrl;
@@ -119,12 +120,12 @@ export class ArticleService {
     }
 
     // Clear previous articles list.
-    this[(pages) ? 'pages' : 'articles'] = []
+    this[(options.pages) ? 'pages' : 'articles'] = []
 
     // Check if a cached version exist and return it.
     if (this.cacheService.checkCacheKey(cacheKey)) {
       const cachedData = this.cacheService.getCache(cacheKey);
-      this[(pages) ? 'pages' : 'articles'] = cachedData.results as Article[];
+      this[(options.pages) ? 'pages' : 'articles'] = cachedData.results as Article[];
       this.paginationService.setupPagination(cachedData.page, cachedData.numPages);
 
       // Toggle loading service
@@ -133,7 +134,7 @@ export class ArticleService {
       return Promise.resolve(cachedData.results as Article[]);
     }
 
-    if (page) { params['page'] = page; }
+    if (options.page) { params['page'] = options.page; }
 
     return this.apiService
       .get(url, params)
@@ -144,14 +145,14 @@ export class ArticleService {
         this.paginationService.setupPagination(data.page, data.numPages);
 
         // Set articles on this service.
-        this[(pages) ? 'pages' : 'articles'] = data.results as Article[];
+        this[(options.pages) ? 'pages' : 'articles'] = data.results as Article[];
 
         this.cacheService.setCache(cacheKey, data);
 
         // Toggle loading service
         this.loadingService.set(false);
 
-        return this[(pages) ? 'pages' : 'articles'];
+        return this[(options.pages) ? 'pages' : 'articles'];
       });
   }
 
@@ -194,16 +195,16 @@ export class ArticleService {
       })
   }
 
-  updateDateTime(property: string, value: any) {
+  updateDateTime(property: string, value: any): void {
     const date = moment(value).format();
     this.updateProperty(property, date);
   }
 
-  updateProperty(property: string, value: any) {
+  updateProperty(property: string, value: any): void {
     this.article[property] = value;
   }
 
-  hasProperty(property, value) {
+  hasProperty(property, value): boolean {
     if (!this.article[property]) {
       return false;
     }
@@ -216,7 +217,7 @@ export class ArticleService {
     });
   }
 
-  toggleProperty(property: string, obj: object) {
+  toggleProperty(property: string, obj: object): void {
     if (!this.article[property]) { this.article[property] = [] }
 
     // Toggle a property on the article.

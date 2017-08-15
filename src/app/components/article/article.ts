@@ -43,9 +43,9 @@ export class Article {
   snippetsMediaObjects: Media[];
   headerCrop: string;
 
-  constructor(article?: object) {
+  constructor(article?: Article) {
     this.author = null;
-    this.title = (article) ? article['title'] : '';
+    this.title = (article) ? article.title : '';
     this.slug = '';
     this.subtitle = '';
     this.intro = '';
@@ -53,16 +53,16 @@ export class Article {
     this.flatpageSlug = '';
     this.createdAt = '';
     this.updatedAt = '';
-    this.publishDate = (article) ? article['publishDate'] : moment().format();
+    this.publishDate = (article) ? article.publishDate : moment().format();
     this.expiryDate = '';
-    this.category = (article) ? article['category'] : [];
+    this.category = (article) ? article.category : [];
     this.seoScore = 0;
     this.published = false;
     this.isPartner = false;
     this.isFlatpage = false;
     this.isListed = true;
     this.showComments = true;
-    this.frontendUrls = (article) ? article['frontendUrls'] : {};
+    this.frontendUrls = (article) ? article.frontendUrls : {};
     this.featured = false;
     this.RATable = [];
     this.titleTag = '';

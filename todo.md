@@ -48,3 +48,4 @@
 ✓ Pagination
 
 - Article loses feeds and site after create
+- Snippet list sends categories over to the ArticleService getArticles function but it isn't picked up.

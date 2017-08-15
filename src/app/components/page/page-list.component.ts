@@ -30,8 +30,15 @@ export class PageListComponent implements OnInit {
   ngOnInit(): void {
 
     this._route
-      .queryParams
-      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true, null, params['q']))
+    .queryParams
+    .switchMap((params: ParamMap) => {
+        const options = {
+          page: +params['page'],
+          pages: true,
+          query: params['q']
+        }
+        return this.articleService.getArticles(options);
+      })
       .subscribe();
   }
 }
