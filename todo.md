@@ -5,6 +5,7 @@
 ✓ SEO score
 - SEO calculation
 
+✓ Site specific CMS
 - Site specific styling
 
 ✓ Styling header image crop settings
