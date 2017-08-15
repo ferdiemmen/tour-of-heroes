@@ -31,7 +31,7 @@ export class PageListComponent implements OnInit {
 
     this._route
       .queryParams
-      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true, true, null, params['q']))
+      .switchMap((params: ParamMap) => this.articleService.getArticles(+params['page'], true, null, params['q']))
       .subscribe();
   }
 }

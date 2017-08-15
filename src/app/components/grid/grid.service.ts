@@ -9,6 +9,7 @@ import { DeferredService } from '../deferred/deferred.service';
 import { PaginationService } from '../pagination/pagination.service';
 import { Grid } from './grid';
 import { GridElement } from './grid-element';
+import { GridElementService } from './grid-element.service';
 
 declare var _rs: any;
 
@@ -69,6 +70,29 @@ export class GridService {
 
   addElement(element: GridElement) {
     this.grid.elements.push(element);
+  }
+
+  create(): Promise<Grid> {
+    return this._apiService.put(this._gridUrl, this.grid)
+      .then(response => {
+        this.grid.elements.forEach(element => this._createElement(element, response.json().id));
+        return response.json() as Grid;
+      });
+  }
+
+  update(): Promise<Grid> {
+    const url = `${this._gridUrl}${this.grid.id}/`;
+
+    return this._apiService.post(url, this.grid)
+      .then(response => {
+        this.grid.elements.forEach(element => this._createElement(element, response.json().id));
+        return response.json() as Grid;
+      });
+  }
+
+  private _createElement(element: GridElement, id: number): void {
+    const url = `${this._gridUrl}${id}/elements/`;
+    this._apiService.put(url, element);
   }
 
   remove(): Promise<void> {

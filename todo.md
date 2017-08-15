@@ -47,3 +47,4 @@
 
 ✓ Pagination
 
+- Article loses feeds and site after create

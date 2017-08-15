@@ -58,7 +58,6 @@ export class ArticleService {
 
   getArticle(id: number): Promise<Article> {
     const url = `${this._articlesUrl}/${id}/`;
-    const cacheKey = `article_${id}`;
 
     // Set article defaults.
     this._setDefaults();
@@ -80,15 +79,6 @@ export class ArticleService {
       this._deferredService.reset();
     }
 
-    // Check if a cached version exist and return it.
-    if (this.cacheService.checkCacheKey(cacheKey)) {
-
-      this.article = this.cacheService.getCache(cacheKey);
-      this.snippetService.setSnippets(this.article.snippetsJson);
-
-      return Promise.resolve(this.article as Article);
-    }
-
     return this.apiService
       .get(url)
       .then(response => {
@@ -97,14 +87,11 @@ export class ArticleService {
         this.article = response.json() as Article;
         this.snippetService.setSnippets(this.article.snippetsJson);
 
-        // Add response to cache.
-        this.cacheService.setCache(cacheKey, response.json() as Article);
-
         return this.article as Article;
       });
   }
 
-  getArticles(page: number, pages?: boolean, cached?: boolean, parameters?: Object, query?: string): Promise<Article[]> {
+  getArticles(page: number, pages?: boolean, parameters?: Object, query?: string): Promise<Article[]> {
     const amount = (parameters && parameters.hasOwnProperty('amount')) ? parameters['amount'] : config.paginationAmount;
     const tag = (parameters && parameters.hasOwnProperty('tag')) ? parameters['tag'] : null;
     const params = {
@@ -113,6 +100,7 @@ export class ArticleService {
 
     let url = `${this._articlesUrl}/site/${_rs.siteId}/` +
               `${(pages) ? 'flatpages/' : ''}${(tag) ? '/tag/' + tag + '/' : ''}${amount}/`;
+
     let cacheKey = (pages) ? 'pages' : 'articles';
     cacheKey = (page) ? `${cacheKey}_${page}` : `${cacheKey}_1`;
 
@@ -134,7 +122,7 @@ export class ArticleService {
     this[(pages) ? 'pages' : 'articles'] = []
 
     // Check if a cached version exist and return it.
-    if (this.cacheService.checkCacheKey(cacheKey) && cached) {
+    if (this.cacheService.checkCacheKey(cacheKey)) {
       const cachedData = this.cacheService.getCache(cacheKey);
       this[(pages) ? 'pages' : 'articles'] = cachedData.results as Article[];
       this.paginationService.setupPagination(cachedData.page, cachedData.numPages);
@@ -158,10 +146,7 @@ export class ArticleService {
         // Set articles on this service.
         this[(pages) ? 'pages' : 'articles'] = data.results as Article[];
 
-        // Add articles to cache.
-        if (cached) {
-          this.cacheService.setCache(cacheKey, data);
-        }
+        this.cacheService.setCache(cacheKey, data);
 
         // Toggle loading service
         this.loadingService.set(false);
@@ -199,8 +184,6 @@ export class ArticleService {
         // Update article in cached articles.
         this.cacheService
           .updateObjectInCacheArray(cacheKey, this.article);
-        this.cacheService
-          .updateObject(`article_${this.article.id}`, this.article);
 
         this.article = response.json() as Article;
 
@@ -218,7 +201,6 @@ export class ArticleService {
 
   updateProperty(property: string, value: any) {
     this.article[property] = value;
-    this.cacheService.updateObject(`article_${this.article.id}`, this.article);
   }
 
   hasProperty(property, value) {

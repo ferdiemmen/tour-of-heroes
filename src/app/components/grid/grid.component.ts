@@ -30,9 +30,9 @@ export class GridComponent implements OnInit, AfterViewInit {
     let action = (this.gridService.grid.id) ? 'update' : 'create';
 
     this.gridService[action]()
-      .then(block => {
+      .then(grid => {
         if (cont) {
-          link = ['/cms/grid/edit', block.id];
+          link = ['/cms/grid/edit', grid.id];
           action = 'update';
         } else {
           link = ['/cms/grid-list'];
@@ -77,7 +77,7 @@ export class GridComponent implements OnInit, AfterViewInit {
               }
             }).promise().done(() => {
 
-              _self._gridElementService.create(coordinates);
+              _self._gridElementService.add(coordinates);
               $('.grid-selectable', _self._elementRef.nativeElement).removeClass('ui-selected');
             });
 

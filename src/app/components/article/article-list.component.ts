@@ -60,7 +60,7 @@ export class ArticleListComponent implements OnInit {
         // in the article list.
         if (params['selecting']) { this.selecting = true; }
 
-        return this.articleService.getArticles(+params['page'], null, true, null, params['q'])
+        return this.articleService.getArticles(+params['page'], null, null, params['q'])
       })
       .subscribe();
   }
