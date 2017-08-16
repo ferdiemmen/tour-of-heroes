@@ -16,6 +16,7 @@ import { GridElementService } from './grid-element.service';
 })
 export class GridComponent implements OnInit, AfterViewInit {
   public selectableRange: Array<number> = new Array(450);
+  public remove: boolean = false;
 
   constructor(
     public gridService: GridService,
