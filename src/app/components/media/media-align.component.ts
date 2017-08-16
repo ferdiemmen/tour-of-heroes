@@ -5,7 +5,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-media-align',
-  templateUrl: './media-align.component.html'
+  templateUrl: './media-align.component.html',
+  styleUrls: ['./media-align.component.scss'],
 })
 export class MediaAlignComponent {
   public position: string = 'center';

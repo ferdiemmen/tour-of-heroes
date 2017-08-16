@@ -1,6 +1,6 @@
 
-@import '../scss/settings';
-@import '../scss/extends';
+@import '../../../scss/_settings';
+@import '../../../scss/mixins';
 
 .cms-media__align {
   @extend %list-reset;
@@ -8,6 +8,11 @@
   display: flex;
   padding-top: 2px;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 
   li {
     display: border-box;
